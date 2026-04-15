@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" role="img" aria-labelledby="title desc">
+	<title id="title">இணைய வகுப்பு அமைப்பு வரைபடம்</title>
+	<desc id="desc">கருத்தலகு, அலகுகள், மற்றும் பாடங்களின் அமைப்பைக் காட்டும் கோப்பு வரைபடம்</desc>
+	<style>
+		.label {
+			font-family: "Noto Serif Tamil", Latha, "Nirmala UI", serif;
+			fill: #232323;
+		}
+
+		.top {
+			font-size: 52px;
+			font-weight: 700;
+		}
+
+		.mid {
+			font-size: 48px;
+			font-weight: 600;
+		}
+
+		.bottom {
+			font-size: 44px;
+			font-weight: 600;
+		}
+
+		.line {
+			stroke: #2f2f2f;
+			stroke-width: 4;
+			stroke-linecap: square;
+			fill: none;
+		}
+	</style>
+
+	<rect x="0" y="0" width="1400" height="500" fill="#edd1a6" />
+
+	<text x="700" y="70" text-anchor="middle" class="label top">கருத்தலகு</text>
+
+	<line x1="700" y1="88" x2="700" y2="140" class="line" />
+	<line x1="220" y1="140" x2="1180" y2="140" class="line" />
+
+	<line x1="220" y1="140" x2="220" y2="220" class="line" />
+	<line x1="700" y1="140" x2="700" y2="220" class="line" />
+	<line x1="1180" y1="140" x2="1180" y2="220" class="line" />
+
+	<text x="220" y="258" text-anchor="middle" class="label mid">அலகு 1</text>
+	<text x="700" y="258" text-anchor="middle" class="label mid">அலகு 2</text>
+	<text x="1180" y="258" text-anchor="middle" class="label mid">அலகு 3 ......</text>
+
+	<path d="M220 292 L95 360" class="line" />
+	<path d="M220 292 L345 360" class="line" />
+
+	<path d="M700 292 L600 360" class="line" />
+	<path d="M700 292 L800 360" class="line" />
+
+	<path d="M1180 292 L1080 360" class="line" />
+	<path d="M1180 292 L1280 360" class="line" />
+
+	<text x="95" y="408" text-anchor="middle" class="label bottom">பாடம் <tspan dx="14">1</tspan></text>
+	<text x="345" y="408" text-anchor="middle" class="label bottom">பாடம் <tspan dx="14">2</tspan></text>
+
+	<text x="560" y="408" text-anchor="middle" class="label bottom">......</text>
+	<text x="842" y="408" text-anchor="middle" class="label bottom">........</text>
+
+	<text x="1060" y="408" text-anchor="middle" class="label bottom">........</text>
+	<text x="1325" y="408" text-anchor="middle" class="label bottom">........</text>
+</svg>

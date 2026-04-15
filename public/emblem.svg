@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Government Emblem">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="url(#g)"/>
+  <circle cx="60" cy="60" r="45" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+  <path d="M40 74h40M42 58h36M48 43h24" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
+  <path d="M60 26l12 10h-24z" fill="#f8fafc"/>
+</svg>
