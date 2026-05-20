@@ -8,8 +8,8 @@ const lectureConstituents = [
   "அகஇலக்கியம்",
   "புறஇலக்கியம்",
   "திட்ட வரலாறு",
-  "கருத்தலகு-அகம்",
-  "கருத்தலகு-புறம்",
+  "கருத்தலகு 1 : அகம்",
+  "கருத்தலகு 2 : புறம்",
 ];
 
 const introDrawerItems = [
@@ -21,6 +21,36 @@ const introDrawerItems = [
   "கற்றல் கோட்பாடும் அணுகுமுறையும்",
   "இணைய வகுப்பு அமைப்பு",
   "மதிப்பீடு",
+];
+
+const akamDrawerItems = [
+  "அலகு 1 : முல்லை",
+  "அலகு 2 : குறிஞ்சி",
+  "அலகு 3 : மருதம்",
+  "அலகு 4 : நெய்தல்",
+  "அலகு 5 : பாலை",
+  "அலகு 6 : கைக்கிளை",
+  "அலகு 7 : பெருந்திணை",
+];
+
+const puramModuleDrawerItems = [
+  "அலகு 1 : வெட்சி",
+  "அலகு 2 : வஞ்சி",
+  "அலகு 3 : உழிஞை",
+  "அலகு 4 : தும்பை",
+  "அலகு 5 : வாகை",
+  "அலகு 6 : காஞ்சி",
+  "அலகு 7 : பாடாண்",
+];
+
+const puramDrawerItems = [
+  "அலகு 1 : வெட்சி",
+  "அலகு 2 : வஞ்சி",
+  "அலகு 3 : உழிஞை",
+  "அலகு 4 : தும்பை",
+  "அலகு 5 : வாகை",
+  "அலகு 6 : காஞ்சி",
+  "அலகு 7 : பாடாண்",
 ];
 
 const introWelcomeContent = [
@@ -38,15 +68,15 @@ const introDrawerContent = {
     "தொழில்நுட்பம் முனைப்புடன் வளர்ந்து வரும் இன்றைய சூழலில் பல்வேறு மொழி கற்றல் செயல்பாடுகளைச் செயற்படுத்தும் வகையில் திட்டமிட்ட இணைய மொழிப் பாட வகுப்புகள் இன்று பெருகி வருகின்றன. இந்நிலையில் தமிழ்ச் செவ்விலக்கியப் பனுவல்களில் (literary texts) பயன் கொள்ளும் மொழி வகையைப் புரிந்து கொள்ள விருப்புவோர்க்குச் செவ்விலக்கிய மொழித்திறனை அடைய உதவுவது இணையவழிச் செம்மொழித் தமிழ் என்னும் இவ்விணைய வகுப்பின் முதன்மை நோக்கமாகும்.",
     "தமிழ்ச் செவ்விலக்கியப் பனுவல் பற்றிய",
     "அ. இலக்கண அறிவு (Grammatical Knowledge)"
-],
+  ],
   "நோக்கங்கள்": [
-    "2. நோக்கங்கள்", 
+    "2. நோக்கங்கள்",
     "செவ்விலக்கிய மொழித்திறன் (Classical Literary competence) பெறுதல்.",
     "மாணவர்கள் வாசிப்பு, பொருள் புரிதல், மற்றும் விமர்சன அணுகுமுறை திறன்களை வளர்த்துக்கொள்ள உதவுதல்.",
   ],
   "காலம்": [
     "இப்பாடநெறி தொகுதிவாரியாக அமைக்கப்பட்டதால், கற்றவர் தமக்கேற்ற வேகத்தில் முன்னேற முடியும்.",
-    "ஒவ்வொரு பகுதிக்கும் பரிந்துரைக்கப்பட்ட கற்பு நேரம் மற்றும் மீள்பார்வு நேரம் வழங்கப்படுகிறது.",
+    "ஒவ்வொரு பகுதிக்கும் பரிந்துரைக்கப்பட்ட கற்பு நேரம் மற்றும் மீள்பார்வை நேரம் வழங்கப்படுகிறது.",
   ],
   "கற்றல் விளைவுகள்": [
     "செம்மொழித் தமிழின் அடிப்படை கருத்துக்களைப் புரிந்துகொண்டு, உரை வாசிப்பில் தன்னம்பிக்கை பெறுதல்.",
@@ -67,6 +97,30 @@ const introDrawerContent = {
   "மதிப்பீடு": [
     "ஒவ்வொரு அலகின் முடிவிலும் சுயமதிப்பீட்டு கேள்விகள் மூலம் கற்றல் நிலை அளவிடப்படுகிறது.",
     "பயிற்சி மற்றும் பின்னூட்டத்தின் மூலம் அடுத்த கட்ட கற்றல் திட்டமிட உதவும் வழிகாட்டி வழங்கப்படுகிறது.",
+  ],
+};
+
+const puramDrawerContent = {
+  "அலகு 1 : வெட்சி": [
+    "அலகு 1 : வெட்சி — இந்த அலகில் வெட்சித் திணை பற்றிய முதற்பொருள், கருப்பொருள், உரிப்பொருள் மற்றும் திணைமயக்கம் விளக்கப்படுகின்றன.",
+  ],
+  "அலகு 2 : வஞ்சி": [
+    "அலகு 2 : வஞ்சி — இந்த அலகில் வஞ்சித் திணை பற்றிய முதற்பொருள், கருப்பொருள், உரிப்பொருள் மற்றும் திணைமயக்கம் விளக்கப்படுகின்றன.",
+  ],
+  "அலகு 3 : உழிஞை": [
+    "அலகு 3 : உழிஞை — இந்த அலகில் உழிஞைத் திணை பற்றிய முதற்பொருள், கருப்பொருள், உரிப்பொருள் மற்றும் திணைமயக்கம் விளக்கப்படுகின்றன.",
+  ],
+  "அலகு 4 : தும்பை": [
+    "அலகு 4 : தும்பை — இந்த அலகில் தும்பைத் திணை பற்றிய முதற்பொருள், கருப்பொருள், உரிப்பொருள் மற்றும் திணைமயக்கம் விளக்கப்படுகின்றன.",
+  ],
+  "அலகு 5 : வாகை": [
+    "அலகு 5 : வாகை — இந்த அலகில் வாகைத் திணை பற்றிய முதற்பொருள், கருப்பொருள், உரிப்பொருள் மற்றும் திணைமயக்கம் விளக்கப்படுகின்றன.",
+  ],
+  "அலகு 6 : காஞ்சி": [
+    "அலகு 6 : காஞ்சி — இந்த அலகில் காஞ்சித் திணை விளக்கப்படுகிறது.",
+  ],
+  "அலகு 7 : பாடாண்": [
+    "அலகு 7 : பாடாண் — இந்த அலகில் பாடாண் திணை விளக்கப்படுகிறது.",
   ],
 };
 
@@ -95,38 +149,573 @@ const sectionContent = {
   "புறஇலக்கியம்": [
     "புறஇலக்கியம் வீரியம், சமூக வாழ்க்கை, அரசியல், மற்றும் பண்பாட்டு வெளிப்பாடுகளின் பரப்பை அறிமுகப்படுத்துகிறது.",
   ],
-  "கருத்தலகு-அகம்": [
-    "கருத்தலகு-அகம் பகுதியில் அகப்பாடல்களின் கருத்தமைப்பு, குறியீடுகள், மற்றும் உரைப் பகுப்பாய்வு அணுகுமுறைகள் கொடுக்கப்படுகின்றன.",
-  ],
   "கருத்தலகு-புறம்": [
     "கருத்தலகு-புறம் பகுதியில் புறப்பாடல்களின் கருத்தியல் வடிவங்கள் மற்றும் பொருளடக்கத் தொடர்புகள் விளக்கப்படுகின்றன.",
   ],
 };
 
+// ── Akam module overview ──
+const AkamModuleOverview = ({ emphasisClass }) => (
+  <div className="space-y-5">
+    <p className={emphasisClass}>கருத்தலகு 1 : அகம்</p>
+    <p className="text-lg font-semibold text-[#5a3417]">Module 1 : Akam</p>
+    <p className="text-justify">
+      இக்கருத்தலகு அகம்பற்றியது. தமிழ்ச் செவ்வியல் மொழியில் பாடல்களைக் கேட்ட
+      மாத்திரத்திலேயே பொருளுணர்தல், வாசித்துப் பொருளுணர்தல் நயம் பாராட்டிப் பேசுதல்
+      எழுதுதல் ஆகிய திறன்களை உங்களிடம் வளர்ப்பது இக்கருத்தலகின் முதன் நோக்கம்.
+      தமிழ்ச் செவ்வியல் செய்யுள் மொழிக்கு அறிமுகமாவதோடு அம்மொழியில் வாசிக்கவும்,
+      எழுதவும் தங்கு தடையில்லா ஆற்றலை இக்கருத்தலகைக் கற்று முடிக்கும்போது நீங்கள்
+      பெறுவீர்கள்.
+    </p>
+    <p className="text-justify">
+      தொல்காப்பியமும் இறையனார் களவியலும் அகத்திணைச் செய்திகளைத் தருகின்றன.
+      அகத்திணை தொடர்பான இலக்கண நூல்களில் மூன்று வகையான முறைமைகள்
+      பின்பற்றப்படுகின்றன அவை 1. கூற்று முறை 2. நிகழ்ச்சி முறை 3. துறைமுறை என்பன.
+      இங்குத் துறை முறை பின்பற்றப்படுகிறது. கூற்றுமுறையைப் பின்பற்றுவதற்குத்
+      தொல்காப்பியம் சிறந்த எடுத்துக்காட்டு.
+    </p>
+    <p className="text-justify">
+      'அகம்' என்பது ஒத்த பண்பு கொண்ட ஒருவனும் ஒருத்தியும் தம்முள் கொள்ளும் அன்பு
+      முறையாகும். நச்சினார்க்கினியர் அகம் என்பதை,
+    </p>
+    <blockquote className="border-l-4 border-[#a66f3f] bg-[#fdf3df]/70 px-5 py-4 italic text-[#3b2718]">
+      ஒத்த அன்பால் ஒருவனும் ஒருத்தியும் கூடுகின்ற காலத்துப் பிறந்த பேரின்பம்
+      அக்கூட்டத்தின் பின்னர் அவ்விருவரும் ஒருவருக்கு ஒருவர் தத்தமக்குப் புலனாக
+      இவ்வாறு இருந்ததெனக் கூறப்படாததாய் யாண்டும் உள்ளத்துணர்வே நுகர்ந்து
+      இன்பமுறுவதோர் பொருள்
+    </blockquote>
+    <p className="text-justify">என்று விளக்குகிறார்.</p>
+    <p className="text-justify">
+      இவ்வகத்திணை, ஏழு திணைகளாக வகுக்கப்பட்டுள்ளது. இவை ஏழு அலகுகளாக இக்
+      கருத்தலகில் இடம்பெறுகின்றன. இவை ஒவ்வொன்றும் முதற்பொருள், கருப்பொருள்,
+      உரிப்பொருள், திணைமயக்கம் என்னும் நான்கு பொருளிலும் பயின்று வரும்.
+    </p>
+    <p className="text-justify">
+      இவை பயின்று வரும் மொழியமைப்பு பற்றிய முழு அறிவைப் பெறும் போது, செவ்வியல் அக
+      இலக்கியங்களின் செய்யுளமைப்பையும், பொருளமைப்பையும் புரிந்துகொள்ள முடியும்.
+      கலிப்பா மற்றும் பரிபாடல் செய்யுள் வகை இப்பாடல்களின் நடையைப் புரிந்து கொள்ள
+      உதவுவதோடு இவற்றில் பயின்று வரும் உவமச் சிறப்போடு கருத்துவிளக்கம் பெறவும்
+      உதவுகின்றன. திணை ஒவ்வொன்றும் தனித்தனிப் பாடங்களாக அமைக்கப் பெற்றுள்ளன.
+    </p>
+    <p className={emphasisClass}>அலகு</p>
+  </div>
+);
+
+// ── Akam unit page (standard units 1-5) ──
+const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
+  <div className="space-y-5">
+    <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
+    <p className="text-2xl font-bold text-[#5a3417]">{thinaName}</p>
+    <p className="text-justify">
+      இது {thinaName}திணை பற்றியது. இத்திணை சார்ந்த பாடல் ஒவ்வொன்றிலும்
+      பயின்றுகொள்ளும் மொழியின் அமைப்பு அதன் பொருள் வகையான முதற்பொருள்,
+      கருப்பொருள், உரிப்பொருள், திணைமயக்கம் என்பதன் மூலம் புலப்படும் இயல்பை
+      நீங்கள் புரிந்துகொள்வது இவ்வலகின் நோக்கம்.
+    </p>
+    <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        முதல் கரு உரிப்பொருள் என்ற மூன்றே நுவலுங் காலை முறைசிறந்
+        <br />
+        தனவே பாடலுட் பயின்றவை நாடுங் காலை
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— அகத் .3</p>
+      <p className="mt-1 text-sm text-[#5a3417]">என்பது தொல்காப்பியம்.</p>
+    </div>
+    <p className="text-justify">
+      இவ்வலகைக் கற்று முடிக்கும்போது {thinaName}திணையின்
+    </p>
+    <div className="space-y-2 pl-6">
+      <p className="font-semibold text-[#2f1d10]">முதற்பொருள்</p>
+      <p className="font-semibold text-[#2f1d10]">கருப்பொருள்</p>
+      <p className="font-semibold text-[#2f1d10]">உரிப்பொருள்</p>
+      <p className="font-semibold text-[#2f1d10]">திணைமயக்கம்</p>
+    </div>
+    <p className="text-justify">
+      என்னும் நான்கு பொருள் பற்றிய பொதுவான அறிவைப் பெறுவதோடு அவை புலப்பட்டு
+      நிற்கும் மொழி அறிவையும் நீங்கள் பெறுவீர்கள்.
+    </p>
+    <p className="text-justify">
+      இனி, கீழே கொடுக்கப்பட்டுள்ள பாடலின் மூலம் {thinaName}திணை புலப்படுத்தும்
+      மொழி அறிவைப் பெற நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக்
+      வாசித்துக் கொள்ளுங்கள். பின்னர், பாடலைக் கவனமாகக் கேளுங்கள்.
+    </p>
+  </div>
+);
+
+// ── Akam unit 6 : கைக்கிளை ──
+const AkamUnit6Page = ({ emphasisClass }) => (
+  <div className="space-y-5">
+    <p className={emphasisClass}>கருத்தலகு 1 : அலகு 6</p>
+    <p className="text-2xl font-bold text-[#5a3417]">கைக்கிளை</p>
+    <p className="text-justify">இது கைக்கிளைப் பற்றியது.</p>
+    <p className="text-justify">
+      இனி, கீழே கொடுக்கப்பட்டுள்ள பாடலின் மூலம் கைக்கிளையின் புலப்படுத்தும் மொழி அறிவைப் பெற
+      நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக் வாசித்துக் கொள்ளுங்கள். பின்னர்,
+      பாடலைக் கவனமாகக் கேளுங்கள்.
+    </p>
+  </div>
+);
+
+// ── Akam unit 7 : பெருந்திணை ──
+const AkamUnit7Page = ({ emphasisClass }) => (
+  <div className="space-y-5">
+    <p className={emphasisClass}>கருத்தலகு 1 : அலகு 7</p>
+    <p className="text-2xl font-bold text-[#5a3417]">பெருந்திணை</p>
+    <p className="text-justify">இது பெருந்திணை பற்றியது.</p>
+    <p className="text-justify">
+      இனி, கீழே கொடுக்கப்பட்டுள்ள பாடலின் மூலம் பெருந்திணையின் புலப்படுத்தும் மொழி அறிவைப் பெற
+      நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக் வாசித்துக் கொள்ளுங்கள். பின்னர்,
+      பாடலைக் கவனமாகக் கேளுங்கள்.
+    </p>
+  </div>
+);
+
+// ── Puram module overview ──
+const PuramModuleOverview = ({ emphasisClass }) => (
+  <div className="space-y-5">
+    <p className={emphasisClass}>கருத்தலகு 2 : புறம்</p>
+    <p className="text-lg font-semibold text-[#5a3417]">Module 2 : Puram</p>
+    <p className="text-justify">
+      இக்கருத்தலகு புறம் பற்றியது. தமிழ்ச் செவ்வியல் இலக்கியங்களைப் பயிலும்போதே பொருளுணர்தல்,
+      வாசித்துப் பொருளுணர்தல், இலக்கிய நயம் பாராட்டிப் பேசுதல், எழுதுதல் ஆகிய திறன்களைத்
+      தங்களிடம் வளர்ப்பது இக் கருத்தலகின் நோக்கமாகும். தமிழ்ச் செவ்வியல் செய்யுள் மொழிக்கு
+      அறிமுகமாவதுடன், அம்மொழியில் வாசிக்கவும் எழுதவும் கூடிய ஆற்றலை இக்கருத்தலகைக் கற்று
+      முடிக்கும்போது தாங்கள் பெறுவீர்கள்.
+    </p>
+    <p className="text-justify">
+      தொல்காப்பியப் புறத்திணையியல், புறத்திணைக் குறித்த செய்திகளைத் தருகின்றது. தமிழ்ச் செவ்வியல்
+      இலக்கியங்களான எட்டுத்தொகையின் புறநானூறும், பதிற்றுப்பத்தும் முழுவதும் புறநூல்கள்.
+      பரிபாடலில் செவ்வேள், திருமால் குறித்த பாடல்கள் புறம் சார்ந்தன. பத்துப்பாட்டில் ஆற்றுப்படை
+      நூல்கள் ஐந்தும், மதுரைக்காஞ்சியும் புறநூல்கள். பதினெண்கீழ்க்கணக்கு நூல்களில் களவழி நாற்பது
+      புறத்திற்குரிய நூல். நாலடியார், திருக்குறளின் பொருட்பாலில் புறம்சார்ந்த செய்திகள்
+      இடம்பெற்றுள்ளன. காப்பியங்களில் சிலப்பதிகாரத்தில் புறம் சார்ந்த செய்திகள் காணப்பெறுகின்றன.
+      முத்தொள்ளாயிரப் பாடல்கள், அகப்பாடல்களைப் பெற்றிருப்பதுபோல் புறம்சார்ந்த பாடல்களையும்
+      கொண்டு இலங்குகின்றது. மேற்கண்டவை, புறப்பொருளைப் பாடுபொருளாகக் கொண்டு அமைந்த தமிழ்ச்
+      செவ்வியல் இலக்கியங்கள். இவ்விலக்கியங்களிலிருந்து திரட்டப்பெற்ற 35 பாடல்களுக்குத்
+      தொல்காப்பியப் புறத்திணையியல் அடிப்படையில் திணை, துறைகள் வகுக்கப்பெற்று இக்கருத்தலகில்
+      பாடங்களாகத் தரப்பெற்றுள்ளன.
+    </p>
+    <div className="space-y-1 pl-4">
+      {["1. வெட்சி","2. வஞ்சி","3. உழிஞை","4. தும்பை","5. வாகை","6. காஞ்சி","7. பாடாண்"].map(t => (
+        <p key={t}>{t}</p>
+      ))}
+    </div>
+    <p className="text-justify">இவ் ஏழும், ஏழு அகத்திணைகளுக்கும் புறனாக அமைகின்றன.</p>
+    <div className="space-y-1 pl-4">
+      {[
+        "1. வெட்சி குறிஞ்சிக்குப் புறன்",
+        "2. வஞ்சி முல்லைக்குப் புறன்",
+        "3. உழிஞை மருதத்திற்குப் புறன்",
+        "4. தும்பை நெய்தலுக்குப் புறன்",
+        "5. வாகை பாலைக்குப் புறன்",
+        "6. காஞ்சி பெருந்திணைப் புறன்",
+        "7. பாடாண் கைக்கிளைக்குப் புறன்",
+      ].map(t => <p key={t}>{t}</p>)}
+    </div>
+    <div className="space-y-2">
+      <p className="text-justify">வெட்சி என்பது பகைவர் நாட்டு ஆநிரைகளைக் கவர்தற்காகச் செய்யப்படும் போர்.</p>
+      <p className="text-justify">வஞ்சி என்பது மண்ணாசை கொண்டு போரிட வந்த வேந்தனை முன்எதிர்ந்து சென்று போரிட்டு அழித்தல்</p>
+      <p className="text-justify">உழிஞை என்பது முழுமையான பாதுகாப்புகளை உடைய அரணை முற்றுகை இடுதலும் அதைக் கைக்கொள்ளுதலும்.</p>
+      <p className="text-justify">தும்பை என்பது தன் வீரத்தைப் பொருளாகக் கருதி வந்த அரசனோடு, போரிட்டு, அவனை முற்றிலுமாக அழித்தல்.</p>
+      <p className="text-justify">வாகை என்பது பல்வேறு வகை வெற்றிகளின் வெளிப்பாடு.</p>
+      <p className="text-justify">காஞ்சி நிலையாமையை அடிப்படையாகக் கொண்டு அமைவது.</p>
+      <p className="text-justify">பாடாண்திணை தலைமாந்தரின் வீரம், கொடை, புகழ் ஆகியனவற்றைப் போற்றுதல்.</p>
+    </div>
+    <p className="text-justify">
+      இப்புறத்திணை ஏழும் ஏழு அலகுகளாகத் தரப்பெற்றுள்ளன. இக்கருத்தலகில் அமைந்துள்ள இவ்வேழு
+      புறத்திணைக்குரிய பாடங்களைப் பயின்று முடிக்கையில், தமிழ்ச் செவ்வியல் இலக்கியங்களுக்கான
+      செய்யுள் மொழி, அவற்றின் பொருளமைப்பு ஆகியவற்றை உய்த்துணர்ந்திருக்க முடியும். அக்காலப்
+      போர்முறை குறித்த அறிமுகமும், அக்கால வேந்தனது சிறப்பும் விளங்கியிருக்கும். இனி ஒவ்வொரு
+      திணைக்குமான பாடங்களைப் பயில முயற்சி செய்யலாமா?
+    </p>
+  </div>
+);
+
+// ── Puram unit pages ──
+const puramUnitContent = {
+  "அலகு 1 : வெட்சி": {
+    header: "கருத்தலகு 2 : அலகு 1",
+    title: "வெட்சி",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு வெட்சித்திணை பற்றியது. போர் தொடங்கும் முன் தம் கருத்தைப் பகைவர்க்கு அறிவிப்பது
+          போலப் பகைவர்நாட்டு ஆநிரைகளைக் களவிற் கொள்ளும் ஒழுக்கம் வெட்சித்திணைக் குரியது.
+        </p>
+    <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        வேந்து விடுமுனைஞர் வேற்றுப்புலக்களவின்
+        <br />
+        ஆதந்து ஓம்பல் மேவற்றாகும்  
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 2</p>
+    </div>
+        <p className="text-justify">
+          என்பது வெட்சி என்பதற்குரிய தொல்காப்பிய நூற்பாவாகும். வெட்சித்திணைக் குறிஞ்சிக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணை சார்ந்த பாடல்களைப் பயில்கையில் வெட்சி என்பதற்குரிய விளக்கம், வெட்சித் திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          வெட்சிப்போர் ஒரு திட்டமிட்ட போர். தொல்காப்பியத் துறைகளைப் போருக்கான முன்னேற்பாடுகள்,
+          போர்ச்செயல்கள், போருக்குப்பின் நிகழும் செயல்கள் என மூன்று நிலைகளாகப் பாகுபடுத்தலாம்.
+          மேலும் எடுத்த செயலை முடிக்கவல்ல வீரர்தம் குடிச்சிறப்பு, வெற்றித் தெய்வமாகப் போற்றபெறும்
+          கொற்றவை வழிபாடு ஆகியனவும் வெட்சி சார்ந்தன. இவை தவிர, கவர்ந்து சென்ற ஆநிரைகளை
+          மீட்டுச் செல்லுதலும் வெட்சித்திணைக்கு உரியது.
+        </p>
+        <p className="text-justify">
+          இவ்வலகில், உண்டாட்டு, சீர்சால்வேந்தன் சிறப்பெடுத்து உரைத்தல், நடுகல், குடிநிலை உரைத்தல்,
+          ஒற்றின் ஆகிய வேய் ஆகிய வெட்சித் திணை குறித்த பாடல்கள் பாடங்களாக அமைகின்றன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 2 : வஞ்சி": {
+    header: "கருத்தலகு 2 : அலகு 2",
+    title: "வஞ்சி",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு வஞ்சித்திணை பற்றியது. நாட்டைக் கைப்பற்ற வரும் வேந்தனை, மற்றொரு வேந்தன்
+          எதிர்த்துப் போரிடச் செல்லுதல் வஞ்சித் திணைக்குரியது.
+        </p>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        எஞ்சா மண்நசை வேந்தனை வேந்தன்
+        <br />
+        அஞ்சுதகத் தலைச்சென்று அடல்குறித் தன்றே 
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 6</p>
+    </div>
+        <p className="text-justify">
+          என்பது வஞ்சித்திணைக்குரிய தொல்காப்பிய நூற்பா. வஞ்சித்திணை முல்லைத்திணைக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, வஞ்சித் திணைக்குரிய விளக்கம், வஞ்சித்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          தொல்காப்பியம் இத்திணையில் 13 துறைகளைத் தருகின்றது. போருக்கு முன்னிலைத் துறைகள்,
+          போர்த்துறைகள், போருக்குப் பின்னிலைத்துறைகள் என்ற நிலைகளில் இதன் செயல்பாடுகள் அமைகின்றன.
+        </p>
+        <p className="text-justify">
+          இவ்வலகில், எரிப்பரந்தெடுத்தல், கொற்றவள்ளை, பொருளின்றி உய்த்த பேராண் பக்கம் என்னும்
+          துறைகள் தொல்காப்பிய வஞ்சித்திணைக்கேற்பப் பாடப்பகுதிகளாக அமைகின்றன. புறநானூற்றின் துறை
+          வகுப்பின் அடிப்படையில் துணைவஞ்சிக்குரிய பாடப்பகுதி அமைகின்றது. வஞ்சித்திணைக்குரியதாகக்
+          கருதத்தக்க தூது திருக்குறளிலிருந்து பாடப்பகுதியாகக் கொள்ளப்பெறுகின்றது.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 3 : உழிஞை": {
+    header: "கருத்தலகு 2 : அலகு 3",
+    title: "உழிஞை",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு உழிஞைத்திணை பற்றியது. நன்கு பாதுகாப்புடைய அரணை முற்றுதலும் கோடலும்
+          உழிஞைத்திணை ஆகும்.
+        </p>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+       முழுமுதல் அரணம் முற்றலும் கோடலும்
+       <br />
+        அஞ்சுதகத் தலைச்சென்று அடல்குறித் தன்றே 
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 8</p>
+    </div>
+        <p className="text-justify">
+          என்பது உழிஞைத்திணைக்குரிய தொல்காப்பிய நூற்பாவாகும். உழிஞைத்திணை மருதத்திணைக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, உழிஞைத் திணைக்குரிய விளக்கம், உழிஞைத்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          தொல்காப்பியம் இத்திணைக்குரியதாக இருபது துறைகளைக் குறிப்பிடுகின்றது. முதல் எட்டுத்துறைகள்
+          உழிஞையின் பொதுநிலைகளைக் குறிக்கின்றன. போரெடுத்து வரும் அரசனின் சிறப்பைக் கூறும்
+          துறைகளும் அகத்திருந்து மதிலைப் பாதுகாக்கும் அரசனது சிறப்பைக் கூறும் துறைகளும் இங்கு
+          இடம்பெறுகின்றன.
+        </p>
+        <p className="text-justify">
+          அடுத்துவரும் 12 துறைகள் வரன்முறையான உழிஞைப்போரைக் காட்டுகின்றன. போருக்கு முன்னிலைத்
+          துறைகள், பல்வேறு போர்நிகழ்வுகளைக் காட்டும் போர்த்துறைகள், பின்னிலைத் துறைகள் எனப் பாகுபடுத்தலாம்.
+        </p>
+        <p className="text-justify">
+          கடைஇச் சுற்றமர் ஒழிய வென்று கைக்கொண்டு முற்றிய முதிர்வு, உள்ளியது முடிக்கும் வேந்தனது
+          சிறப்பு, உடன்றோர் வருபகை பேணார் ஆர்எயில், தொல்எயிற்று இவர்தல் என்னும் உழிஞைத் திணைக்குரிய
+          பாடல்கள் பாடங்களாக இவ்வலகில் இடம்பெற்றுள்ளன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 4 : தும்பை": {
+    header: "கருத்தலகு 2 : அலகு 4",
+    title: "தும்பை",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு தும்பைத்திணை பற்றியது. தம் வலிமையைப் பொருளாகக் கருதி வந்த வேந்தனை மற்றொரு
+          வேந்தன் அவனை முற்றிலுமாக அழித்தல் தும்பைத்திணையாகும்.
+        </p>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+         மைந்துபொரு ளாக வந்த வேந்தனைச்
+        <br />
+         சென்றதலை அழிக்குஞ் சிறப்பிற் றென்ப  
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 12</p>
+    </div>
+        <p className="text-justify">
+          என்பது தும்பைத்திணைக்குரிய தொல்காப்பிய நூற்பா ஆகும். தும்பைத்திணை நெய்தல்திணைக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, தும்பைத் திணைக்குரிய விளக்கம், தும்பைத்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          பன்னிரண்டு துறைகளைத் தும்பைத்திணைக்குரிய துறைகளாகத் தொல்காப்பியர் குறிப்பிடுகின்றார்.
+          பிறதிணைகளில் போருக்கு முன்நிகழ்பவை, போர்நிகழ்ச்சிகள், போருக்குப் பின்நிகழ்ச்சிகள் எனப்
+          பாகுபடுத்துவதுபோல், இத்திணையில் பிரிவுகள் அமைவதில்லை. இத்திணையில் காணப்பெறும் அனைத்துத்
+          துறைகளுமே போர்நிகழ்வுகளாக அமைகின்றன.
+        </p>
+        <p className="text-justify">
+          தானைநிலை, தானைமறம், குதிரைமறம், யானைமறம் என்னும் தும்பைத் திணையுள் அமையும்
+          துறைகளுக்குரிய பாடல்கள் பாடங்களாக இவ்வலகில் அமைந்துள்ளன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 5 : வாகை": {
+    header: "கருத்தலகு 2 : அலகு 5",
+    title: "வாகை",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு வாகைத்திணை பற்றியது. அழிவில்லாத கோட்பாட்டினையுடைய தத்தமக்குள்ள இயல்பை வேறுபட
+          சிறப்பித்துக் கூறுதல் வாகைத்திணையாகும்.
+        </p>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        தாவில் கொள்கைத் தத்தம் கூற்றைப்
+        <br />
+        பாகுபட மிகுதிப் படுத்தல் என்ப  
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல். பொருள். புறத். 12</p>
+    </div>
+        <p className="text-justify">
+          என்பது வாகைத்திணைக்குரிய தொல்காப்பிய நூற்பா ஆகும். வாகைத்திணைப் பாலைத்திணைக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, வாகைத் திணைக்குரிய விளக்கம், வாகைத்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          வாகை பற்றிய துறைகள் மூன்றுநிலைகளில் அமைகின்றன. பல்வேறு மனிதர்கள் தத்தம் இயல்புகளில்
+          அதாவது அவர்களுக்கென்று அமைந்த பண்புகளில் மேம்பட்டு நிற்கும் நிலை முதலாவது அமைகின்றது.
+          இதை ஏழுவகையாகப் பிரித்து முதலில் விளக்குகிறார். பின்னர் பதினெட்டு துறைகளை 'இருபாற்பட்ட
+          ஒன்பதில் துறைத்து' என முடித்து ஒரு நூற்பாவில் விளக்குகிறார். போர் அல்லது மறம் சார்ந்து
+          எழும் ஒன்பது துறைகள், அறம் சார்ந்து எழும் ஒன்பது துறைகள் என இவற்றை இரண்டாகப் பிரிக்கலாம்.
+        </p>
+        <p className="text-justify">
+          எனவே, வாகை இயல்பில் மேம்பட்டு நிற்றல், மறம் சார்ந்து அமைபவை, அறம் சார்ந்து அமைபவை என
+          மூன்றுவகையாகப் பிரிக்கலாம்.
+        </p>
+        <p className="text-justify">
+          பார்ப்பனவாகை, தாபத வாகை போன்றவை முதல்பிரிவுக்கு உரியவை. வேனிற்பாசறை, கூதிர்ப்பாசறை,
+          மறக்களவேள்வி, அவிப்பலி முதலியவை இரண்டாம் பிரிவுக்கு உரியவை. பொருளொடு புணர்ந்த பக்கம்,
+          அருளொடு புணர்ந்த அகற்சி, கட்டில் நீத்த பால் போன்றவை மூன்றாம் பிரிவுக்கு உரியவை.
+        </p>
+        <p className="text-justify">
+          அரசவாகை, வல்லாண்பக்கம் ஆகிய வாகைத்திணையுள் அமையும் துறைகளுக்குரிய பாடல்கள் பாடங்களாக
+          இவ்வலகில் அமைந்துள்ளன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 6 : காஞ்சி": {
+    header: "கருத்தலகு 2 : அலகு 6",
+    title: "காஞ்சி",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு காஞ்சித்திணை பற்றியது. பலவகைச் சிறப்புகளையும் உடைய இவ் உலகம் நிலைபெறாத
+          தன்மையது என்பதை உணர்த்துதல் காஞ்சித்திணையாகும்.
+        </p>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        பாங்கருஞ் சிறப்பின் பல்லாற் றானும்
+        <br />
+        நில்லா உலகம் புல்லிய நெறித்தே  
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 18</p>
+    </div>
+        <p className="text-justify">
+          என்பது காஞ்சித்திணையின் தொல்காப்பிய நூற்பா ஆகும். காஞ்சித்திணைப் பெருந்திணைக்குப் புறனாக அமையும்.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, காஞ்சித் திணைக்குரிய விளக்கம், காஞ்சித்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          காஞ்சி பற்றிய செய்திகள் இருவகையில் அமைகின்றன. காஞ்சித்திணையின் இருபது துறைகளில்,
+          முன்வரும் பத்துத் துறைகள் ஒருவகையாகவும், பின்வரும் பத்துத் துறைகள் மற்றொரு வகையாகவும்
+          பாகுபடுத்தப்படுகின்றன. காஞ்சித்திணை யாக்கை, இளமை, செல்வம், வாழ்க்கை ஆகியவற்றின்
+          நிலையாமையைத் தன் துறைகளின்வழி சுட்டிச்சென்றிருக்கின்றது.
+        </p>
+        <p className="text-justify">
+          வஞ்சினக்காஞ்சி, தொடாக்காஞ்சி, பெருங்காஞ்சி ஆகிய காஞ்சித்திணையுள் அமையும் துறைகளுக்குரிய
+          பாடல்கள் பாடங்களாக இவ்வலகில் அமைந்துள்ளன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+  "அலகு 7 : பாடாண்": {
+    header: "கருத்தலகு 2 : அலகு 7",
+    title: "பாடாண்",
+    body: (
+      <div className="space-y-5">
+        <p className="text-justify">
+          இவ்வலகு பாடாண்திணைபற்றியது. பாடப்பெறுவதற்குத் தகுதியுடைய தலைமை மக்களின் புகழ், வீரம்,
+          கொடை ஆகியவற்றைக் குறித்துப் பாடுதல் பாடாண்திணையாகும்.
+        </p>
+        <blockquote className="border-l-4 border-[#a66f3f] bg-[#fdf3df]/70 px-5 py-4 text-[#3b2718]">
+          பாடாண் பகுதி கைக்கிளைப் புறனே<br />
+          நாடுங் காலை நாலிரண் டுடைத்தே — தொல். பொருள். புறத். 78
+        </blockquote>
+        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        பாடாண் பகுதி கைக்கிளைப் புறனே
+        <br />
+        நாடுங் காலை நாலிரண் டுடைத்தே  
+      </p>
+      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 78</p>
+    </div>
+        <p className="text-justify">
+          என்பது பாடாண்திணை. பாடாண்திணைக் கைக்கிளைத்திணைக்குப் புறனாக அமைகின்றது.
+        </p>
+        <p className="text-justify">
+          இத்திணைக்குரிய பாடல்களைப் பயிலும்போது, பாடாண் திணைக்குரிய விளக்கம், பாடாண்திணையின்
+          செயற்பாடுகள் எத்தகையது என்பதனை நீங்கள் உணர்ந்து கொள்வதே இவ்வலகின் நோக்கமாகும்.
+        </p>
+        <p className="text-justify">
+          தொல்காப்பியர் பாடாண்திணையைப் பதினொரு நூற்பாக்களில் விளக்கி இருக்கின்றார். இறுதி
+          நூற்பாக்களில் இதன் சிறப்புத் துறைகள் தொகுத்துத் தரப்பெறுகின்றன. இந்நூற்பாக்கள் அனைத்திலும்
+          அமையும் கருத்துகளை மையமாகக் கொண்டு பாடாண்திணையின் பாடுபொருளை எட்டுவகைகளாகப் பிரிக்கலாம்.
+          கடவுள்வாழ்த்து வகை, வாழ்த்தியல் வகை, மங்கல வகை, செவியறிவுறுத்தல் வகை, ஆற்றுப்படை வகை,
+          பரிசிற்றுறை வகை, கைக்கிளை வகை, வசை வகை என்பனவாக அவை அமையும்.
+        </p>
+        <p className="text-justify">
+          கடவுள்வாழ்த்து, இயன்மொழி, ஆற்றுப்படை, அரசவாகை ஆகியன பாடாண்திணையுள் அமையும்,
+          துறைகளுக்குரிய பாடல்கள் பாடங்களாக இவ்வலகில் அமைந்துள்ளன.
+        </p>
+        <p className="text-justify">
+          இனி, இப்பாடங்களை அறிந்துகொள்ள முயற்சி செய்யலாமா? பாடலின் முன்னுரையை வாசித்துக்கொள்ளுங்கள்.
+          பாடலைக் கவனமாகக் கேளுங்கள்.
+        </p>
+      </div>
+    ),
+  },
+};
+
 const VideoLecturesPage = () => {
   const [isIntroDrawerOpen, setIsIntroDrawerOpen] = useState(false);
+  const [isAkamDrawerOpen, setIsAkamDrawerOpen] = useState(false);
+  const [isPuramModuleDrawerOpen, setIsPuramModuleDrawerOpen] = useState(false);
+  const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
+
   const [activeItem, setActiveItem] = useState("அறிமுகம்");
   const [activeIntroItem, setActiveIntroItem] = useState("அறிமுகம்");
+  const [activeAkamItem, setActiveAkamItem] = useState(null);
+  const [activePuramModuleItem, setActivePuramModuleItem] = useState(null);
+  const [activePuramItem, setActivePuramItem] = useState(null);
 
   const currentContent = useMemo(() => {
     if (activeItem === "அறிமுகம்") {
       return introDrawerContent[activeIntroItem] || [];
     }
+    if (activeItem === "கருத்தலகு 1 : அகம்") return null;
+    if (activeItem === "கருத்தலகு 2 : புறம்") return null;
+    
     return sectionContent[activeItem] || [];
-  }, [activeItem, activeIntroItem]);
+  }, [activeItem, activeIntroItem, activeAkamItem, activePuramModuleItem, activePuramItem]);
 
   const isMunnuraiView = activeItem === "அறிமுகம்" && activeIntroItem === "முன்னுரை";
   const isNokkangalView = activeItem === "அறிமுகம்" && activeIntroItem === "நோக்கங்கள்";
   const isKaalamView = activeItem === "அறிமுகம்" && activeIntroItem === "காலம்";
-  const isLearningOutcomesView =
-    activeItem === "அறிமுகம்" && activeIntroItem === "கற்றல் விளைவுகள்";
+  const isLearningOutcomesView = activeItem === "அறிமுகம்" && activeIntroItem === "கற்றல் விளைவுகள்";
   const isPaadaporulView = activeItem === "அறிமுகம்" && activeIntroItem === "பாடப்பொருள்";
-  const isLearningApproachView =
-    activeItem === "அறிமுகம்" && activeIntroItem === "கற்றல் கோட்பாடும் அணுகுமுறையும்";
-  const isOnlineClassStructureView =
-    activeItem === "அறிமுகம்" && activeIntroItem === "இணைய வகுப்பு அமைப்பு";
+  const isLearningApproachView = activeItem === "அறிமுகம்" && activeIntroItem === "கற்றல் கோட்பாடும் அணுகுமுறையும்";
+  const isOnlineClassStructureView = activeItem === "அறிமுகம்" && activeIntroItem === "இணைய வகுப்பு அமைப்பு";
   const isAssessmentView = activeItem === "அறிமுகம்" && activeIntroItem === "மதிப்பீடு";
   const emphasisClass = "font-bold text-[17px] text-[#2a1b10] sm:text-[19px]";
+
+  // ── Akam content renderer ──
+  const renderAkamContent = () => {
+    if (!activeAkamItem) return <AkamModuleOverview emphasisClass={emphasisClass} />;
+    const akamUnitMap = {
+      "அலகு 1 : முல்லை": { unitNumber: 1, thinaName: "முல்லைத்" },
+      "அலகு 2 : குறிஞ்சி": { unitNumber: 2, thinaName: "குறிஞ்சித்" },
+      "அலகு 3 : மருதம்": { unitNumber: 3, thinaName: "மருதத்" },
+      "அலகு 4 : நெய்தல்": { unitNumber: 4, thinaName: "நெய்தல்" },
+      "அலகு 5 : பாலை": { unitNumber: 5, thinaName: "பாலைத்" },
+    };
+    if (activeAkamItem === "அலகு 6 : கைக்கிளை") return <AkamUnit6Page emphasisClass={emphasisClass} />;
+    if (activeAkamItem === "அலகு 7 : பெருந்திணை") return <AkamUnit7Page emphasisClass={emphasisClass} />;
+    const unit = akamUnitMap[activeAkamItem];
+    if (unit) {
+      return <AkamUnitPage unitNumber={unit.unitNumber} thinaName={unit.thinaName} emphasisClass={emphasisClass} />;
+    }
+    return <p>இந்தப் பிரிவுக்கான உள்ளடக்கம் விரைவில் சேர்க்கப்படும்.</p>;
+  };
+
+  // ── Puram module 2 content renderer ──
+  const renderPuramModuleContent = () => {
+    if (!activePuramModuleItem) return <PuramModuleOverview emphasisClass={emphasisClass} />;
+    const unit = puramUnitContent[activePuramModuleItem];
+    if (unit) {
+      return (
+        <div className="space-y-5">
+          <p className={emphasisClass}>{unit.header}</p>
+          <p className="text-2xl font-bold text-[#5a3417]">{unit.title}</p>
+          {unit.body}
+        </div>
+      );
+    }
+    return <p>இந்தப் பிரிவுக்கான உள்ளடக்கம் விரைவில் சேர்க்கப்படும்.</p>;
+  };
+
+  const closeAllDrawers = () => {
+    setIsIntroDrawerOpen(false);
+    setIsAkamDrawerOpen(false);
+    setIsPuramModuleDrawerOpen(false);
+    setIsPuramDrawerOpen(false);
+  };
 
   return (
     <div className="space-y-6">
@@ -141,14 +730,15 @@ const VideoLecturesPage = () => {
                       <button
                         type="button"
                         onClick={() => {
-                          setIsIntroDrawerOpen((previous) => !previous);
+                          setIsIntroDrawerOpen((prev) => !prev);
                           setActiveItem("அறிமுகம்");
                           setActiveIntroItem("அறிமுகம்");
+                          setIsAkamDrawerOpen(false);
+                          setIsPuramModuleDrawerOpen(false);
+                          setIsPuramDrawerOpen(false);
                         }}
                         className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                          activeItem === "அறிமுகம்"
-                            ? "bg-[#dba66d]/75 text-[#2f1b0d]"
-                            : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                          activeItem === "அறிமுகம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
                         }`}
                         style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                         aria-expanded={isIntroDrawerOpen}
@@ -156,23 +746,141 @@ const VideoLecturesPage = () => {
                         <span>{item}</span>
                         <span className="text-sm">{isIntroDrawerOpen ? "▾" : "▸"}</span>
                       </button>
-
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ${
-                          isIntroDrawerOpen ? "max-h-160" : "max-h-0"
-                        }`}
-                      >
+                      <div className={`overflow-hidden transition-all duration-300 ${isIntroDrawerOpen ? "max-h-160" : "max-h-0"}`}>
                         <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
                           {introDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
                                 type="button"
-                                onClick={() => {
-                                  setActiveItem("அறிமுகம்");
-                                  setActiveIntroItem(drawerItem);
-                                }}
+                                onClick={() => { setActiveItem("அறிமுகம்"); setActiveIntroItem(drawerItem); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "அறிமுகம்" && activeIntroItem === drawerItem
+                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
+                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                }`}
+                                style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                              >
+                                {drawerItem}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : item === "கருத்தலகு 1 : அகம்" ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAkamDrawerOpen((prev) => !prev);
+                          setActiveItem("கருத்தலகு 1 : அகம்");
+                          setActiveAkamItem(null);
+                          setIsIntroDrawerOpen(false);
+                          setIsPuramModuleDrawerOpen(false);
+                          setIsPuramDrawerOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு 1 : அகம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        }`}
+                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                        aria-expanded={isAkamDrawerOpen}
+                      >
+                        <span>{item}</span>
+                        <span className="text-sm">{isAkamDrawerOpen ? "▾" : "▸"}</span>
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${isAkamDrawerOpen ? "max-h-160" : "max-h-0"}`}>
+                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                          {akamDrawerItems.map((drawerItem) => (
+                            <li key={drawerItem}>
+                              <button
+                                type="button"
+                                onClick={() => { setActiveItem("கருத்தலகு 1 : அகம்"); setActiveAkamItem(drawerItem); }}
+                                className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
+                                  activeItem === "கருத்தலகு 1 : அகம்" && activeAkamItem === drawerItem
+                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
+                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                }`}
+                                style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                              >
+                                {drawerItem}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : item === "கருத்தலகு 2 : புறம்" ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsPuramModuleDrawerOpen((prev) => !prev);
+                          setActiveItem("கருத்தலகு 2 : புறம்");
+                          setActivePuramModuleItem(null);
+                          setIsIntroDrawerOpen(false);
+                          setIsAkamDrawerOpen(false);
+                          setIsPuramDrawerOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு 2 : புறம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        }`}
+                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                        aria-expanded={isPuramModuleDrawerOpen}
+                      >
+                        <span>{item}</span>
+                        <span className="text-sm">{isPuramModuleDrawerOpen ? "▾" : "▸"}</span>
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${isPuramModuleDrawerOpen ? "max-h-160" : "max-h-0"}`}>
+                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                          {puramModuleDrawerItems.map((drawerItem) => (
+                            <li key={drawerItem}>
+                              <button
+                                type="button"
+                                onClick={() => { setActiveItem("கருத்தலகு 2 : புறம்"); setActivePuramModuleItem(drawerItem); }}
+                                className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
+                                  activeItem === "கருத்தலகு 2 : புறம்" && activePuramModuleItem === drawerItem
+                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
+                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                }`}
+                                style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                              >
+                                {drawerItem}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : item === "கருத்தலகு-புறம்" ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsPuramDrawerOpen((prev) => !prev);
+                          setActiveItem("கருத்தலகு-புறம்");
+                          setActivePuramItem(null);
+                          setIsIntroDrawerOpen(false);
+                          setIsAkamDrawerOpen(false);
+                          setIsPuramModuleDrawerOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு-புறம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        }`}
+                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                        aria-expanded={isPuramDrawerOpen}
+                      >
+                        <span>{item}</span>
+                        <span className="text-sm">{isPuramDrawerOpen ? "▾" : "▸"}</span>
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${isPuramDrawerOpen ? "max-h-160" : "max-h-0"}`}>
+                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                          {puramDrawerItems.map((drawerItem) => (
+                            <li key={drawerItem}>
+                              <button
+                                type="button"
+                                onClick={() => { setActiveItem("கருத்தலகு-புறம்"); setActivePuramItem(drawerItem); }}
+                                className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
+                                  activeItem === "கருத்தலகு-புறம்" && activePuramItem === drawerItem
                                     ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
                                     : "text-[#51321a] hover:bg-[#f2dcc0]/80"
                                 }`}
@@ -188,14 +896,9 @@ const VideoLecturesPage = () => {
                   ) : (
                     <button
                       type="button"
-                      onClick={() => {
-                        setActiveItem(item);
-                        setIsIntroDrawerOpen(false);
-                      }}
+                      onClick={() => { setActiveItem(item); closeAllDrawers(); }}
                       className={`w-full border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                        activeItem === item
-                          ? "bg-[#dba66d]/75 text-[#2f1b0d]"
-                          : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        activeItem === item ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
                       }`}
                       style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                     >
@@ -228,10 +931,13 @@ const VideoLecturesPage = () => {
               className="mt-5 text-left text-[15px] leading-[1.8] text-[#2f241b] sm:text-base"
               style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
             >
-              {isMunnuraiView ? (
+              {activeItem === "கருத்தலகு 1 : அகம்" ? (
+                renderAkamContent()
+              ) : activeItem === "கருத்தலகு 2 : புறம்" ? (
+                renderPuramModuleContent()
+              ) : isMunnuraiView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>1. அறிமுகம்</p>
-
                   <p className="text-justify">
                     தொழில்நுட்பம் முனைப்புடன் வளர்ந்து வரும் இன்றைய சூழலில் பல்வேறு மொழி கற்றல்
                     செயல்பாடுகளைச் செயற்படுத்தும் வகையில் திட்டமிட்ட இணைய மொழிப் பாட வகுப்புகள்
@@ -242,49 +948,18 @@ const VideoLecturesPage = () => {
                     <span className={emphasisClass}> என்னும் இவ்விணைய வகுப்பின்</span>
                     முதன்மை நோக்கமாகும்.
                   </p>
-
                   <p className="text-justify">தமிழ்ச் செவ்விலக்கியப் பனுவல் பற்றிய</p>
-
                   <div className="space-y-2">
-                    <p>
-                      <span className={emphasisClass}>அ. இலக்கண அறிவு</span>
-                      <span className={emphasisClass}> (Grammatical Knowledge)</span>
-                    </p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">
-                      (ஒலியனியல், உருவனியல், தொடரியல், சொற்களஞ்சியம், செம்மொழித் தமிழின்
-                      அமைப்பு பற்றிய செய்திகள் இதில் அடங்கும்)
-                    </p>
-
-                    <p>
-                      <span className={emphasisClass}>ஆ. பனுவல் அறிவு</span>
-                      <span className={emphasisClass}> (Textual Knowledge)</span>
-                    </p>
-
-                    <p>
-                      <span className={emphasisClass}>இ. பயனாட்டு அறிவு</span>
-                      <span className={emphasisClass}> (Functional Knowledge)</span>
-                    </p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">
-                      (மொழியைக் கையாளும் திறன், கருத்தை ஆழியவனில் அதில் அடங்கும்)
-                    </p>
-
-                    <p>
-                      <span className={emphasisClass}>ஈ. சமூக மொழியியல் அறிவு</span>
-                      <span className={emphasisClass}> (Sociolinguistic Knowledge)</span>
-                    </p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">
-                      (குறை வழக்குகள், மொழிமாற்றங்கள், பன்மாட்டு செய்திகள் இதில் அடங்கும்)
-                    </p>
-
-                    <p>
-                      <span className={emphasisClass}>உ. இலக்கிய அறிவு</span>
-                      <span className={emphasisClass}> (Literary Knowledge)</span>
-                    </p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">
-                      (இலக்கிய வகைமை, கவிதையியல், நடை பற்றிய அறிவு இதில் அடங்கும்)
-                    </p>
+                    <p><span className={emphasisClass}>அ. இலக்கண அறிவு</span><span className={emphasisClass}> (Grammatical Knowledge)</span></p>
+                    <p className="pl-4 text-justify text-[#3b2a1e]">(ஒலியனியல், உருவனியல், தொடரியல், சொற்களஞ்சியம், செம்மொழித் தமிழின் அமைப்பு பற்றிய செய்திகள் இதில் அடங்கும்)</p>
+                    <p><span className={emphasisClass}>ஆ. பனுவல் அறிவு</span><span className={emphasisClass}> (Textual Knowledge)</span></p>
+                    <p><span className={emphasisClass}>இ. பயனாட்டு அறிவு</span><span className={emphasisClass}> (Functional Knowledge)</span></p>
+                    <p className="pl-4 text-justify text-[#3b2a1e]">(மொழியைக் கையாளும் திறன், கருத்தை ஆழியவனில் அதில் அடங்கும்)</p>
+                    <p><span className={emphasisClass}>ஈ. சமூக மொழியியல் அறிவு</span><span className={emphasisClass}> (Sociolinguistic Knowledge)</span></p>
+                    <p className="pl-4 text-justify text-[#3b2a1e]">(குறை வழக்குகள், மொழிமாற்றங்கள், பன்மாட்டு செய்திகள் இதில் அடங்கும்)</p>
+                    <p><span className={emphasisClass}>உ. இலக்கிய அறிவு</span><span className={emphasisClass}> (Literary Knowledge)</span></p>
+                    <p className="pl-4 text-justify text-[#3b2a1e]">(இலக்கிய வகைமை, கவிதையியல், நடை பற்றிய அறிவு இதில் அடங்கும்)</p>
                   </div>
-
                   <p className="text-justify">
                     ஆகிய ஐவை செவ்விலக்கிய மொழித்திறனின் முதன்மைக் கூறுகளாகும். இவற்றின்
                     ஊடாட்டமே செவ்விலக்கியங்களின் தனி மொழியாட்சி வகையை உருவாக்குகிறது.
@@ -297,77 +972,29 @@ const VideoLecturesPage = () => {
               ) : isNokkangalView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>2. நோக்கங்கள்</p>
-
-                  <p className="text-justify">
-                    செவ்விலக்கிய மொழித்திறன் (Classical Literary competence) பெறுதல்
-                  </p>
-
+                  <p className="text-justify">செவ்விலக்கிய மொழித்திறன் (Classical Literary competence) பெறுதல்</p>
                   <div className="space-y-2">
                     <p>செவ்வியல் இலக்கிய மொழியைப் புரிந்துகொள்ளுதல்</p>
                     <p>செவ்வியல் இலக்கியங்களை நயம்பாராட்டும் திறன் பெறுதல்</p>
                     <p>செவ்வியல் இலக்கியங்களுக்குக் கருத்துவிளக்கம் தரும் திறன் பெறுதல்</p>
                   </div>
-
-                  <p className="text-justify">
-                    நேர்நோக்கங்களை அடைய, செவ்விலக்கிய முதன்மைக் கூறுகளின் அடிப்படையில்
-                    கற்றல் விளைவுகள் (Learning outcomes) இங்காணப் பட்டுள்ளன.
-                  </p>
+                  <p className="text-justify">நேர்நோக்கங்களை அடைய, செவ்விலக்கிய முதன்மைக் கூறுகளின் அடிப்படையில் கற்றல் விளைவுகள் (Learning outcomes) இங்காணப் பட்டுள்ளன.</p>
                 </div>
               ) : isKaalamView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>3. காலம் : 300 மணி</p>
-
-                  <p className="text-justify">
-                    300 மணி நேர கால அளவில் 250 மணி நேரம் கற்றலுக்கும், 50 மணி நேரம்
-                    மதிப்பீட்டிற்கும் ஒப்படைப்பிற்கும் ஒதுக்கப்படும்.
-                    கருத்தலகுரியாயாக மணி நேரம் கீழுமாறு ஒதுக்கீடு செய்யப்பட்டுள்ளது.
-                  </p>
-
+                  <p className="text-justify">300 மணி நேர கால அளவில் 250 மணி நேரம் கற்றலுக்கும், 50 மணி நேரம் மதிப்பீட்டிற்கும் ஒப்படைப்பிற்கும் ஒதுக்கப்படும்.</p>
                   <div className="space-y-1">
-                    <div className="grid grid-cols-[1fr_auto] gap-6">
-                      <p>கருத்தலகு 1</p>
-                      <p>50 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] gap-6">
-                      <p>கருத்தலகு 2</p>
-                      <p>50 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] gap-6">
-                      <p>கருத்தலகு 3</p>
-                      <p>50 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] gap-6">
-                      <p>கருத்தலகு 4</p>
-                      <p>50 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] gap-6">
-                      <p>கருத்தலகு 5</p>
-                      <p>50 மணி</p>
-                    </div>
+                    {["கருத்தலகு 1","கருத்தலகு 2","கருத்தலகு 3","கருத்தலகு 4","கருத்தலகு 5"].map((k,i) => (
+                      <div key={i} className="grid grid-cols-[1fr_auto] gap-6"><p>{k}</p><p>50 மணி</p></div>
+                    ))}
                   </div>
-
                   <div className="space-y-1">
-                    <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                      <p></p>
-                      <p>=</p>
-                      <p>250 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                      <p>மதிப்பீடு</p>
-                      <p>=</p>
-                      <p>25 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                      <p>ஒப்படைப்பு</p>
-                      <p>=</p>
-                      <p>25 மணி</p>
-                    </div>
+                    <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p>=</p><p>250 மணி</p></div>
+                    <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
+                    <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>ஒப்படைப்பு</p><p>=</p><p>25 மணி</p></div>
                     <div className="mt-2 border-t border-[#7d5a34]/60 pt-2">
-                      <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                        <p></p>
-                        <p></p>
-                        <p className={emphasisClass}>300 மணி</p>
-                      </div>
+                      <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p></p><p className={emphasisClass}>300 மணி</p></div>
                     </div>
                   </div>
                 </div>
@@ -375,85 +1002,22 @@ const VideoLecturesPage = () => {
                 <div className="space-y-5">
                   <p className={emphasisClass}>4. கற்றல் விளைவுகள்</p>
                   <p>பின்வருவனவற்றை அறிந்து கொள்ளுதல்</p>
-
-                  <div className="space-y-2 pl-2">
-                    <p>• செம்மொழித் தமிழ்</p>
-                    <p>• அக இலக்கியங்கள்</p>
-                    <p>• புற இலக்கியங்கள்</p>
-                    <p>• அற இலக்கியங்கள்</p>
-                    <p>• காப்பிய இலக்கியங்கள்</p>
-                    <p>• செவ்வியல் இலக்கணம்</p>
+                  <div className="space-y-1 pl-2">
+                    <p>• செம்மொழித் தமிழ்</p><p>• அக இலக்கியங்கள்</p><p>• புற இலக்கியங்கள்</p>
+                    <p>• அற இலக்கியங்கள்</p><p>• காப்பிய இலக்கியங்கள்</p><p>• செவ்வியல் இலக்கணம்</p>
                     <p>• செவ்வியல் மொழிமைப்பு</p>
-                    <p className="pl-5">→ ஒலியனையப்பு</p>
-                    <p className="pl-5">→ புணர்ச்சி அமைப்பு</p>
-                    <p className="pl-5">→ உருவனமைப்பு</p>
-                    <p className="pl-5">→ தொடரமைப்பு</p>
-                    <p>• திணை</p>
-                    <p className="pl-5">→ அகத்திணை</p>
-                    <p className="pl-10 font-semibold">முல்லை</p>
-                    <p className="pl-10 font-semibold">குறிஞ்சி</p>
-                    <p className="pl-10 font-semibold">மருதம்</p>
-                    <p className="pl-10 font-semibold">நெய்தல்</p>
-                    <p className="pl-10 font-semibold">பாலை</p>
-                    <p className="pl-10 font-semibold">கைக்கிளை</p>
-                    <p className="pl-10 font-semibold">பெருந்திணை</p>
+                    <p className="pl-5">→ ஒலியனையப்பு</p><p className="pl-5">→ புணர்ச்சி அமைப்பு</p>
+                    <p className="pl-5">→ உருவனமைப்பு</p><p className="pl-5">→ தொடரமைப்பு</p>
+                    <p>• திணை</p><p className="pl-5">→ அகத்திணை</p>
+                    {["முல்லை","குறிஞ்சி","மருதம்","நெய்தல்","பாலை","கைக்கிளை","பெருந்திணை"].map(t=><p key={t} className="pl-10 font-semibold">{t}</p>)}
                     <p className="pl-5">→ புறத்திணை</p>
-                    <p className="pl-10">வெட்சி</p>
-                    <p className="pl-10">வஞ்சி</p>
-                    <p className="pl-10">உழிஞை</p>
-                    <p className="pl-10">தும்பை</p>
-                    <p className="pl-10">வாகை</p>
-                    <p className="pl-10">காஞ்சி</p>
-                    <p className="pl-10">பாடாண்</p>
-                    <p className="pl-5">→ அறம்</p>
-                    <p className="pl-10 font-semibold">புறம்</p>
-                    <p className="pl-10">அரசு, அமைச்சர், குடி, துறவு</p>
-                    <p className="pl-10 font-semibold">அகம்</p>
-                    <p className="pl-10">இல்லாழ்வு</p>
-                    <p className="pl-10 font-semibold">அறம்</p>
-                    <p className="pl-10">நல்லொழுக்கம், தீயொழுக்கம்</p>
-                    <p className="pl-5">→ காப்பியம்</p>
-                    <p className="pl-10">சிலப்பதிகாரம்</p>
-                    <p className="pl-10">மணிமேகலை</p>
-                    <p className="pl-5">→ இலக்கணம்</p>
-                    <p className="pl-10 font-semibold">கற்று</p>
-                    <p className="pl-10">கற்று, கைகோள், நிகழ்துவோர், கேட்போர், காலம்</p>
-                    <p className="pl-10 font-semibold">திணை (அகம்)</p>
-                    <p className="pl-10">முல்லை</p>
-                    <p className="pl-10">குறிஞ்சி</p>
-                    <p className="pl-10">மருதம்</p>
-                    <p className="pl-10">நெய்தல்</p>
-                    <p className="pl-10">பாலை</p>
-                    <p className="pl-10">கைக்கிளை</p>
-                    <p className="pl-10">பெருந்திணை</p>
-                    <p className="pl-10 font-semibold">திணை (புறம்)</p>
-                    <p className="pl-10">துறை</p>
-                    <p className="pl-10">வெட்சி</p>
-                    <p className="pl-10">வஞ்சி</p>
-                    <p className="pl-10">உழிஞை</p>
-                    <p className="pl-10">தும்பை</p>
-                    <p className="pl-10">வாகை</p>
-                    <p className="pl-10">காஞ்சி</p>
-                    <p className="pl-10">பாடாண்</p>
-                    <p className="pl-10 font-semibold">யாப்பு</p>
-                    <p className="pl-10">யாப்பு, பா, அசை, சீர், அடி, தொடை, அளவு</p>
-                    <p className="pl-10 font-semibold">செய்யுள் மொழி</p>
-                    <p className="pl-10">தூக்கு, நோக்கு, பயன், மெய்ப்பாடு, எச்சம், பொருள், வண்ணம், அம்மை, அழகு</p>
-                    <p className="pl-10 font-semibold">பொருள்மொழி</p>
-                    <p className="pl-10">எழுத்து, மாத்திரை, மரபு, மாட்டு, முன்னம், தொன்மை, தோல், விருந்து, இயைபு, புலன், இழைபு</p>
-                    <p className="pl-10 font-semibold">நயம்பாராட்டல்</p>
-                    <p className="pl-10">பொருள், யாப்பு, உவமை, உள்ளுறை, இறைச்சி, சொல்லாட்சி, பொருத்தகருத்து</p>
+                    {["வெட்சி","வஞ்சி","உழிஞை","தும்பை","வாகை","காஞ்சி","பாடாண்"].map(t=><p key={t} className="pl-10">{t}</p>)}
                   </div>
                 </div>
               ) : isPaadaporulView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>5. பாடப்பொருள்</p>
-
-                  <p className="text-justify">
-                    இவ்விணைய வகுப்பின் பாடப்பொருள், செவ்விலக்கிய மொழித்திறனை படிப்படியாக
-                    வளர்க்கும் வகையில் கருத்தலகு அடிப்படையில் அமைக்கப்பட்டுள்ளது.
-                  </p>
-
+                  <p className="text-justify">இவ்விணைய வகுப்பின் பாடப்பொருள், செவ்விலக்கிய மொழித்திறனை படிப்படியாக வளர்க்கும் வகையில் கருத்தலகு அடிப்படையில் அமைக்கப்பட்டுள்ளது.</p>
                   <div className="space-y-2 pl-2">
                     <p>• கருத்தலகு 1 : செம்மொழித் தமிழ் - அடிப்படைப் புரிதல்கள்</p>
                     <p>• கருத்தலகு 2 : அக இலக்கியங்கள் - திணை, உணர்ச்சி, உரைப்பண்பு</p>
@@ -461,7 +1025,6 @@ const VideoLecturesPage = () => {
                     <p>• கருத்தலகு 4 : அறம் மற்றும் காப்பியப் பார்வை - கருத்தியல் விரிவாக்கம்</p>
                     <p>• கருத்தலகு 5 : இலக்கணம், யாப்பு, செய்யுள் மொழி, நயம்பாராட்டல்</p>
                   </div>
-
                   <p className="text-justify">
                     ஒவ்வொரு கருத்தலகிலும்
                     <span className={emphasisClass}> விளக்க உரை</span>,
@@ -473,13 +1036,7 @@ const VideoLecturesPage = () => {
               ) : isLearningApproachView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>6. கற்றல் கோட்பாடும் அணுகுமுறையும்</p>
-
-                  <p className="text-justify">
-                    இவ்விணைய வகுப்பு கற்றவர்-மையக் கற்றல் முறையை முன்னிறுத்துகிறது.
-                    கற்றல் செயல்முறை வாசிப்பு, புரிதல், பகுப்பாய்வு, நடைமுறைப் பயன்பாடு
-                    ஆகிய நான்கு அடுக்குகளில் முன்னெடுக்கப்படுகிறது.
-                  </p>
-
+                  <p className="text-justify">இவ்விணைய வகுப்பு கற்றவர்-மையக் கற்றல் முறையை முன்னிறுத்துகிறது.</p>
                   <div className="space-y-2 pl-2">
                     <p>• தன்னிச்சை கற்றல் (Self-paced learning) முறையில் அலகு முன்னேற்றம்</p>
                     <p>• வழிநடத்தப்பட்ட உரை வாசிப்பு மற்றும் கருத்துப் பகுப்பாய்வு</p>
@@ -487,265 +1044,22 @@ const VideoLecturesPage = () => {
                     <p>• செயற்பாட்டு பயிற்சிகள் மூலம் கருத்தை நடைமுறைக்கு மாற்றுதல்</p>
                     <p>• தொடர்ச்சியான சுயமதிப்பீடு மூலம் கற்றல் ஆழத்தை உறுதிசெய்தல்</p>
                   </div>
-
-                  <p className="text-justify">
-                    இந்த அணுகுமுறை மூலம் கற்றவர்
-                    <span className={emphasisClass}> வாசிப்புத் திறன்</span>,
-                    <span className={emphasisClass}> பொருள் உணர்தல் திறன்</span>,
-                    <span className={emphasisClass}> உரை விளக்கத் திறன்</span> மற்றும்
-                    <span className={emphasisClass}> நயம்பாராட்டும் திறன்</span>
-                    ஆகியவற்றை ஒருங்கிணைந்து வளர்த்துக் கொள்கிறார்.
-                  </p>
                 </div>
               ) : isOnlineClassStructureView ? (
                 <div className="space-y-6">
                   <p className={emphasisClass}>7. இணைய வகுப்பு அமைப்பு (Online course structure)</p>
-
-                  <p className="text-justify">
-                    செவ்விலக்கிய மொழியில் மேற்தர நோக்கங்களை அடையும் வகையில் இவ்விணைய வகுப்பு
-                    நான்கு தலைப்புகளில் அமைக்கப்பட்டுள்ளது.
-                  </p>
-
+                  <p className="text-justify">செவ்விலக்கிய மொழியில் மேற்தர நோக்கங்களை அடையும் வகையில் இவ்விணைய வகுப்பு நான்கு தலைப்புகளில் அமைக்கப்பட்டுள்ளது.</p>
                   <div className="space-y-1 pl-2">
                     <p>• செவ்விலக்கியக் கூறுகள் (Classical literary components)</p>
                     <p>• செவ்விலக்கிய மொழித்திறன்கள் (Classical language skills)</p>
                     <p>• செவ்விலக்கிய மொழியமைப்பு (Structure of Classical language)</p>
                     <p>• செவ்விலக்கியத் திறன்கள் (Classical literary skills)</p>
                   </div>
-
-                  <p className="text-justify">
-                    செவ்விலக்கியக் கூறுகள் முதன்மைக் கூறுகளின் அடிப்படையில் கருத்தலகுகளாகவும்,
-                    துணைக்கூறுகளின் அடிப்படையில் அலகுகளாகவும் பாடங்களாகவும் வகுக்கப்பட்டுள்ளன.
-                    மொத்தம் ஐந்து கருத்தலகுகள் இதில் அடங்கும். இவற்றுள் முதல் நான்கு கருத்தலகுகள்
-                    அலகுகளாகவும், ஒவ்வொரு அலகும் செவ்வியல் கூறுகளின் அடிப்படையில் பாடங்களாகவும்
-                    (Lessons) பிரிக்கப்பட்டுள்ளன. இவ்வமைப்பை என வரைபடத்தில் காட்டலாம். எ.கா.
-
-                  </p>
-
-                  <div className="overflow-hidden rounded-xl bg-[#edd1a6]">
-                    <img
-                      src="/course-structure-diagram.svg"
-                      alt="கருத்தலகு, அலகு, பாடம் அமைப்பைக் காட்டும் வரைபடம்"
-                      className="block w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-                    <p className="font-semibold text-[#3b2718]">கருத்தலகு 1 : அக இலக்கியம்</p>
-
-                    <div className="mt-2 space-y-1 pl-2">
-                      <p>
-                        <span className="font-semibold">அலகு 1</span> : முல்லைத் திணை
-                      </p>
-                      <p className="pl-5">பாடம் 1 : முதற்பொருள்</p>
-                      <p className="pl-5">பாடம் 2 : கருப்பொருள்</p>
-                      <p className="pl-5">பாடம் 3 : உரிப்பொருள்</p>
-                      <p className="pl-5">பாடம் 4 : திணைமயக்கம்</p>
-                    </div>
-
-                    <div className="mt-3 space-y-1 pl-2">
-                      <p>
-                        <span className="font-semibold">அலகு 2</span> : குறிஞ்சித் திணை
-                      </p>
-                      <p className="pl-5">பாடம் 1 : முதற்பொருள்</p>
-                      <p className="pl-5">பாடம் 2 : கருப்பொருள்</p>
-                      <p className="pl-5">...</p>
-                    </div>
-                  </div>
-
-                  <div className="overflow-x-auto rounded-xl border border-[#8f6033]/45 bg-[#fff9ee]/78">
-                    <table className="min-w-245 w-full border-collapse text-sm sm:text-base">
-                      <thead>
-                        <tr className="bg-[#edd1a6]/75 text-[#2f1f13]">
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 1 - முல்லை</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 2 - குறிஞ்சி</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 3 - மருதம்</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 4 - நெய்தல்</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 5 - பாலை</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 6 - கைக்கிளை</th>
-                          <th className="border border-[#b2875b]/70 px-2 py-2 text-left">அலகு 7 - பெருந்திணை</th>
-                        </tr>
-                      </thead>
-                      <tbody className="text-[#2f241b]">
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1 முதற்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1 முதற்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1 முதற்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1 முதற்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1 முதற்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:1</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:2 கருப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:2 கருப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:2 கருப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:2 கருப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:2 கருப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:3 உரிப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:3 உரிப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:3 உரிப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:3 உரிப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:3 உரிப்பொருள்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:4 திணைமயக்கம்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:4 திணைமயக்கம்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:4 திணைமயக்கம்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:4 திணைமயக்கம்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2">பாடம்:4 திணைமயக்கம்</td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-2 py-2"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <p className="text-justify">
-                    ஒவ்வொரு பாடமும் ஏற்கனவே குறிக்கப்பட்ட ஒரு துணைக்கூறைக் கொண்டு உருவாக்கப்பட்டுள்ளது.
-                    இத் துணைக்கூறு அப்பாடத்தின் கற்றல் விளைவு.
-                  </p>
-
-                  <div className="space-y-2">
-                    <p className="font-semibold text-[#3b2718]">
-                      கருத்தலகு 1 (அக இலக்கியம்) - அலகு 1 : பாடம் 1
-                    </p>
-                    <p className="font-semibold">செவ்விலக்கியக் கூறுகள்:</p>
-                    <ol className="list-decimal space-y-1 pl-6">
-                      <li>அகத்திணை அறிதல்</li>
-                      <li>முல்லைத்திணை அறிதல்</li>
-                      <li>முதற்பொருள் அறிதல்</li>
-                      <li>கருப்பொருள் அறிதல்</li>
-                      <li>உரிப்பொருள் அறிதல்</li>
-                      <li>திணைமயக்கம் அறிதல்</li>
-                    </ol>
-                  </div>
-
-                  <p className="text-justify">
-                    இக்கற்றல் விளைவை கற்போர் அடையும் வகையில் ஒன்றோ இரண்டோ பாடல்கள் செவ்வியல்
-                    இலக்கியங்களிலிருந்து தெரிவு செய்யப்படுகின்றன. அப்பாடல்களில் அமைந்துள்ள
-                    செவ்வியல் மொழியை கேட்பது (Listening), வாசித்துப் பொருணர்தல் (Reading),
-                    எழுதுதல் (Writing) ஆகிய செவ்விலக்கிய மொழித்திறன்களைப் பெறத் துணைக் கற்றல் விளைவுகள் இனங்காணப்படுகின்றன. எ.கா.
-                  </p>
-
-                  <div className="space-y-4 rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-                    <p className="font-semibold text-[#3b2718]">
-                      கருத்தலகு 1 - அலகு 1 : பாடம் 1 (எ.கா. குறுந். 188)
-                    </p>
-
-                    <div className="space-y-1">
-                      <p className="font-semibold">கேட்புப் பொருணர்தல் (Listening)</p>
-                      <p>• பாடலின் மையக் கருத்து அறிதல்</p>
-                      <p>• பாடலின் திணைக் கருத்து அறிதல்</p>
-                      <p>• பாடலின் நோக்கப்பொருள் அறிதல்</p>
-                      <p>• பொருள் உணர்த்தும் பாடல் அமைப்பு அறிதல்</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <p className="font-semibold">வாசித்தல் (Reading)</p>
-                      <p>• பாடலை உரக்க வாசிக்க அறிதல்</p>
-                      <p>• மென்குரலில் வாசித்துப் பொருள் அறிதல்</p>
-                      <p>• பழந்தமிழ் இயைபுடன் வாசிக்க அறிதல்</p>
-                      <p>• பாடலை இனிசையுடன் பாட அறிதல்</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <p className="font-semibold">எழுதுதல் (Writing)</p>
-                      <p>• பொருள் அறிந்து தொடர்பான வினாக்களுக்கு பதில் எழுதுதல்</p>
-                      <p>• பாடலின் மையக்கருத்து எழுதுதல்</p>
-                      <p>• பாடலின் திணைப்பிரிவு எழுதுதல்</p>
-                      <p>• கருப்பொருளை விளக்கமாக எழுதுதல்</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <p className="font-semibold">மதிப்பீடு (Assessment)</p>
-                    <p className="text-justify">
-                      இக்கற்றல் விளைவுகளை கற்போர் அடையும் வகையில் தன்முறைப் பயிற்சி
-                      உத்திமுறைகள் (tutorial strategies) வகுக்கப்பட்டுள்ளன.
-                    </p>
-
-                    <div className="space-y-1 pl-2">
-                      <p>• கருத்துக் கட்டம்</p>
-                      <p>• அருஞ்சொற்பொருள்கள்</p>
-                      <p>• பொழிப்புரை</p>
-                      <p>• பகுப்புரை</p>
-                      <p>• மொழிபெயர்ப்பு</p>
-                    </div>
-
-                    <p className="text-justify">
-                      ஆகிய நிரல்பட்டி (User Interface) தரப்பட்டுள்ளது. ஒரு செவ்வியல் பாடலை
-                      வாசித்தலுடன் புரிந்துகொள்ளும் திறனை இத்துணைமுறைப் பயிற்சி மூலம் கற்போர்
-                      அடைவது மதிப்பீடு செய்யப்படுகிறது. தொடர்ந்து செவ்விலக்கிய மொழியமைப்பை
-                      புரிந்துகொள்ள உதவும் அகப்பொருள் இலக்கணக் கூறுகள் தேர்வுகள் வழியாகவும்
-                      மதிப்பீடு செய்யப்படுகின்றன.
-                    </p>
-                  </div>
-
-                  <div className="overflow-x-auto rounded-xl border border-[#8f6033]/45 bg-[#fff9ee]/78">
-                    <table className="min-w-90 w-full border-collapse text-sm sm:text-base">
-                      <thead>
-                        <tr className="bg-[#edd1a6]/75 text-[#2f1f13]">
-                          <th className="border border-[#b2875b]/70 px-3 py-2 text-left">கூற்று (அகம்)</th>
-                          <th className="border border-[#b2875b]/70 px-3 py-2 text-left">திணை (அகம்)</th>
-                        </tr>
-                      </thead>
-                      <tbody className="text-[#2f241b]">
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">களவு</td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">அகத்திணை</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">கற்பு</td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">முதற்பொருள்</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">கருப்பொருள்</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">உரிப்பொருள்</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">திணைமயக்கம்</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2"></td>
-                          <td className="border border-[#c69a6f]/70 px-3 py-2">கைகோள்</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <p className="text-justify">
-                    இக்கற்றல் விளைவுகளை மாணவர் அடைவதற்கு ஏற்ப இக் கருத்தலகின் துணைமுறைப் பயிற்சி
-                    உத்திமுறைகள் வகுக்கப்பட்டுள்ளன.
-                  </p>
-
-                  <p className="text-justify">
-                    இணையவழிச் செம்மொழித் தமிழ் என்னும் இவ்விணைய வகுப்பின் அகம், புறம் ஆகிய
-                    இரண்டு கருத்தலகுகள் மட்டுமே தற்போது பதிவேற்றம் செய்யப்பட்டுள்ளன என்பது
-                    குறிப்பிடத்தக்கது. பிற கருத்தலகுகள் மதிப்பீட்டு நிலையில் உள்ளன.
-                  </p>
                 </div>
               ) : isAssessmentView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>8. மதிப்பீடு</p>
-
-                  <p className="text-justify">
-                    கற்றல் விளைவுகளை அளவிடவும், கற்றவர் முன்னேற்றத்தை கண்காணிக்கவும்,
-                    இவ்விணைய வகுப்பில் படிநிலை மதிப்பீட்டு முறை பின்பற்றப்படுகிறது.
-                  </p>
-
+                  <p className="text-justify">கற்றல் விளைவுகளை அளவிடவும், கற்றவர் முன்னேற்றத்தை கண்காணிக்கவும், இவ்விணைய வகுப்பில் படிநிலை மதிப்பீட்டு முறை பின்பற்றப்படுகிறது.</p>
                   <div className="space-y-2 pl-2">
                     <p>• அலகு முடிவு சுயமதிப்பீட்டு வினாக்கள்</p>
                     <p>• கருத்து புரிதல் அடிப்படையிலான குறுந்தேர்வுகள்</p>
@@ -753,36 +1067,18 @@ const VideoLecturesPage = () => {
                     <p>• தொகுதி வாரியான பயன்பாட்டு பணிகள் (Assignments)</p>
                     <p>• முழுமைப் பரிசோதனை வழியாக மொத்த திறன் மதிப்பீடு</p>
                   </div>
-
                   <div className="space-y-1">
-                    <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                      <p>தொடர்ச்சியான மதிப்பீடு</p>
-                      <p>=</p>
-                      <p>25 மணி</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                      <p>ஒப்படைப்பு / செயல்பாட்டு மதிப்பீடு</p>
-                      <p>=</p>
-                      <p>25 மணி</p>
-                    </div>
+                    <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>தொடர்ச்சியான மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
+                    <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>ஒப்படைப்பு / செயல்பாட்டு மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
                     <div className="mt-2 border-t border-[#7d5a34]/60 pt-2">
-                      <div className="grid grid-cols-[1fr_auto_auto] gap-6">
-                        <p></p>
-                        <p></p>
-                        <p className={emphasisClass}>50 மணி</p>
-                      </div>
+                      <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p></p><p className={emphasisClass}>50 மணி</p></div>
                     </div>
                   </div>
                 </div>
-              ) : currentContent.length > 0 ? (
+              ) : currentContent && currentContent.length > 0 ? (
                 <div className="space-y-5">
                   {currentContent.map((line, index) => (
-                    <p
-                      key={`${activeItem}-${index}`}
-                      className={index > 0 ? "text-justify" : ""}
-                    >
-                      {line}
-                    </p>
+                    <p key={`${activeItem}-${index}`} className={index > 0 ? "text-justify" : ""}>{line}</p>
                   ))}
                 </div>
               ) : (

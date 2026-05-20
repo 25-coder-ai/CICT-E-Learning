@@ -9,6 +9,7 @@ import VideoLecturesPage from "./pages/VideoLecturesPage";
 import LearnersPage from "./pages/LearnersPage";
 import AttachmentsPage from "./pages/AttachmentsPage";
 import ContactPage from "./pages/ContactPage";
+import AcknowledgementPage from "./pages/AcknowledgementPage";
 
 const pageComponents = {
   home: HomePage,
@@ -18,6 +19,7 @@ const pageComponents = {
   learners: LearnersPage,
   attachments: AttachmentsPage,
   contact: ContactPage,
+  acknowledgement: AcknowledgementPage,
 };
 
 const pageTitles = {
@@ -28,6 +30,7 @@ const pageTitles = {
   learners: "Learners",
   attachments: "Attachments",
   contact: "Contact",
+  acknowledgement: "நன்றி – Acknowledgement",
 };
 
 const App = () => {
@@ -88,7 +91,7 @@ const App = () => {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
       >
-        <ActivePage />
+        <ActivePage onNavigate={setCurrentPage} />
       </main>
 
       <Footer />
