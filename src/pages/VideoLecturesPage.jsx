@@ -158,7 +158,7 @@ const sectionContent = {
 const AkamModuleOverview = ({ emphasisClass }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அகம்</p>
-    <p className="text-lg font-semibold text-[#5a3417]">Module 1 : Akam</p>
+    <p className="text-lg font-semibold text-[#407E8C]">Module 1 : Akam</p>
     <p className="text-justify">
       இக்கருத்தலகு அகம்பற்றியது. தமிழ்ச் செவ்வியல் மொழியில் பாடல்களைக் கேட்ட
       மாத்திரத்திலேயே பொருளுணர்தல், வாசித்துப் பொருளுணர்தல் நயம் பாராட்டிப் பேசுதல்
@@ -178,7 +178,7 @@ const AkamModuleOverview = ({ emphasisClass }) => (
       'அகம்' என்பது ஒத்த பண்பு கொண்ட ஒருவனும் ஒருத்தியும் தம்முள் கொள்ளும் அன்பு
       முறையாகும். நச்சினார்க்கினியர் அகம் என்பதை,
     </p>
-    <blockquote className="border-l-4 border-[#a66f3f] bg-[#fdf3df]/70 px-5 py-4 italic text-[#3b2718]">
+    <blockquote className="border-l-4 border-[#A58D66] bg-[#C0D5D6]/50 px-5 py-4 italic text-[#083A4F]">
       ஒத்த அன்பால் ஒருவனும் ஒருத்தியும் கூடுகின்ற காலத்துப் பிறந்த பேரின்பம்
       அக்கூட்டத்தின் பின்னர் அவ்விருவரும் ஒருவருக்கு ஒருவர் தத்தமக்குப் புலனாக
       இவ்வாறு இருந்ததெனக் கூறப்படாததாய் யாண்டும் உள்ளத்துணர்வே நுகர்ந்து
@@ -205,30 +205,30 @@ const AkamModuleOverview = ({ emphasisClass }) => (
 const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
-    <p className="text-2xl font-bold text-[#5a3417]">{thinaName}</p>
+    <p className="text-2xl font-bold text-[#407E8C]">{thinaName}</p>
     <p className="text-justify">
       இது {thinaName}திணை பற்றியது. இத்திணை சார்ந்த பாடல் ஒவ்வொன்றிலும்
       பயின்றுகொள்ளும் மொழியின் அமைப்பு அதன் பொருள் வகையான முதற்பொருள்,
       கருப்பொருள், உரிப்பொருள், திணைமயக்கம் என்பதன் மூலம் புலப்படும் இயல்பை
       நீங்கள் புரிந்துகொள்வது இவ்வலகின் நோக்கம்.
     </p>
-    <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+    <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         முதல் கரு உரிப்பொருள் என்ற மூன்றே நுவலுங் காலை முறைசிறந்
         <br />
         தனவே பாடலுட் பயின்றவை நாடுங் காலை
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— அகத் .3</p>
-      <p className="mt-1 text-sm text-[#5a3417]">என்பது தொல்காப்பியம்.</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— அகத் .3</p>
+      <p className="mt-1 text-sm text-[#407E8C]">என்பது தொல்காப்பியம்.</p>
     </div>
     <p className="text-justify">
       இவ்வலகைக் கற்று முடிக்கும்போது {thinaName}திணையின்
     </p>
     <div className="space-y-2 pl-6">
-      <p className="font-semibold text-[#2f1d10]">முதற்பொருள்</p>
-      <p className="font-semibold text-[#2f1d10]">கருப்பொருள்</p>
-      <p className="font-semibold text-[#2f1d10]">உரிப்பொருள்</p>
-      <p className="font-semibold text-[#2f1d10]">திணைமயக்கம்</p>
+      <p className="font-semibold text-[#083A4F]">முதற்பொருள்</p>
+      <p className="font-semibold text-[#083A4F]">கருப்பொருள்</p>
+      <p className="font-semibold text-[#083A4F]">உரிப்பொருள்</p>
+      <p className="font-semibold text-[#083A4F]">திணைமயக்கம்</p>
     </div>
     <p className="text-justify">
       என்னும் நான்கு பொருள் பற்றிய பொதுவான அறிவைப் பெறுவதோடு அவை புலப்பட்டு
@@ -246,7 +246,7 @@ const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
 const AkamUnit6Page = ({ emphasisClass }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அலகு 6</p>
-    <p className="text-2xl font-bold text-[#5a3417]">கைக்கிளை</p>
+    <p className="text-2xl font-bold text-[#407E8C]">கைக்கிளை</p>
     <p className="text-justify">இது கைக்கிளைப் பற்றியது.</p>
     <p className="text-justify">
       இனி, கீழே கொடுக்கப்பட்டுள்ள பாடலின் மூலம் கைக்கிளையின் புலப்படுத்தும் மொழி அறிவைப் பெற
@@ -260,7 +260,7 @@ const AkamUnit6Page = ({ emphasisClass }) => (
 const AkamUnit7Page = ({ emphasisClass }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அலகு 7</p>
-    <p className="text-2xl font-bold text-[#5a3417]">பெருந்திணை</p>
+    <p className="text-2xl font-bold text-[#407E8C]">பெருந்திணை</p>
     <p className="text-justify">இது பெருந்திணை பற்றியது.</p>
     <p className="text-justify">
       இனி, கீழே கொடுக்கப்பட்டுள்ள பாடலின் மூலம் பெருந்திணையின் புலப்படுத்தும் மொழி அறிவைப் பெற
@@ -274,7 +274,7 @@ const AkamUnit7Page = ({ emphasisClass }) => (
 const PuramModuleOverview = ({ emphasisClass }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 2 : புறம்</p>
-    <p className="text-lg font-semibold text-[#5a3417]">Module 2 : Puram</p>
+    <p className="text-lg font-semibold text-[#407E8C]">Module 2 : Puram</p>
     <p className="text-justify">
       இக்கருத்தலகு புறம் பற்றியது. தமிழ்ச் செவ்வியல் இலக்கியங்களைப் பயிலும்போதே பொருளுணர்தல்,
       வாசித்துப் பொருளுணர்தல், இலக்கிய நயம் பாராட்டிப் பேசுதல், எழுதுதல் ஆகிய திறன்களைத்
@@ -342,13 +342,13 @@ const puramUnitContent = {
           இவ்வலகு வெட்சித்திணை பற்றியது. போர் தொடங்கும் முன் தம் கருத்தைப் பகைவர்க்கு அறிவிப்பது
           போலப் பகைவர்நாட்டு ஆநிரைகளைக் களவிற் கொள்ளும் ஒழுக்கம் வெட்சித்திணைக் குரியது.
         </p>
-    <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+    <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         வேந்து விடுமுனைஞர் வேற்றுப்புலக்களவின்
         <br />
         ஆதந்து ஓம்பல் மேவற்றாகும்  
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 2</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 2</p>
     </div>
         <p className="text-justify">
           என்பது வெட்சி என்பதற்குரிய தொல்காப்பிய நூற்பாவாகும். வெட்சித்திணைக் குறிஞ்சிக்குப் புறனாக அமையும்.
@@ -384,13 +384,13 @@ const puramUnitContent = {
           இவ்வலகு வஞ்சித்திணை பற்றியது. நாட்டைக் கைப்பற்ற வரும் வேந்தனை, மற்றொரு வேந்தன்
           எதிர்த்துப் போரிடச் செல்லுதல் வஞ்சித் திணைக்குரியது.
         </p>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         எஞ்சா மண்நசை வேந்தனை வேந்தன்
         <br />
         அஞ்சுதகத் தலைச்சென்று அடல்குறித் தன்றே 
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 6</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 6</p>
     </div>
         <p className="text-justify">
           என்பது வஞ்சித்திணைக்குரிய தொல்காப்பிய நூற்பா. வஞ்சித்திணை முல்லைத்திணைக்குப் புறனாக அமையும்.
@@ -425,13 +425,13 @@ const puramUnitContent = {
           இவ்வலகு உழிஞைத்திணை பற்றியது. நன்கு பாதுகாப்புடைய அரணை முற்றுதலும் கோடலும்
           உழிஞைத்திணை ஆகும்.
         </p>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
        முழுமுதல் அரணம் முற்றலும் கோடலும்
        <br />
         அஞ்சுதகத் தலைச்சென்று அடல்குறித் தன்றே 
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 8</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 8</p>
     </div>
         <p className="text-justify">
           என்பது உழிஞைத்திணைக்குரிய தொல்காப்பிய நூற்பாவாகும். உழிஞைத்திணை மருதத்திணைக்குப் புறனாக அமையும்.
@@ -471,13 +471,13 @@ const puramUnitContent = {
           இவ்வலகு தும்பைத்திணை பற்றியது. தம் வலிமையைப் பொருளாகக் கருதி வந்த வேந்தனை மற்றொரு
           வேந்தன் அவனை முற்றிலுமாக அழித்தல் தும்பைத்திணையாகும்.
         </p>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
          மைந்துபொரு ளாக வந்த வேந்தனைச்
         <br />
          சென்றதலை அழிக்குஞ் சிறப்பிற் றென்ப  
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 12</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 12</p>
     </div>
         <p className="text-justify">
           என்பது தும்பைத்திணைக்குரிய தொல்காப்பிய நூற்பா ஆகும். தும்பைத்திணை நெய்தல்திணைக்குப் புறனாக அமையும்.
@@ -512,13 +512,13 @@ const puramUnitContent = {
           இவ்வலகு வாகைத்திணை பற்றியது. அழிவில்லாத கோட்பாட்டினையுடைய தத்தமக்குள்ள இயல்பை வேறுபட
           சிறப்பித்துக் கூறுதல் வாகைத்திணையாகும்.
         </p>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         தாவில் கொள்கைத் தத்தம் கூற்றைப்
         <br />
         பாகுபட மிகுதிப் படுத்தல் என்ப  
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல். பொருள். புறத். 12</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல். பொருள். புறத். 12</p>
     </div>
         <p className="text-justify">
           என்பது வாகைத்திணைக்குரிய தொல்காப்பிய நூற்பா ஆகும். வாகைத்திணைப் பாலைத்திணைக்குப் புறனாக அமையும்.
@@ -563,13 +563,13 @@ const puramUnitContent = {
           இவ்வலகு காஞ்சித்திணை பற்றியது. பலவகைச் சிறப்புகளையும் உடைய இவ் உலகம் நிலைபெறாத
           தன்மையது என்பதை உணர்த்துதல் காஞ்சித்திணையாகும்.
         </p>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         பாங்கருஞ் சிறப்பின் பல்லாற் றானும்
         <br />
         நில்லா உலகம் புல்லிய நெறித்தே  
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 18</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 18</p>
     </div>
         <p className="text-justify">
           என்பது காஞ்சித்திணையின் தொல்காப்பிய நூற்பா ஆகும். காஞ்சித்திணைப் பெருந்திணைக்குப் புறனாக அமையும்.
@@ -604,17 +604,17 @@ const puramUnitContent = {
           இவ்வலகு பாடாண்திணைபற்றியது. பாடப்பெறுவதற்குத் தகுதியுடைய தலைமை மக்களின் புகழ், வீரம்,
           கொடை ஆகியவற்றைக் குறித்துப் பாடுதல் பாடாண்திணையாகும்.
         </p>
-        <blockquote className="border-l-4 border-[#a66f3f] bg-[#fdf3df]/70 px-5 py-4 text-[#3b2718]">
+        <blockquote className="border-l-4 border-[#A58D66] bg-[#C0D5D6]/50 px-5 py-4 text-[#083A4F]">
           பாடாண் பகுதி கைக்கிளைப் புறனே<br />
           நாடுங் காலை நாலிரண் டுடைத்தே — தொல். பொருள். புறத். 78
         </blockquote>
-        <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
-      <p className="text-justify font-semibold leading-relaxed text-[#3b2718]">
+        <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+      <p className="text-justify font-semibold leading-relaxed text-[#083A4F]">
         பாடாண் பகுதி கைக்கிளைப் புறனே
         <br />
         நாடுங் காலை நாலிரண் டுடைத்தே  
       </p>
-      <p className="mt-2 text-right text-sm text-[#5a3417]">— தொல்.பொருள்.புறத். 78</p>
+      <p className="mt-2 text-right text-sm text-[#407E8C]">— தொல்.பொருள்.புறத். 78</p>
     </div>
         <p className="text-justify">
           என்பது பாடாண்திணை. பாடாண்திணைக் கைக்கிளைத்திணைக்குப் புறனாக அமைகின்றது.
@@ -673,7 +673,7 @@ const VideoLecturesPage = () => {
   const isLearningApproachView = activeItem === "அறிமுகம்" && activeIntroItem === "கற்றல் கோட்பாடும் அணுகுமுறையும்";
   const isOnlineClassStructureView = activeItem === "அறிமுகம்" && activeIntroItem === "இணைய வகுப்பு அமைப்பு";
   const isAssessmentView = activeItem === "அறிமுகம்" && activeIntroItem === "மதிப்பீடு";
-  const emphasisClass = "font-bold text-[17px] text-[#2a1b10] sm:text-[19px]";
+  const emphasisClass = "font-bold text-[17px] text-[#083A4F] sm:text-[19px]";
 
   // ── Akam content renderer ──
   const renderAkamContent = () => {
@@ -702,7 +702,7 @@ const VideoLecturesPage = () => {
       return (
         <div className="space-y-5">
           <p className={emphasisClass}>{unit.header}</p>
-          <p className="text-2xl font-bold text-[#5a3417]">{unit.title}</p>
+          <p className="text-2xl font-bold text-[#407E8C]">{unit.title}</p>
           {unit.body}
         </div>
       );
@@ -719,10 +719,10 @@ const VideoLecturesPage = () => {
 
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-2xl border border-[#b98a53]/50 bg-linear-to-b from-[#f1d4a2]/34 to-[#e1b985]/26 shadow-[inset_0_1px_0_rgba(255,244,219,0.52),0_14px_30px_rgba(86,52,22,0.16)] backdrop-blur-md">
+      <section className="overflow-hidden rounded-2xl border border-[#A58D66]/50 bg-linear-to-b from-[#C0D5D6]/38 to-[#E5E1DD]/50 shadow-[inset_0_1px_0_rgba(192,213,214,0.52),0_14px_30px_rgba(8,58,79,0.16)] backdrop-blur-md">
         <div className="grid items-start md:grid-cols-[minmax(0,300px)_minmax(0,1fr)]">
-          <aside className="h-fit self-start border-r border-[#6f4421]/65 bg-linear-to-b from-[#c79258]/88 via-[#b8824b]/86 to-[#a66f3f]/84 backdrop-blur-sm">
-            <ul className="divide-y divide-[#f2d7ad]/65">
+          <aside className="h-fit self-start border-r border-[#407E8C]/65 bg-linear-to-b from-[#083A4F]/88 via-[#083A4F]/86 to-[#083A4F]/84 backdrop-blur-sm">
+            <ul className="divide-y divide-[#C0D5D6]/65">
               {lectureConstituents.map((item, index) => (
                 <li key={`${item}-${index}`}>
                   {item === "அறிமுகம்" ? (
@@ -737,8 +737,8 @@ const VideoLecturesPage = () => {
                           setIsPuramModuleDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
                         }}
-                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                          activeItem === "அறிமுகம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "அறிமுகம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
                         }`}
                         style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                         aria-expanded={isIntroDrawerOpen}
@@ -747,7 +747,7 @@ const VideoLecturesPage = () => {
                         <span className="text-sm">{isIntroDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isIntroDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {introDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -755,8 +755,8 @@ const VideoLecturesPage = () => {
                                 onClick={() => { setActiveItem("அறிமுகம்"); setActiveIntroItem(drawerItem); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "அறிமுகம்" && activeIntroItem === drawerItem
-                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
-                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
                                 }`}
                                 style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                               >
@@ -779,8 +779,8 @@ const VideoLecturesPage = () => {
                           setIsPuramModuleDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
                         }}
-                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                          activeItem === "கருத்தலகு 1 : அகம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு 1 : அகம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
                         }`}
                         style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                         aria-expanded={isAkamDrawerOpen}
@@ -789,7 +789,7 @@ const VideoLecturesPage = () => {
                         <span className="text-sm">{isAkamDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isAkamDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {akamDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -797,8 +797,8 @@ const VideoLecturesPage = () => {
                                 onClick={() => { setActiveItem("கருத்தலகு 1 : அகம்"); setActiveAkamItem(drawerItem); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "கருத்தலகு 1 : அகம்" && activeAkamItem === drawerItem
-                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
-                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
                                 }`}
                                 style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                               >
@@ -821,8 +821,8 @@ const VideoLecturesPage = () => {
                           setIsAkamDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
                         }}
-                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                          activeItem === "கருத்தலகு 2 : புறம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு 2 : புறம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
                         }`}
                         style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                         aria-expanded={isPuramModuleDrawerOpen}
@@ -831,7 +831,7 @@ const VideoLecturesPage = () => {
                         <span className="text-sm">{isPuramModuleDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isPuramModuleDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {puramModuleDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -839,8 +839,8 @@ const VideoLecturesPage = () => {
                                 onClick={() => { setActiveItem("கருத்தலகு 2 : புறம்"); setActivePuramModuleItem(drawerItem); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "கருத்தலகு 2 : புறம்" && activePuramModuleItem === drawerItem
-                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
-                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
                                 }`}
                                 style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                               >
@@ -863,8 +863,8 @@ const VideoLecturesPage = () => {
                           setIsAkamDrawerOpen(false);
                           setIsPuramModuleDrawerOpen(false);
                         }}
-                        className={`flex w-full items-center justify-between border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                          activeItem === "கருத்தலகு-புறம்" ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு-புறம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
                         }`}
                         style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                         aria-expanded={isPuramDrawerOpen}
@@ -873,7 +873,7 @@ const VideoLecturesPage = () => {
                         <span className="text-sm">{isPuramDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isPuramDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#c99a67]/70 border-t border-[#8f6033]/55 bg-linear-to-b from-[#f2dfc1]/90 to-[#ebd0a8]/85">
+                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {puramDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -881,8 +881,8 @@ const VideoLecturesPage = () => {
                                 onClick={() => { setActiveItem("கருத்தலகு-புறம்"); setActivePuramItem(drawerItem); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "கருத்தலகு-புறம்" && activePuramItem === drawerItem
-                                    ? "bg-[#e4bf8b]/85 text-[#2f1b0d]"
-                                    : "text-[#51321a] hover:bg-[#f2dcc0]/80"
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
                                 }`}
                                 style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                               >
@@ -897,8 +897,8 @@ const VideoLecturesPage = () => {
                     <button
                       type="button"
                       onClick={() => { setActiveItem(item); closeAllDrawers(); }}
-                      className={`w-full border-b border-[#f1d4a9]/35 px-4 py-3 text-left text-lg leading-tight transition ${
-                        activeItem === item ? "bg-[#dba66d]/75 text-[#2f1b0d]" : "text-[#2f1b0d] hover:bg-[#d39a5d]/65"
+                      className={`w-full border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                        activeItem === item ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
                       }`}
                       style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                     >
@@ -910,9 +910,9 @@ const VideoLecturesPage = () => {
             </ul>
           </aside>
 
-          <div className="bg-[#fff8e8]/30 p-6 sm:p-8">
+          <div className="bg-[#E5E1DD]/30 p-6 sm:p-8">
             <h3
-              className="text-3xl font-bold tracking-[0.01em] text-[#2f1d10] sm:text-4xl"
+              className="text-3xl font-bold tracking-[0.01em] text-[#083A4F] sm:text-4xl"
               style={{ fontFamily: '"Noto Serif Tamil", "Cinzel", serif' }}
             >
               {activeItem === "அறிமுகம்"
@@ -920,7 +920,7 @@ const VideoLecturesPage = () => {
                 : activeItem}
             </h3>
             <p
-              className={`mt-3 text-3xl font-bold tracking-wide text-[#5a3417] sm:text-4xl ${
+              className={`mt-3 text-3xl font-bold tracking-wide text-[#407E8C] sm:text-4xl ${
                 activeItem === "திட்ட வரலாறு" ? "" : "uppercase"
               }`}
             >
@@ -928,7 +928,7 @@ const VideoLecturesPage = () => {
             </p>
 
             <div
-              className="mt-5 text-left text-[15px] leading-[1.8] text-[#2f241b] sm:text-base"
+              className="mt-5 text-left text-[15px] leading-[1.8] text-[#083A4F] sm:text-base"
               style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
             >
               {activeItem === "கருத்தலகு 1 : அகம்" ? (
@@ -951,14 +951,14 @@ const VideoLecturesPage = () => {
                   <p className="text-justify">தமிழ்ச் செவ்விலக்கியப் பனுவல் பற்றிய</p>
                   <div className="space-y-2">
                     <p><span className={emphasisClass}>அ. இலக்கண அறிவு</span><span className={emphasisClass}> (Grammatical Knowledge)</span></p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">(ஒலியனியல், உருவனியல், தொடரியல், சொற்களஞ்சியம், செம்மொழித் தமிழின் அமைப்பு பற்றிய செய்திகள் இதில் அடங்கும்)</p>
+                    <p className="pl-4 text-justify text-[#083A4F]">(ஒலியனியல், உருவனியல், தொடரியல், சொற்களஞ்சியம், செம்மொழித் தமிழின் அமைப்பு பற்றிய செய்திகள் இதில் அடங்கும்)</p>
                     <p><span className={emphasisClass}>ஆ. பனுவல் அறிவு</span><span className={emphasisClass}> (Textual Knowledge)</span></p>
                     <p><span className={emphasisClass}>இ. பயனாட்டு அறிவு</span><span className={emphasisClass}> (Functional Knowledge)</span></p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">(மொழியைக் கையாளும் திறன், கருத்தை ஆழியவனில் அதில் அடங்கும்)</p>
+                    <p className="pl-4 text-justify text-[#083A4F]">(மொழியைக் கையாளும் திறன், கருத்தை ஆழியவனில் அதில் அடங்கும்)</p>
                     <p><span className={emphasisClass}>ஈ. சமூக மொழியியல் அறிவு</span><span className={emphasisClass}> (Sociolinguistic Knowledge)</span></p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">(குறை வழக்குகள், மொழிமாற்றங்கள், பன்மாட்டு செய்திகள் இதில் அடங்கும்)</p>
+                    <p className="pl-4 text-justify text-[#083A4F]">(குறை வழக்குகள், மொழிமாற்றங்கள், பன்மாட்டு செய்திகள் இதில் அடங்கும்)</p>
                     <p><span className={emphasisClass}>உ. இலக்கிய அறிவு</span><span className={emphasisClass}> (Literary Knowledge)</span></p>
-                    <p className="pl-4 text-justify text-[#3b2a1e]">(இலக்கிய வகைமை, கவிதையியல், நடை பற்றிய அறிவு இதில் அடங்கும்)</p>
+                    <p className="pl-4 text-justify text-[#083A4F]">(இலக்கிய வகைமை, கவிதையியல், நடை பற்றிய அறிவு இதில் அடங்கும்)</p>
                   </div>
                   <p className="text-justify">
                     ஆகிய ஐவை செவ்விலக்கிய மொழித்திறனின் முதன்மைக் கூறுகளாகும். இவற்றின்
@@ -993,7 +993,7 @@ const VideoLecturesPage = () => {
                     <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p>=</p><p>250 மணி</p></div>
                     <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
                     <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>ஒப்படைப்பு</p><p>=</p><p>25 மணி</p></div>
-                    <div className="mt-2 border-t border-[#7d5a34]/60 pt-2">
+                    <div className="mt-2 border-t border-[#A58D66]/60 pt-2">
                       <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p></p><p className={emphasisClass}>300 மணி</p></div>
                     </div>
                   </div>
@@ -1070,7 +1070,7 @@ const VideoLecturesPage = () => {
                   <div className="space-y-1">
                     <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>தொடர்ச்சியான மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
                     <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p>ஒப்படைப்பு / செயல்பாட்டு மதிப்பீடு</p><p>=</p><p>25 மணி</p></div>
-                    <div className="mt-2 border-t border-[#7d5a34]/60 pt-2">
+                    <div className="mt-2 border-t border-[#A58D66]/60 pt-2">
                       <div className="grid grid-cols-[1fr_auto_auto] gap-6"><p></p><p></p><p className={emphasisClass}>50 மணி</p></div>
                     </div>
                   </div>

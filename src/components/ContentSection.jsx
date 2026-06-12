@@ -2,18 +2,20 @@ const ContentSection = () => {
   return (
     <section
       aria-labelledby="classical-tamil-online-title"
-      className="rounded-2xl border border-[#b98a53]/50 bg-linear-to-b from-[#f1d4a2]/38 to-[#e1b985]/30 p-6 text-center shadow-[inset_0_1px_0_rgba(255,244,219,0.52),0_14px_30px_rgba(86,52,22,0.18)] backdrop-blur-md sm:p-8"
+      style={{ fontFamily: '"Tiro Tamil", serif' }}
     >
       <h3
         id="classical-tamil-online-title"
-        className="text-2xl font-bold tracking-[0.02em] text-[#3f2310] sm:text-3xl"
-        style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
+        className="text-3xl font-normal tracking-[0.02em] text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-4xl"
+        style={{ fontFamily: '"Tiro Tamil", serif' }}
       >
         Classical Tamil Online
       </h3>
-      <p className="mt-3 text-lg font-medium text-[#6d4118]">அன்புடன் வரவேற்கிறோம்</p>
+      <p className="mt-2 text-lg font-normal text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-xl">
+        அன்புடன் வரவேற்கிறோம்
+      </p>
 
-      <div className="mx-auto mt-6 max-w-5xl space-y-4 text-[15px] leading-8 text-[#3f2f20] sm:text-base">
+      <div className="mt-5 space-y-4 text-lg font-normal leading-10 text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-xl">
         <p>
           செம்மொழித் தமிழாய்வு மத்திய நிறுவனம் வழங்கும் Classical Tamil Online தளம்,
           உலகம் முழுவதும் உள்ள தமிழ் மாணவர்கள், ஆராய்ச்சியாளர்கள் மற்றும் தமிழ் ஆர்வலர்களுக்காக

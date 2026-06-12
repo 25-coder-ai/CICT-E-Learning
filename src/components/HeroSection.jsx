@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-linear-to-r from-sky-900 via-teal-800 to-cyan-700 text-white">
+    <section className="relative overflow-hidden bg-linear-to-r from-[#083A4F] via-[#083A4F] to-[#407E8C] text-white">
       <img
         src="/world.svg"
         alt="Abstract world map"
@@ -17,15 +17,15 @@ const HeroSection = () => {
           <h2 className="text-2xl font-extralight leading-tight sm:text-3xl md:text-4xl">
             Central Institute of Classical Tamil
           </h2>
-          <p className="text-base text-cyan-50 sm:text-lg">
+          <p className="text-base text-[#E5E1DD] sm:text-lg">
             உலகத் தமிழர்களுக்கான டிஜிட்டல் கற்றல் வாயில்
           </p>
         </div>
 
-        <div className="justify-self-start rounded-2xl border border-cyan-100/20 bg-white/10 p-6 shadow-xl backdrop-blur md:justify-self-end">
-          <p className="text-sm uppercase tracking-[0.22em] text-cyan-100">CTO 24x7</p>
+        <div className="justify-self-start rounded-2xl border border-[#C0D5D6]/20 bg-[#C0D5D6]/10 p-6 shadow-xl backdrop-blur md:justify-self-end">
+          <p className="text-sm uppercase tracking-[0.22em] text-[#C0D5D6]">CTO 24x7</p>
           <p className="mt-2 text-3xl font-bold text-white sm:text-4xl">E-Learning</p>
-          <p className="mt-2 text-sm text-cyan-50">Government Academic Knowledge Portal</p>
+          <p className="mt-2 text-sm text-[#E5E1DD]">Government Academic Knowledge Portal</p>
         </div>
       </div>
     </section>

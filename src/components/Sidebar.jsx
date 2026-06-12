@@ -1,14 +1,14 @@
 const Sidebar = () => {
   return (
-    <aside className="rounded-2xl border border-[#97612f]/75 bg-linear-to-b from-[#f1d4a2]/84 to-[#e1b985]/78 p-6 shadow-[inset_0_1px_0_rgba(255,232,188,0.45),0_12px_28px_rgba(86,52,22,0.2)] backdrop-blur-sm">
+    <aside className="rounded-2xl border border-[#A58D66]/75 bg-linear-to-b from-[#C0D5D6]/84 to-[#E5E1DD]/78 p-6 shadow-[inset_0_1px_0_rgba(192,213,214,0.45),0_12px_28px_rgba(8,58,79,0.2)] backdrop-blur-sm">
       <h3
-        className="text-xl font-bold tracking-[0.02em] text-[#3f2310]"
+        className="text-xl font-bold tracking-[0.02em] text-[#083A4F]"
         style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
       >
         About CICT
       </h3>
 
-      <div className="mt-4 overflow-hidden rounded-xl border border-[#ac7b46] bg-[#efd7ad] shadow-sm">
+      <div className="mt-4 overflow-hidden rounded-xl border border-[#A58D66] bg-[#C0D5D6] shadow-sm">
         {!isVideoPlaying ? (
           <button
             type="button"
@@ -24,7 +24,7 @@ const Sidebar = () => {
             />
             <span className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/35" />
             <span className="absolute inset-0 flex items-center justify-center">
-              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-2xl text-[#6d4118] shadow-md">
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-2xl text-[#407E8C] shadow-md">
                 ▶
               </span>
             </span>
@@ -47,7 +47,7 @@ const Sidebar = () => {
         href="https://youtu.be/DYfZdQI2Zcs?si=g69RAMfhzTivMUsh"
         target="_blank"
         rel="noreferrer"
-        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#6d4118] transition-all duration-300 hover:underline"
+        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#407E8C] transition-all duration-300 hover:underline"
       >
         Explore Video Lecture Library
         <span aria-hidden="true">→</span>

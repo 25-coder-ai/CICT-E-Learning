@@ -20,61 +20,34 @@ const webLinks = [
 
 const AttachmentsPage = () => {
   return (
-    <section
-      className="rounded-2xl border border-[#b98a53]/50 bg-linear-to-b from-[#f1d4a2]/34 to-[#e1b985]/26 p-6 shadow-[inset_0_1px_0_rgba(255,244,219,0.52),0_14px_30px_rgba(86,52,22,0.16)] backdrop-blur-md sm:p-8"
-      style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
-    >
-      {/* Page title */}
+    <div style={{ fontFamily: '"Tiro Tamil", serif' }}>
       <h3
-        className="text-2xl font-bold tracking-[0.02em] text-[#3f2310] sm:text-3xl"
-        style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
-      > 
+        className="text-3xl font-normal tracking-[0.02em] text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-4xl"
+        style={{ fontFamily: '"Tiro Tamil", serif' }}
+      >
         இணைப்புகள்
       </h3>
 
-      {/* Section subtitle */}
-      <p className="mt-3 text-sm font-bold tracking-widest text-[#7a4e22] sm:text-base">
+      <p className="mt-2 text-lg font-normal text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-xl">
         WEB LINKS
       </p>
 
-      {/* Divider */}
-      <div className="mt-3 h-px w-full bg-[#b98a53]/40" />
-
-      {/* Links list */}
-      <ul className="mt-4 space-y-2.5">
+      <ul className="mt-5 space-y-3">
         {webLinks.map((link, index) => (
-          <li key={index}>
+          <li key={index} className="flex items-start gap-3">
+            <span className="mt-2.5 h-3 w-3 shrink-0 rounded-full bg-[#457472]" />
             <a
               href={link.href}
               target={link.href !== "#" ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 transition-colors duration-200"
+              className="text-lg font-normal leading-9 text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] underline-offset-2 transition-colors duration-200 hover:text-[#E8ECEF]/70 hover:underline sm:text-xl"
             >
-              {/* Arrow bullet icon */}
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#8B6240] shadow-sm transition-colors duration-200 group-hover:bg-[#6B3F1A]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-3.5 w-3.5 text-[#f5e6c8]"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-
-              {/* Link label */}
-              <span className="text-[15px] leading-7 text-[#4b2f17] underline-offset-2 group-hover:text-[#6B3F1A] group-hover:underline sm:text-base">
-                {link.label}
-              </span>
+              {link.label}
             </a>
           </li>
         ))}
       </ul>
-    </section>
+    </div>
   );
 };
 

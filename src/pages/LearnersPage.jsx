@@ -1,31 +1,18 @@
 const LearnersPage = () => {
   return (
-    <section
-      className="rounded-2xl border border-[#b98a53]/50 bg-linear-to-b from-[#f1d4a2]/34 to-[#e1b985]/26 p-6 shadow-[inset_0_1px_0_rgba(255,244,219,0.52),0_14px_30px_rgba(86,52,22,0.16)] backdrop-blur-md sm:p-8"
-      style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+    <div
+      style={{ fontFamily: '"Tiro Tamil", serif' }}
     >
       {/* Page heading */}
       <h3
-        className="text-2xl font-bold tracking-[0.02em] text-[#3f2310] sm:text-3xl"
-        style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
+        className="text-3xl font-normal tracking-[0.02em] text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-4xl"
+        style={{ fontFamily: '"Tiro Tamil", serif' }}
       >
         கற்போர்
       </h3>
 
-      {/* LEARNER label */}
-      <p
-        className="mt-1 text-xs font-bold uppercase tracking-widest text-[#b98a53]"
-        style={{ fontFamily: '"Cinzel", serif' }}
-      >
-        Learner
-      </p>
-
-      {/* Divider */}
-      <div className="mt-4 h-px w-full bg-[#b98a53]/40" />
-
-      {/* Paragraph 1 */}
-      <p className="mt-5 text-[15px] leading-8 text-[#3f2f20] sm:text-base">
-        <strong className="font-bold text-[#3f2310]">
+      <p className="mt-5 text-lg font-normal leading-10 text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-xl">
+        <strong className="font-semibold text-[#E8ECEF]">
           இணையவழிச் செம்மொழித் தமிழ்,
         </strong>{" "}
         கற்க விழைவோர் அனைவருக்கும் இலவசமாக வழங்கப் படுகிறது. இப்பாடவதுபில்
@@ -37,9 +24,8 @@ const LearnersPage = () => {
         இவ்வினையவழிக் கற்றல் உதவ தகுதியாகாது.
       </p>
 
-      {/* Paragraph 2 */}
-      <p className="mt-5 text-[15px] leading-8 text-[#3f2f20] sm:text-base">
-        <strong className="font-bold text-[#3f2310]">
+      <p className="mt-4 text-lg font-normal leading-10 text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-xl">
+        <strong className="font-semibold text-[#E8ECEF]">
           இணையவழிச் செம்மொழித் தமிழ்,
         </strong>{" "}
         கற்போரை மையமாகக் கொண்ட தனிப் பயிற்சி. கற்போர் நாம் கற்க இயலும்
@@ -51,7 +37,7 @@ const LearnersPage = () => {
         கற்றல் குறைவை நிரப்பும் பயிற்சித் தடங்களை உருவாக்கச் செம்மொழித்
         தமிழாய்வு மத்திய நிறுவனம் திட்டமிட்டுள்ளது.
       </p>
-    </section>
+    </div>
   );
 };
 

@@ -24,12 +24,12 @@ const pageComponents = {
 
 const pageTitles = {
   home: "Central Institute of Classical Tamil",
-  about: "About",
-  creation: "Creation",
+  about: "எங்களைப் பற்றி",
+  creation: "உருவாக்கம்",
   "video-lectures": "Video Lectures",
-  learners: "Learners",
-  attachments: "Attachments",
-  contact: "Contact",
+  learners: "கற்போர்",
+  attachments: "இணைப்புகள்",
+  contact: "தொடர்புக்கு",
   acknowledgement: "நன்றி – Acknowledgement",
 };
 
@@ -45,27 +45,49 @@ const App = () => {
 
   const ActivePage = pageComponents[currentPage] || HomePage;
   const pageTitle = pageTitles[currentPage] || pageTitles.home;
+  const isVideoLectures = currentPage === 'video-lectures';
+  const isHome = currentPage === 'home';
+  const isCreation = currentPage === 'creation';
+  const isLearners = currentPage === 'learners';
+  const isAttachments = currentPage === 'attachments';
+  const isContact = currentPage === 'contact';
+  const useImageBg = !isVideoLectures;
+  const bgImage = isHome ? '/home-bg.jpg'
+    : isCreation ? '/creation-bg.jpg'
+    : isLearners ? '/learners-bg.jpg'
+    : isAttachments ? '/attachments-bg.jpg'
+    : isContact ? '/contact-bg.jpg'
+    : '/pallava-relief.jpg';
 
   return (
     <div
       className="relative isolate min-h-screen overflow-x-hidden text-slate-900"
-      style={{ fontFamily: '"Cormorant Garamond", "Noto Serif Tamil", serif' }}
+      style={{ fontFamily: '"Tiro Tamil", serif' }}
     >
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-20">
+      {/* All pages except video-lectures: pallava relief background */}
+      {useImageBg && (
         <img
-          src="/profile.jpg"
+          src={bgImage}
           alt=""
-          className="h-full w-full object-cover object-center"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top select-none -z-10"
+          style={{ opacity: 0.45 }}
         />
-        <div className="absolute inset-0 bg-linear-to-b from-[#fffaf0]/48 via-[#f7edd4]/42 to-[#efdfbe]/46" />
-      </div>
+      )}
+
+      {/* Video Lectures: solid background */}
+      {isVideoLectures && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 -z-20"
+          style={{ backgroundColor: '#E5E1DD' }}
+        />
+      )}
 
       <Header
         isMenuOpen={isMenuOpen}
         onMenuToggle={() => setIsMenuOpen((previous) => !previous)}
+        isGlass={useImageBg}
       />
       <Navbar
         isOpen={isMenuOpen}
@@ -74,16 +96,22 @@ const App = () => {
         onNavigate={(page) => setCurrentPage(page)}
       />
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-8">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-10">
         <h2
-          className="text-center text-3xl font-bold tracking-[0.03em] [text-shadow:0_2px_14px_rgba(52,32,14,0.3)] sm:text-4xl md:text-5xl"
-          style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
+          className="text-center text-3xl font-bold leading-[1.6] tracking-[0.03em] overflow-visible sm:text-4xl md:text-5xl"
+          style={{ fontFamily: '"Tiro Tamil", serif' }}
         >
-          <span className="bg-linear-to-r from-[#40210d] via-[#6a3f1a] to-[#7a4e22] bg-clip-text text-transparent">
+          <span className={useImageBg
+            ? 'text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)]'
+            : 'bg-linear-to-r from-[#083A4F] via-[#407E8C] to-[#083A4F] bg-clip-text text-transparent'
+          }>
             {pageTitle}
           </span>
         </h2>
-        <div className="mx-auto mt-3 h-1 w-44 rounded-full bg-linear-to-r from-[#4e2c10]/85 via-[#9c6c31]/90 to-[#5c3413]/85 shadow-[0_0_10px_rgba(106,62,27,0.35)]" />
+        {useImageBg
+          ? <div className="mt-3 h-px w-full bg-[#E8ECEF]/30" />
+          : <div className="mx-auto mt-3 h-1 w-44 rounded-full bg-linear-to-r from-[#2D1910]/80 via-[#A58D66]/95 to-[#2D1910]/80 shadow-[0_0_10px_rgba(45,25,16,0.30)]" />
+        }
       </section>
 
       <main

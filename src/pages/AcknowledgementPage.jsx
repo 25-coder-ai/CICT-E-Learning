@@ -4,7 +4,7 @@
 
 const Red = ({ children, italic = false, bold = false }) => (
   <span
-    className={`text-[#c0392b] ${italic ? "italic" : ""} ${bold ? "font-bold" : ""}`}
+    className={`text-[#407E8C] ${italic ? "italic" : ""} ${bold ? "font-bold" : ""}`}
     style={{ fontFamily: '"Noto Serif Tamil", serif' }}
   >
     {children}
@@ -12,65 +12,65 @@ const Red = ({ children, italic = false, bold = false }) => (
 );
 
 const SectionHead = ({ children, italic = false }) => (
-  <p className={`mt-5 mb-1 font-bold text-[14px] text-[#c0392b] leading-6 ${italic ? "italic" : ""}`}
+  <p className={`mt-5 mb-1 font-bold text-[14px] text-[#407E8C] leading-6 ${italic ? "italic" : ""}`}
     style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
     {children}
   </p>
 );
 
 const SubHead = ({ children }) => (
-  <p className="mt-3 mb-0.5 font-bold text-[14px] text-[#3f2310] leading-6"
+  <p className="mt-3 mb-0.5 font-bold text-[14px] text-[#083A4F] leading-6"
     style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
     {children}
   </p>
 );
 
 const Line = ({ children }) => (
-  <p className="text-[13.5px] leading-7 text-[#3f2f20] pl-4"
+  <p className="text-[13.5px] leading-7 text-[#083A4F] pl-4"
     style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
     {children}
   </p>
 );
 
-const Rule = () => <div className="my-4 h-px w-full bg-[#b98a53]/30" />;
+const Rule = () => <div className="my-4 h-px w-full bg-[#A58D66]/30" />;
 
 const AcknowledgementPage = () => {
   return (
     <section
-      className="rounded-2xl border border-[#b98a53]/50 bg-linear-to-b from-[#f1d4a2]/34 to-[#e1b985]/26 p-6 shadow-[inset_0_1px_0_rgba(255,244,219,0.52),0_14px_30px_rgba(86,52,22,0.16)] backdrop-blur-md sm:p-8"
+      className="rounded-2xl border border-[#A58D66]/50 bg-linear-to-b from-[#C0D5D6]/38 to-[#E5E1DD]/50 p-6 shadow-[inset_0_1px_0_rgba(192,213,214,0.52),0_14px_30px_rgba(8,58,79,0.16)] backdrop-blur-md sm:p-8"
       style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
     >
       {/* Header */}
       <div className="text-center mb-2">
-        <p className="font-bold text-[15px] text-[#c0392b] leading-7"
+        <p className="font-bold text-[15px] text-[#407E8C] leading-7"
           style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
           செம்மொழித் தமிழாய்வு மத்திய நிறுவனம்
         </p>
-        <p className="font-semibold text-[14px] text-[#3f2310] leading-7"
+        <p className="font-semibold text-[14px] text-[#083A4F] leading-7"
           style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
           இணையவழிச் செம்மொழித் தமிழ்
         </p>
       </div>
 
-      <div className="mt-4 h-px w-full bg-[#b98a53]/40" />
+      <div className="mt-4 h-px w-full bg-[#A58D66]/40" />
 
       {/* நன்றி */}
-      <p className="mt-4 font-bold text-[15px] text-[#c0392b] underline underline-offset-4"
+      <p className="mt-4 font-bold text-[15px] text-[#407E8C] underline underline-offset-4"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         நன்றி
       </p>
 
       {/* Director block */}
       <div className="mt-3 space-y-0.5">
-        <p className="text-[13.5px] font-semibold text-[#3f2310] leading-7"
+        <p className="text-[13.5px] font-semibold text-[#083A4F] leading-7"
           style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
           செம்மொழித் தமிழாய்வு மத்திய நிறுவனம், சென்னை
         </p>
-        <p className="text-[13.5px] font-bold text-[#3f2310] leading-7"
+        <p className="text-[13.5px] font-bold text-[#083A4F] leading-7"
           style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
           பேராசிரியர் இரா. சந்திரசேகரன்
         </p>
-        <p className="text-[13.5px] font-bold text-[#3f2310] leading-7"
+        <p className="text-[13.5px] font-bold text-[#083A4F] leading-7"
           style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
           இயக்குநர்
         </p>
@@ -105,7 +105,7 @@ const AcknowledgementPage = () => {
       <Rule />
 
       {/* Advisory Committee 2006–2008 */}
-      <p className="mt-2 font-bold italic text-[13.5px] text-[#c0392b] leading-7"
+      <p className="mt-2 font-bold italic text-[13.5px] text-[#407E8C] leading-7"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         திட்ட ஆலோசனைக் குழு (2006 - 2008), செம்மொழித் தமிழ் உயராய்வு மையம், இந்திய மொழிகளின் நடுவண் நிறுவனம், மைசூர்.
       </p>
@@ -123,7 +123,7 @@ const AcknowledgementPage = () => {
       <Rule />
 
       {/* Advisory Committee 2009–2014 */}
-      <p className="mt-2 font-bold italic text-[13.5px] text-[#c0392b] leading-7"
+      <p className="mt-2 font-bold italic text-[13.5px] text-[#407E8C] leading-7"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         திட்ட ஆலோசனைக் குழு (2009 - 2014), செம்மொழித் தமிழாய்வு மத்திய நிறுவனம், சென்னை
       </p>
@@ -171,11 +171,11 @@ const AcknowledgementPage = () => {
 
       {/* தொழில் நுட்ப உதவி */}
       <SectionHead>தொழில் நுட்ப உதவி</SectionHead>
-      <p className="text-[13.5px] leading-7 text-[#3f2f20]"
+      <p className="text-[13.5px] leading-7 text-[#083A4F]"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         செம்மொழித் தமிழாய்வு மத்திய நிறுவனம்
       </p>
-      <p className="text-[13.5px] leading-7 text-[#3f2f20]"
+      <p className="text-[13.5px] leading-7 text-[#083A4F]"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         பேராசிரியர் ரெ. குமரன், திரு. த. செந்தில்குமார்{" "}
         <span className="font-bold">(குரும்படக் காட்சிகள்)</span>
@@ -187,7 +187,7 @@ const AcknowledgementPage = () => {
           <Line>திரு. இரா.சந்தரகணபதி</Line>
         </div>
         <div className="flex items-center">
-          <span className="text-[13px] font-bold text-[#3f2310]">(வலை வழங்குநர்)</span>
+          <span className="text-[13px] font-bold text-[#083A4F]">(வலை வழங்குநர்)</span>
         </div>
       </div>
 
@@ -195,14 +195,14 @@ const AcknowledgementPage = () => {
 
       {/* தொழில் நுட்ப உதவி – இணைய வகுப்புரை */}
       <SectionHead>தொழில் நுட்ப உதவி (இணைய வகுப்புரை)</SectionHead>
-      <p className="text-[13.5px] font-semibold leading-7 text-[#3f2310]"
+      <p className="text-[13.5px] font-semibold leading-7 text-[#083A4F]"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         தேசிய தொழில்நுட்ப ஆசிரியப் பயிற்சி மற்றும் ஆராய்ச்சி நிறுவனம்
       </p>
       <Line>பேராசிரியர் இ. எஸ். எம். சுரேஷ்</Line>
       <Line>திரு. எல்.பி. எல்பின்</Line>
       <Line>திரு. என். சாய்சங்கர்</Line>
-      <p className="mt-2 text-[13.5px] font-semibold leading-7 text-[#3f2310]"
+      <p className="mt-2 text-[13.5px] font-semibold leading-7 text-[#083A4F]"
         style={{ fontFamily: '"Noto Serif Tamil", serif' }}>
         இந்திய தொழில்நுட்ப கழகம் சென்னை
       </p>

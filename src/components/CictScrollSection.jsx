@@ -17,18 +17,18 @@ const springTransition = {
 const Roll = ({ side, isOpen }) => {
   const sideClass =
     side === "left"
-      ? "left-0 bg-linear-to-r from-[#5e3616] via-[#9e6531] to-[#d8b277]"
-      : "right-0 bg-linear-to-l from-[#5e3616] via-[#9e6531] to-[#d8b277]";
+      ? "left-0 bg-linear-to-r from-[#3B1F0E] via-[#7A4520] to-[#A87355]"
+      : "right-0 bg-linear-to-l from-[#3B1F0E] via-[#7A4520] to-[#A87355]";
 
   return (
     <motion.div
       aria-hidden="true"
       animate={{ x: isOpen ? (side === "left" ? -14 : 14) : 0, scale: isOpen ? 1.02 : 1 }}
       transition={{ ...springTransition, stiffness: 110, damping: 24 }}
-      className={`absolute bottom-4 top-4 z-30 w-11 rounded-full border border-[#6e431f]/60 ${sideClass} shadow-[inset_6px_0_10px_rgba(56,30,10,0.42),inset_-5px_0_9px_rgba(255,223,168,0.3),0_5px_12px_rgba(56,30,10,0.35)]`}
+      className={`absolute bottom-4 top-4 z-30 w-11 rounded-full border border-[#3B1F0E]/60 ${sideClass} shadow-[inset_6px_0_10px_rgba(59,31,14,0.42),inset_-5px_0_9px_rgba(168,115,85,0.3),0_5px_12px_rgba(59,31,14,0.35)]`}
     >
-      <div className="absolute -top-2 left-1/2 h-7 w-7 -translate-x-1/2 rounded-full border border-[#5e3616]/65 bg-radial from-[#f3d5a3] via-[#a96d35] to-[#673813]" />
-      <div className="absolute -bottom-2 left-1/2 h-7 w-7 -translate-x-1/2 rounded-full border border-[#5e3616]/65 bg-radial from-[#f3d5a3] via-[#a96d35] to-[#673813]" />
+      <div className="absolute -top-2 left-1/2 h-7 w-7 -translate-x-1/2 rounded-full border border-[#3B1F0E]/65 bg-radial from-[#E5E1DD] via-[#A87355] to-[#3B1F0E]" />
+      <div className="absolute -bottom-2 left-1/2 h-7 w-7 -translate-x-1/2 rounded-full border border-[#3B1F0E]/65 bg-radial from-[#E5E1DD] via-[#A87355] to-[#3B1F0E]" />
     </motion.div>
   );
 };
@@ -110,13 +110,11 @@ const CictScrollSection = () => {
       className="h-full"
     >
       <h3
-        className="text-left text-2xl font-bold tracking-[0.02em] text-[#3f2310] sm:text-3xl"
-        style={{ fontFamily: '"Cinzel", "Noto Serif Tamil", serif' }}
+        className="text-left text-2xl font-normal tracking-[0.02em] text-[#E8ECEF] [text-shadow:0_2px_8px_rgba(8,31,28,0.9),0_1px_3px_rgba(8,31,28,0.8)] sm:text-3xl"
+        style={{ fontFamily: '"Tiro Tamil", serif' }}
       >
-        
-      </h3>
 
-      <p className="mt-2 text-left text-sm text-[#6d4118]"></p>
+      </h3>
 
       <motion.div
         className="relative mx-auto mt-5"
@@ -128,7 +126,7 @@ const CictScrollSection = () => {
           delay: isOpen ? 0.12 : 0,
         }}
       >
-        <div className="pointer-events-none absolute -bottom-4 inset-x-8 h-7 rounded-full bg-[#5e3616]/25 blur-md" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-4 inset-x-8 h-7 rounded-full bg-[#3B1F0E]/25 blur-md" aria-hidden="true" />
 
         <Roll side="left" isOpen={isOpen} />
         <Roll side="right" isOpen={isOpen} />
@@ -156,24 +154,24 @@ const CictScrollSection = () => {
             },
           }}
           style={{ transformOrigin: "center center" }}
-          className="absolute bottom-6 left-7 right-7 top-6 overflow-hidden rounded-[14px] border border-[#9e7142]/70 bg-[#f5deb3]"
+          className="absolute bottom-6 left-7 right-7 top-6 overflow-hidden rounded-[14px] border border-[#A58D66]/70 bg-[#E5E1DD]"
         >
-          <div className="absolute inset-0 bg-linear-to-b from-[#f5deb3] to-[#e6cfa7]" />
-          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_1px_1px_rgba(255,248,229,0.9),inset_0_-10px_20px_rgba(90,52,20,0.2),inset_10px_0_16px_rgba(98,56,24,0.16),inset_-10px_0_16px_rgba(98,56,24,0.16)]" />
+          <div className="absolute inset-0 bg-linear-to-b from-[#E5E1DD] to-[#C0D5D6]" />
+          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_1px_1px_rgba(229,225,221,0.9),inset_0_-10px_20px_rgba(8,58,79,0.15),inset_10px_0_16px_rgba(8,58,79,0.1),inset_-10px_0_16px_rgba(8,58,79,0.1)]" />
 
           <div className="relative flex h-full items-center p-3 sm:p-4">
             {showVideo ? (
-              <div className="w-full overflow-hidden rounded-xl border border-[#ac7b46] bg-[#efd7ad] shadow-[0_8px_16px_rgba(90,52,20,0.2)]">
+              <div className="w-full overflow-hidden rounded-xl border border-[#A58D66] bg-[#C0D5D6] shadow-[0_8px_16px_rgba(8,58,79,0.2)]">
                 <div className="relative mx-auto aspect-video w-full">
                   <iframe
-                    title="CICT YouTube Video"
+                    title="YouTube video player"
                     className="absolute inset-0 h-full w-full"
-                    src="https://www.youtube.com/embed/DYfZdQI2Zcs?autoplay=1&rel=0"
-                    loading="lazy"
+                    src="https://www.youtube.com/embed/DYfZdQI2Zcs?si=WtaU4I2ywA2ltgKP"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
-                  />
+                  />  
                 </div>
               </div>
             ) : null}
