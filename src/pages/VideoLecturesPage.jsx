@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import LessonPlayerModal from "../components/LessonPlayerModal";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -201,11 +202,36 @@ const AkamModuleOverview = ({ emphasisClass }) => (
   </div>
 );
 
+// ── Play-lesson button (Akam unit 1) ──
+const PlayLessonButton = ({ onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="group inline-flex items-center gap-2.5 rounded-full border border-[#825226] bg-linear-to-r from-[#d6a467] via-[#c99255] to-[#d8a96f] px-5 py-2.5 text-sm font-bold tracking-[0.02em] text-[#3d220e] shadow-[inset_0_1px_0_rgba(255,233,189,0.42),0_8px_18px_rgba(94,58,25,0.3)] transition-all duration-200 hover:translate-y-[-1px] hover:shadow-[inset_0_1px_0_rgba(255,233,189,0.5),0_10px_22px_rgba(94,58,25,0.4)]"
+    style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+  >
+    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#3d220e] text-[#f2dfbc] transition-transform duration-200 group-hover:scale-110">
+      <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
+        <path d="M6 4.5v11a.75.75 0 001.14.64l9-5.5a.75.75 0 000-1.28l-9-5.5A.75.75 0 006 4.5z" />
+      </svg>
+    </span>
+    பாடத்தைக் காண்க / Play Lesson
+  </button>
+);
+
 // ── Akam unit page (standard units 1-5) ──
-const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
+const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass, onPlayLesson }) => (
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
     <p className="text-2xl font-bold text-[#5a3417]">{thinaName}</p>
+    {unitNumber === 1 && (
+      <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
+        <p className="mb-3 text-justify text-[15px] text-[#3b2718]">
+          இவ்வலகின் முழுப் பாடத்தையும் இங்கேயே ஒளி-ஒலி வடிவில் காணலாம்.
+        </p>
+        <PlayLessonButton onClick={onPlayLesson} />
+      </div>
+    )}
     <p className="text-justify">
       இது {thinaName}திணை பற்றியது. இத்திணை சார்ந்த பாடல் ஒவ்வொன்றிலும்
       பயின்றுகொள்ளும் மொழியின் அமைப்பு அதன் பொருள் வகையான முதற்பொருள்,
@@ -649,6 +675,8 @@ const VideoLecturesPage = () => {
   const [isPuramModuleDrawerOpen, setIsPuramModuleDrawerOpen] = useState(false);
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
 
+  const [isLessonOpen, setIsLessonOpen] = useState(false);
+
   const [activeItem, setActiveItem] = useState("அறிமுகம்");
   const [activeIntroItem, setActiveIntroItem] = useState("அறிமுகம்");
   const [activeAkamItem, setActiveAkamItem] = useState(null);
@@ -689,7 +717,14 @@ const VideoLecturesPage = () => {
     if (activeAkamItem === "அலகு 7 : பெருந்திணை") return <AkamUnit7Page emphasisClass={emphasisClass} />;
     const unit = akamUnitMap[activeAkamItem];
     if (unit) {
-      return <AkamUnitPage unitNumber={unit.unitNumber} thinaName={unit.thinaName} emphasisClass={emphasisClass} />;
+      return (
+        <AkamUnitPage
+          unitNumber={unit.unitNumber}
+          thinaName={unit.thinaName}
+          emphasisClass={emphasisClass}
+          onPlayLesson={() => setIsLessonOpen(true)}
+        />
+      );
     }
     return <p>இந்தப் பிரிவுக்கான உள்ளடக்கம் விரைவில் சேர்க்கப்படும்.</p>;
   };
@@ -1088,6 +1123,8 @@ const VideoLecturesPage = () => {
           </div>
         </div>
       </section>
+
+      <LessonPlayerModal open={isLessonOpen} onClose={() => setIsLessonOpen(false)} />
     </div>
   );
 };
