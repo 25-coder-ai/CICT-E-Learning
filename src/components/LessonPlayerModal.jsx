@@ -12,7 +12,7 @@ import { useEffect } from "react";
  */
 const LESSON_SRC = "/muli-lesson/index.html";
 
-const LessonPlayerModal = ({ open, onClose, title = "குறுந்தொகை — பாடம்" }) => {
+const LessonPlayerModal = ({ open, onClose, src = LESSON_SRC, title = "குறுந்தொகை — பாடம்" }) => {
   // Close on Escape + lock background scroll while open
   useEffect(() => {
     if (!open) return undefined;
@@ -116,7 +116,7 @@ const LessonPlayerModal = ({ open, onClose, title = "குறுந்தொக
 
         {/* Lesson app */}
         <iframe
-          src={LESSON_SRC}
+          src={src}
           title={title}
           style={{
             flex: 1,

@@ -224,7 +224,7 @@ const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass, onPlayL
   <div className="space-y-5">
     <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
     <p className="text-2xl font-bold text-[#5a3417]">{thinaName}</p>
-    {unitNumber === 1 && (
+    {(unitNumber === 1 || unitNumber === 2) && (
       <div className="rounded-xl border border-[#8f6033]/45 bg-[#fdf3df]/75 p-4">
         <p className="mb-3 text-justify text-[15px] text-[#3b2718]">
           இவ்வலகின் முழுப் பாடத்தையும் இங்கேயே ஒளி-ஒலி வடிவில் காணலாம்.
@@ -676,6 +676,7 @@ const VideoLecturesPage = () => {
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
 
   const [isLessonOpen, setIsLessonOpen] = useState(false);
+  const [activeLessonSrc, setActiveLessonSrc] = useState('/muli-lesson/index.html');
 
   const [activeItem, setActiveItem] = useState("அறிமுகம்");
   const [activeIntroItem, setActiveIntroItem] = useState("அறிமுகம்");
@@ -715,14 +716,19 @@ const VideoLecturesPage = () => {
     };
     if (activeAkamItem === "அலகு 6 : கைக்கிளை") return <AkamUnit6Page emphasisClass={emphasisClass} />;
     if (activeAkamItem === "அலகு 7 : பெருந்திணை") return <AkamUnit7Page emphasisClass={emphasisClass} />;
+    const UNIT_LESSON_SRCS = {
+      1: '/muli-lesson/index.html',
+      2: '/malai-2/index.html',
+    };
     const unit = akamUnitMap[activeAkamItem];
     if (unit) {
+      const lessonSrc = UNIT_LESSON_SRCS[unit.unitNumber];
       return (
         <AkamUnitPage
           unitNumber={unit.unitNumber}
           thinaName={unit.thinaName}
           emphasisClass={emphasisClass}
-          onPlayLesson={() => setIsLessonOpen(true)}
+          onPlayLesson={lessonSrc ? () => { setActiveLessonSrc(lessonSrc); setIsLessonOpen(true); } : undefined}
         />
       );
     }
@@ -1124,7 +1130,7 @@ const VideoLecturesPage = () => {
         </div>
       </section>
 
-      <LessonPlayerModal open={isLessonOpen} onClose={() => setIsLessonOpen(false)} />
+      <LessonPlayerModal open={isLessonOpen} onClose={() => setIsLessonOpen(false)} src={activeLessonSrc} />
     </div>
   );
 };
