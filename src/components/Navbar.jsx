@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const navItems = ["Home", "எங்களைப் பற்றி", "உருவாக்கம்", "Video Lectures", "கற்போர்", "இணைப்புகள்", "தொடர்புக்கு"];
+const baseNavItems = ["Home", "எங்களைப் பற்றி", "உருவாக்கம்", "Video Lectures", "கற்போர்", "இணைப்புகள்", "தொடர்புக்கு"];
 
 const itemColors = ["#091433", "#394f3d", "#9c451b", "#561118"];
 const itemColorsTranslucent = ["rgba(9,20,51,0.6)", "rgba(57,79,61,0.6)", "rgba(156,69,27,0.6)", "rgba(86,17,24,0.6)"];
@@ -15,11 +15,15 @@ const pageByItem = {
   "தொடர்புக்கு": "contact",
 };
 
-const Navbar = ({ isOpen, onClose, currentPage = "home", onNavigate }) => {
+const Navbar = ({ isOpen, onClose, currentPage = "home", onNavigate, isLoggedIn = false }) => {
   const [activeItem, setActiveItem] = useState("Home");
   const [hoveredItem, setHoveredItem] = useState(null);
 
   const getPageFromItem = (item) => pageByItem[item] || "home";
+  const navItems = isLoggedIn
+    ? baseNavItems
+    : baseNavItems.filter((item) => item !== "Video Lectures");
+  const getColorIndex = (item) => baseNavItems.indexOf(item) % itemColors.length;
 
   return (
     <div
@@ -67,9 +71,9 @@ const Navbar = ({ isOpen, onClose, currentPage = "home", onNavigate }) => {
         </div>
 
         <ul className="grid grid-cols-1 gap-2">
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             const isActive = currentPage === getPageFromItem(item) || activeItem === item;
-            const colorIndex = index % itemColors.length;
+            const colorIndex = getColorIndex(item);
             const borderColor = itemColors[colorIndex];
             const bgColor = isActive
               ? itemColors[colorIndex]

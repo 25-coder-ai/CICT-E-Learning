@@ -10,6 +10,7 @@ import LearnersPage from "./pages/LearnersPage";
 import AttachmentsPage from "./pages/AttachmentsPage";
 import ContactPage from "./pages/ContactPage";
 import AcknowledgementPage from "./pages/AcknowledgementPage";
+import LoginPage from "./pages/LoginPage";
 
 const pageComponents = {
   home: HomePage,
@@ -20,6 +21,7 @@ const pageComponents = {
   attachments: AttachmentsPage,
   contact: ContactPage,
   acknowledgement: AcknowledgementPage,
+  login: LoginPage,
 };
 
 const pageTitles = {
@@ -31,17 +33,24 @@ const pageTitles = {
   attachments: "இணைப்புகள்",
   contact: "தொடர்புக்கு",
   acknowledgement: "நன்றி – Acknowledgement",
+  login: "Login",
 };
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("home");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const id = window.requestAnimationFrame(() => setIsVisible(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setCurrentPage("video-lectures");
+  };
 
   const ActivePage = pageComponents[currentPage] || HomePage;
   const pageTitle = pageTitles[currentPage] || pageTitles.home;
@@ -88,12 +97,19 @@ const App = () => {
         isMenuOpen={isMenuOpen}
         onMenuToggle={() => setIsMenuOpen((previous) => !previous)}
         isGlass={useImageBg}
+        isLoggedIn={isLoggedIn}
+        onLoginClick={() => setCurrentPage("login")}
+        onLogoutClick={() => {
+          setIsLoggedIn(false);
+          setCurrentPage("home");
+        }}
       />
       <Navbar
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         currentPage={currentPage}
         onNavigate={(page) => setCurrentPage(page)}
+        isLoggedIn={isLoggedIn}
       />
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 pt-10">
@@ -108,10 +124,7 @@ const App = () => {
             {pageTitle}
           </span>
         </h2>
-        {useImageBg
-          ? <div className="mt-3 h-px w-full bg-[#E8ECEF]/30" />
-          : <div className="mx-auto mt-3 h-1 w-44 rounded-full bg-linear-to-r from-[#2D1910]/80 via-[#A58D66]/95 to-[#2D1910]/80 shadow-[0_0_10px_rgba(45,25,16,0.30)]" />
-        }
+        <div className={`mt-3 h-px w-full ${useImageBg ? 'bg-[#E8ECEF]/30' : 'bg-[#131936]/25'}`} />
       </section>
 
       <main
@@ -119,7 +132,7 @@ const App = () => {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
       >
-        <ActivePage onNavigate={setCurrentPage} />
+        <ActivePage onNavigate={setCurrentPage} onLoginSuccess={handleLoginSuccess} />
       </main>
 
       <Footer />

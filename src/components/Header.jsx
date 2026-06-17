@@ -1,10 +1,10 @@
-const Header = ({ isMenuOpen, onMenuToggle, isGlass }) => {
+const Header = ({ isMenuOpen, onMenuToggle, isGlass, isLoggedIn, onLoginClick, onLogoutClick }) => {
   return (
     <header
       className={`relative border-b text-white shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)] backdrop-blur-md ${
         isGlass
           ? 'border-white/10 bg-black/45'
-          : 'border-[#7a3f10] bg-[#7a3f10]'
+          : 'border-[#131936] bg-[#131936]'
       }`}
     >
       <div className="mx-auto grid max-w-7xl items-center gap-4 px-6 py-5 md:grid-cols-[1fr_auto_1fr]">
@@ -77,12 +77,26 @@ const Header = ({ isMenuOpen, onMenuToggle, isGlass }) => {
             <span className="sr-only">Translate</span>
           </button>
 
-          <button className="h-10 rounded-full border border-white/40 bg-white/20 px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_5px_12px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/30">
-            Login
-          </button>
-          <button className="h-10 rounded-full border border-white/30 bg-transparent px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/15">
-            Register
-          </button>
+          {isLoggedIn ? (
+            <button
+              onClick={onLogoutClick}
+              className="h-10 rounded-full border border-white/40 bg-white/20 px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_5px_12px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/30"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={onLoginClick}
+                className="h-10 rounded-full border border-white/40 bg-white/20 px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_5px_12px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/30"
+              >
+                Login
+              </button>
+              <button className="h-10 rounded-full border border-white/30 bg-transparent px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-white/15">
+                Register
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>
