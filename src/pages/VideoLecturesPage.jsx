@@ -1,4 +1,7 @@
 import { useMemo, useState } from "react";
+import MalaiApp from "../components/MalaiApp";
+import AddQuestionForm from "../components/AddQuestionForm";
+import DynamicExerciseModal from "../components/DynamicExerciseModal";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -154,10 +157,41 @@ const sectionContent = {
   ],
 };
 
+// ── Add Question form placeholder ──
+const AddQuestionView = ({ onBack }) => (
+  <div className="space-y-6">
+    <div className="flex items-center gap-4">
+      <button
+        type="button"
+        onClick={onBack}
+        className="flex items-center gap-2 rounded-lg border border-[#083A4F]/40 bg-[#083A4F]/10 px-4 py-2 text-sm font-semibold text-[#083A4F] transition hover:bg-[#083A4F]/20"
+      >
+        ← Back
+      </button>
+      <h2 className="text-xl font-bold text-[#083A4F]">Add Question</h2>
+    </div>
+    <div className="rounded-xl border border-[#407E8C]/30 bg-[#C0D5D6]/20 p-8 text-center text-[#407E8C]">
+      <p className="text-lg font-semibold">Form layout coming soon</p>
+      <p className="mt-1 text-sm opacity-70">The question form will be added here.</p>
+    </div>
+  </div>
+);
+
 // ── Akam module overview ──
-const AkamModuleOverview = ({ emphasisClass }) => (
+const AkamModuleOverview = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
-    <p className={emphasisClass}>கருத்தலகு 1 : அகம்</p>
+    <div className="flex items-center gap-4">
+      <p className={emphasisClass}>கருத்தலகு 1 : அகம்</p>
+      {isAdmin && (
+        <button
+          type="button"
+          onClick={onAddQuestion}
+          className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95"
+        >
+          + Add Question
+        </button>
+      )}
+    </div>
     <p className="text-lg font-semibold text-[#407E8C]">Module 1 : Akam</p>
     <p className="text-justify">
       இக்கருத்தலகு அகம்பற்றியது. தமிழ்ச் செவ்வியல் மொழியில் பாடல்களைக் கேட்ட
@@ -198,13 +232,52 @@ const AkamModuleOverview = ({ emphasisClass }) => (
       உதவுகின்றன. திணை ஒவ்வொன்றும் தனித்தனிப் பாடங்களாக அமைக்கப் பெற்றுள்ளன.
     </p>
     <p className={emphasisClass}>அலகு</p>
+    <ExerciseButtons btns={exerciseBtns} />
   </div>
 );
 
 // ── Akam unit page (standard units 1-5) ──
-const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
+const ExerciseButtons = ({ btns }) => btns.length === 0 ? null : (
+  <div className="flex flex-wrap gap-4 justify-center pt-2">
+    {btns.map(({ label, onClick, onRemove }) => (
+      <div key={label} className="relative">
+        <button
+          type="button"
+          onClick={onClick}
+          title={`பயிற்சி ${label} திற`}
+          className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#407E8C] bg-[#083A4F] text-lg font-bold text-[#E5E1DD] shadow-md transition-all duration-200 hover:scale-110 hover:bg-[#407E8C]"
+        >
+          {label}
+        </button>
+        {onRemove && (
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); onRemove(); }}
+            title="Remove exercise set"
+            className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold leading-none transition hover:bg-red-600 hover:scale-110"
+          >
+            ×
+          </button>
+        )}
+      </div>
+    ))}
+  </div>
+);
+
+const AkamUnitPage = ({ unitNumber, thinaName, emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
-    <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
+    <div className="flex items-center gap-4">
+      <p className={emphasisClass}>கருத்தலகு 1 : அலகு {unitNumber}</p>
+      {isAdmin && (
+        <button
+          type="button"
+          onClick={onAddQuestion}
+          className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95"
+        >
+          + Add Question
+        </button>
+      )}
+    </div>
     <p className="text-2xl font-bold text-[#407E8C]">{thinaName}</p>
     <p className="text-justify">
       இது {thinaName}திணை பற்றியது. இத்திணை சார்ந்த பாடல் ஒவ்வொன்றிலும்
@@ -239,13 +312,21 @@ const AkamUnitPage = ({ unitNumber, unitTitle, thinaName, emphasisClass }) => (
       மொழி அறிவைப் பெற நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக்
       வாசித்துக் கொள்ளுங்கள். பின்னர், பாடலைக் கவனமாகக் கேளுங்கள்.
     </p>
+    <ExerciseButtons btns={exerciseBtns} />
   </div>
 );
 
 // ── Akam unit 6 : கைக்கிளை ──
-const AkamUnit6Page = ({ emphasisClass }) => (
+const AkamUnit6Page = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
-    <p className={emphasisClass}>கருத்தலகு 1 : அலகு 6</p>
+    <div className="flex items-center gap-4">
+      <p className={emphasisClass}>கருத்தலகு 1 : அலகு 6</p>
+      {isAdmin && (
+        <button type="button" onClick={onAddQuestion} className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95">
+          + Add Question
+        </button>
+      )}
+    </div>
     <p className="text-2xl font-bold text-[#407E8C]">கைக்கிளை</p>
     <p className="text-justify">இது கைக்கிளைப் பற்றியது.</p>
     <p className="text-justify">
@@ -253,13 +334,21 @@ const AkamUnit6Page = ({ emphasisClass }) => (
       நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக் வாசித்துக் கொள்ளுங்கள். பின்னர்,
       பாடலைக் கவனமாகக் கேளுங்கள்.
     </p>
+    <ExerciseButtons btns={exerciseBtns} />
   </div>
 );
 
 // ── Akam unit 7 : பெருந்திணை ──
-const AkamUnit7Page = ({ emphasisClass }) => (
+const AkamUnit7Page = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
-    <p className={emphasisClass}>கருத்தலகு 1 : அலகு 7</p>
+    <div className="flex items-center gap-4">
+      <p className={emphasisClass}>கருத்தலகு 1 : அலகு 7</p>
+      {isAdmin && (
+        <button type="button" onClick={onAddQuestion} className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95">
+          + Add Question
+        </button>
+      )}
+    </div>
     <p className="text-2xl font-bold text-[#407E8C]">பெருந்திணை</p>
     <p className="text-justify">இது பெருந்திணை பற்றியது.</p>
     <p className="text-justify">
@@ -267,13 +356,25 @@ const AkamUnit7Page = ({ emphasisClass }) => (
       நீங்கள் முயற்சிக்கலாமல்லவா? பாடலின் முன்னுரையைக் வாசித்துக் கொள்ளுங்கள். பின்னர்,
       பாடலைக் கவனமாகக் கேளுங்கள்.
     </p>
+    <ExerciseButtons btns={exerciseBtns} />
   </div>
 );
 
 // ── Puram module overview ──
-const PuramModuleOverview = ({ emphasisClass }) => (
+const PuramModuleOverview = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
-    <p className={emphasisClass}>கருத்தலகு 2 : புறம்</p>
+    <div className="flex items-center gap-4">
+      <p className={emphasisClass}>கருத்தலகு 2 : புறம்</p>
+      {isAdmin && (
+        <button
+          type="button"
+          onClick={onAddQuestion}
+          className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95"
+        >
+          + Add Question
+        </button>
+      )}
+    </div>
     <p className="text-lg font-semibold text-[#407E8C]">Module 2 : Puram</p>
     <p className="text-justify">
       இக்கருத்தலகு புறம் பற்றியது. தமிழ்ச் செவ்வியல் இலக்கியங்களைப் பயிலும்போதே பொருளுணர்தல்,
@@ -328,6 +429,7 @@ const PuramModuleOverview = ({ emphasisClass }) => (
       போர்முறை குறித்த அறிமுகமும், அக்கால வேந்தனது சிறப்பும் விளங்கியிருக்கும். இனி ஒவ்வொரு
       திணைக்குமான பாடங்களைப் பயில முயற்சி செய்யலாமா?
     </p>
+    <ExerciseButtons btns={exerciseBtns} />
   </div>
 );
 
@@ -643,11 +745,46 @@ const puramUnitContent = {
   },
 };
 
-const VideoLecturesPage = () => {
+const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isIntroDrawerOpen, setIsIntroDrawerOpen] = useState(false);
   const [isAkamDrawerOpen, setIsAkamDrawerOpen] = useState(false);
   const [isPuramModuleDrawerOpen, setIsPuramModuleDrawerOpen] = useState(false);
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
+  const [malaiOpen, setMalaiOpen] = useState(false);
+  const [addQuestionForUnit, setAddQuestionForUnit] = useState(null);
+  const [exercises, setExercises] = useState({});
+  const [openDynamicExercise, setOpenDynamicExercise] = useState(null);
+
+  const handleAddExercise = (exerciseSet) => {
+    const key = addQuestionForUnit;
+    setExercises(prev => ({ ...prev, [key]: [...(prev[key] || []), exerciseSet] }));
+    setAddQuestionForUnit(null);
+  };
+
+  const removeExercise = (unitKey, idx) =>
+    setExercises(prev => {
+      const updated = [...(prev[unitKey] || [])];
+      updated.splice(idx, 1);
+      return { ...prev, [unitKey]: updated };
+    });
+
+  const buildBtns = (unitKey) => {
+    const isAdmin = userRole === 'admin';
+    const btns = [];
+    if (unitKey === 'அலகு 2 : குறிஞ்சி') {
+      btns.push({ label: 1, onClick: () => setMalaiOpen(true) });
+    }
+    const exList = exercises[unitKey] || [];
+    const start = unitKey === 'அலகு 2 : குறிஞ்சி' ? 2 : 1;
+    exList.forEach((ex, i) => {
+      btns.push({
+        label: start + i,
+        onClick: () => setOpenDynamicExercise({ exercise: ex, title: ex.leftButtons?.[0] || 'பயிற்சி' }),
+        onRemove: isAdmin ? () => removeExercise(unitKey, i) : null,
+      });
+    });
+    return btns;
+  };
 
   const [activeItem, setActiveItem] = useState("அறிமுகம்");
   const [activeIntroItem, setActiveIntroItem] = useState("அறிமுகம்");
@@ -675,9 +812,26 @@ const VideoLecturesPage = () => {
   const isAssessmentView = activeItem === "அறிமுகம்" && activeIntroItem === "மதிப்பீடு";
   const emphasisClass = "font-bold text-[17px] text-[#083A4F] sm:text-[19px]";
 
+  const AddBtn = ({ unitKey }) => userRole === "admin" ? (
+    <button type="button" onClick={() => setAddQuestionForUnit(unitKey)} className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95">+ Add Question</button>
+  ) : null;
+
   // ── Akam content renderer ──
   const renderAkamContent = () => {
-    if (!activeAkamItem) return <AkamModuleOverview emphasisClass={emphasisClass} />;
+    const unitKey = activeAkamItem || 'akam-overview';
+    if (addQuestionForUnit === unitKey) {
+      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={() => setAddQuestionForUnit(null)} />;
+    }
+    if (!activeAkamItem) {
+      return (
+        <AkamModuleOverview
+          emphasisClass={emphasisClass}
+          isAdmin={userRole === "admin"}
+          onAddQuestion={() => setAddQuestionForUnit('akam-overview')}
+          exerciseBtns={buildBtns('akam-overview')}
+        />
+      );
+    }
     const akamUnitMap = {
       "அலகு 1 : முல்லை": { unitNumber: 1, thinaName: "முல்லைத்" },
       "அலகு 2 : குறிஞ்சி": { unitNumber: 2, thinaName: "குறிஞ்சித்" },
@@ -685,25 +839,57 @@ const VideoLecturesPage = () => {
       "அலகு 4 : நெய்தல்": { unitNumber: 4, thinaName: "நெய்தல்" },
       "அலகு 5 : பாலை": { unitNumber: 5, thinaName: "பாலைத்" },
     };
-    if (activeAkamItem === "அலகு 6 : கைக்கிளை") return <AkamUnit6Page emphasisClass={emphasisClass} />;
-    if (activeAkamItem === "அலகு 7 : பெருந்திணை") return <AkamUnit7Page emphasisClass={emphasisClass} />;
+    const isAdmin = userRole === "admin";
+    if (activeAkamItem === "அலகு 6 : கைக்கிளை") {
+      return <AkamUnit6Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => setAddQuestionForUnit(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
+    }
+    if (activeAkamItem === "அலகு 7 : பெருந்திணை") {
+      return <AkamUnit7Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => setAddQuestionForUnit(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
+    }
     const unit = akamUnitMap[activeAkamItem];
     if (unit) {
-      return <AkamUnitPage unitNumber={unit.unitNumber} thinaName={unit.thinaName} emphasisClass={emphasisClass} />;
+      return (
+        <AkamUnitPage
+          unitNumber={unit.unitNumber}
+          thinaName={unit.thinaName}
+          emphasisClass={emphasisClass}
+          exerciseBtns={buildBtns(unitKey)}
+          isAdmin={isAdmin}
+          onAddQuestion={() => setAddQuestionForUnit(unitKey)}
+        />
+      );
     }
     return <p>இந்தப் பிரிவுக்கான உள்ளடக்கம் விரைவில் சேர்க்கப்படும்.</p>;
   };
 
   // ── Puram module 2 content renderer ──
   const renderPuramModuleContent = () => {
-    if (!activePuramModuleItem) return <PuramModuleOverview emphasisClass={emphasisClass} />;
+    const unitKey = activePuramModuleItem || 'puram-overview';
+    if (addQuestionForUnit === unitKey) {
+      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={() => setAddQuestionForUnit(null)} />;
+    }
+    const isAdmin = userRole === "admin";
+    if (!activePuramModuleItem) {
+      return (
+        <PuramModuleOverview
+          emphasisClass={emphasisClass}
+          isAdmin={isAdmin}
+          onAddQuestion={() => setAddQuestionForUnit('puram-overview')}
+          exerciseBtns={buildBtns('puram-overview')}
+        />
+      );
+    }
     const unit = puramUnitContent[activePuramModuleItem];
     if (unit) {
       return (
         <div className="space-y-5">
-          <p className={emphasisClass}>{unit.header}</p>
+          <div className="flex items-center gap-4">
+            <p className={emphasisClass}>{unit.header}</p>
+            <AddBtn unitKey={unitKey} />
+          </div>
           <p className="text-2xl font-bold text-[#407E8C]">{unit.title}</p>
           {unit.body}
+          <ExerciseButtons btns={buildBtns(unitKey)} />
         </div>
       );
     }
@@ -775,6 +961,7 @@ const VideoLecturesPage = () => {
                           setIsAkamDrawerOpen((prev) => !prev);
                           setActiveItem("கருத்தலகு 1 : அகம்");
                           setActiveAkamItem(null);
+                          setAddQuestionForUnit(null);
                           setIsIntroDrawerOpen(false);
                           setIsPuramModuleDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
@@ -794,7 +981,7 @@ const VideoLecturesPage = () => {
                             <li key={drawerItem}>
                               <button
                                 type="button"
-                                onClick={() => { setActiveItem("கருத்தலகு 1 : அகம்"); setActiveAkamItem(drawerItem); }}
+                                onClick={() => { setActiveItem("கருத்தலகு 1 : அகம்"); setActiveAkamItem(drawerItem); setAddQuestionForUnit(null); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "கருத்தலகு 1 : அகம்" && activeAkamItem === drawerItem
                                     ? "bg-[#407E8C]/85 text-[#E5E1DD]"
@@ -817,6 +1004,7 @@ const VideoLecturesPage = () => {
                           setIsPuramModuleDrawerOpen((prev) => !prev);
                           setActiveItem("கருத்தலகு 2 : புறம்");
                           setActivePuramModuleItem(null);
+                          setAddQuestionForUnit(null);
                           setIsIntroDrawerOpen(false);
                           setIsAkamDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
@@ -836,7 +1024,7 @@ const VideoLecturesPage = () => {
                             <li key={drawerItem}>
                               <button
                                 type="button"
-                                onClick={() => { setActiveItem("கருத்தலகு 2 : புறம்"); setActivePuramModuleItem(drawerItem); }}
+                                onClick={() => { setActiveItem("கருத்தலகு 2 : புறம்"); setActivePuramModuleItem(drawerItem); setAddQuestionForUnit(null); }}
                                 className={`w-full px-5 py-2.5 text-left text-base leading-tight transition ${
                                   activeItem === "கருத்தலகு 2 : புறம்" && activePuramModuleItem === drawerItem
                                     ? "bg-[#407E8C]/85 text-[#E5E1DD]"
@@ -1088,6 +1276,33 @@ const VideoLecturesPage = () => {
           </div>
         </div>
       </section>
+
+      {malaiOpen && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/65 backdrop-blur-sm"
+          onClick={(e) => { if (e.target === e.currentTarget) setMalaiOpen(false); }}
+        >
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setMalaiOpen(false)}
+              className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#4d2c03] text-sm font-bold text-[#f5ecd8] shadow-lg transition hover:bg-[#734501]"
+              aria-label="Close exercise"
+            >
+              ✕
+            </button>
+            <MalaiApp />
+          </div>
+        </div>
+      )}
+
+      {openDynamicExercise && (
+        <DynamicExerciseModal
+          exercise={openDynamicExercise.exercise}
+          title={openDynamicExercise.title}
+          onClose={() => setOpenDynamicExercise(null)}
+        />
+      )}
     </div>
   );
 };

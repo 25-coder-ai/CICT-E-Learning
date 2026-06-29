@@ -41,14 +41,16 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("home");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState("user");
 
   useEffect(() => {
     const id = window.requestAnimationFrame(() => setIsVisible(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (role = "user") => {
     setIsLoggedIn(true);
+    setUserRole(role);
     setCurrentPage("video-lectures");
   };
 
@@ -132,7 +134,7 @@ const App = () => {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
       >
-        <ActivePage onNavigate={setCurrentPage} onLoginSuccess={handleLoginSuccess} />
+        <ActivePage onNavigate={setCurrentPage} onLoginSuccess={handleLoginSuccess} userRole={userRole} />
       </main>
 
       <Footer />
