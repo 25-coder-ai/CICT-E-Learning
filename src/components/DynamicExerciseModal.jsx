@@ -1,5 +1,31 @@
+import './dynamic-exercise.css';
 import './malai-app.css';
-import { useState } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
+
+const ThemeCtx = createContext('akam');
+
+const THEMES = {
+  akam: {
+    scopeClass: 'dynamic-scope',
+    box: { background:'rgba(219,234,254,0.45)', color:'#0d2a80', borderLeft:'3px solid #1a4cc8', padding:'8px 12px', borderRadius:'0 6px 6px 0', marginBottom:8, fontSize:'0.83rem', lineHeight:1.7 },
+    dotChecked: { background:'#1a4cc8', border:'4px solid #1a4cc8' },
+    dotUnchecked: { background:'#fff', border:'2px solid #8ab0e0' },
+    closeBg: '#0d2a80', closeColor: '#fff', closeBorder: '1px solid rgba(26,76,200,0.5)',
+    listenQColor: '#b91c1c',
+    qaNumColor: '#0d2a80',
+    dragTextColor: '#0d2a80',
+  },
+  puram: {
+    scopeClass: 'malai-scope',
+    box: { background:'rgba(60,30,2,0.12)', color:'#4d2c03', borderLeft:'3px solid #734501', padding:'8px 12px', borderRadius:'0 6px 6px 0', marginBottom:8, fontSize:'0.83rem', lineHeight:1.7 },
+    dotChecked: { background:'#734501', border:'4px solid #734501' },
+    dotUnchecked: { background:'#fff', border:'2px solid #a0785c' },
+    closeBg: '#4d2c03', closeColor: '#f5ecd8', closeBorder: '1px solid rgba(77,44,3,0.5)',
+    listenQColor: '#f5ecd8',
+    qaNumColor: '#5c3317',
+    dragTextColor: '#f5ecd8',
+  },
+};
 
 /* ── Reusable popup overlays ── */
 function CorrectPopup({ onNext }) {
@@ -56,17 +82,19 @@ const MediaBar = () => (
   </div>
 );
 
-const BrownBox = ({ text }) => (
-  <div style={{ background:'#5c3317', color:'#f5ecd8', padding:'8px 12px', borderRadius:3, marginBottom:8, fontSize:'0.83rem', lineHeight:1.7 }}>{text}</div>
-);
+const BlueBox = ({ text }) => {
+  const t = THEMES[useContext(ThemeCtx)];
+  return <div style={t.box}>{text}</div>;
+};
 
 const LeftBorderPoem = ({ text }) => (
   <div className="q5-paadal-snippet" style={{ whiteSpace:'pre-line' }}>{text}</div>
 );
 
 function RadioDot({ checked }) {
+  const t = THEMES[useContext(ThemeCtx)];
   return (
-    <span className="q2-radio-dot" style={{ background: checked ? '#734501' : '#fff', border: checked ? '4px solid #734501' : '2px solid #555' }} />
+    <span className="q2-radio-dot" style={checked ? t.dotChecked : t.dotUnchecked} />
   );
 }
 
@@ -138,7 +166,7 @@ function MCQQuestion({ q, onNext }) {
           {(q.options||[]).map((opt,i) => (
             <div key={i} className="q2-option q3-option" onClick={() => check(i)}>
               <RadioDot checked={selected===i} />
-              <span>{opt}</span>
+              <span style={{ whiteSpace:'pre-line' }}>{opt}</span>
             </div>
           ))}
         </div>
@@ -153,6 +181,7 @@ function ListenAnswerQuestion({ q, onNext }) {
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState(null);
   const [popup, setPopup] = useState(null);
+  const t = THEMES[useContext(ThemeCtx)];
 
   const check = (i) => {
     setSelected(i);
@@ -162,11 +191,11 @@ function ListenAnswerQuestion({ q, onNext }) {
   if (showOptions) {
     return (
       <div className="q4-options-page">
-        <p style={{ color:'#f5ecd8', fontSize:'0.85rem', marginBottom:12 }}>{q.question}</p>
+        <p style={{ color:t.listenQColor, fontWeight:700, fontSize:'0.85rem', marginBottom:12 }}>{q.question}</p>
         {(q.options||[]).map((opt,i) => (
           <div key={i} className="q4-option-item" onClick={() => check(i)}>
             <RadioDot checked={selected===i} />
-            <span className="q4-option-text">{opt}</span>
+            <span className="q4-option-text" style={{ whiteSpace:'pre-line' }}>{opt}</span>
           </div>
         ))}
         {popup === 'correct' && <CorrectPopup onNext={() => { setPopup(null); setSelected(null); setShowOptions(false); onNext(); }} />}
@@ -180,11 +209,11 @@ function ListenAnswerQuestion({ q, onNext }) {
       <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
       <MediaBar />
       <div className="q2-question-area">
-        {q.primaryInstruction && <BrownBox text={q.primaryInstruction} />}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
         {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
         {q.tertiaryInstruction && <p>{q.tertiaryInstruction}</p>}
-        {q.paadal2 && <LeftBorderPoem text={q.paadal2} />}
         {q.question && <p className="q2-prompt">{q.question}</p>}
+        {q.paadal2 && <LeftBorderPoem text={q.paadal2} />}
         <div className="q4-btn-center">
           <button className="q4-click-btn" onClick={() => setShowOptions(true)}>இங்கே சொடுக்கவும்</button>
         </div>
@@ -207,7 +236,7 @@ function MCQPaadalQuestion({ q, onNext }) {
       <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
       <MediaBar />
       <div className="q2-question-area">
-        {q.primaryInstruction && <BrownBox text={q.primaryInstruction} />}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
         {q.question && <p className="q2-prompt">{q.question}</p>}
         {q.paadal2 && <LeftBorderPoem text={q.paadal2} />}
         {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
@@ -216,7 +245,7 @@ function MCQPaadalQuestion({ q, onNext }) {
           {(q.options||[]).map((opt,i) => (
             <div key={i} className="q2-option q3-option" onClick={() => check(i)}>
               <RadioDot checked={selected===i} />
-              <span>{opt}</span>
+              <span style={{ whiteSpace:'pre-line' }}>{opt}</span>
             </div>
           ))}
         </div>
@@ -233,7 +262,7 @@ function ListenRepeatQuestion({ q, onNext }) {
       <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
       <MediaBar />
       <div className="q2-question-area">
-        {q.primaryInstruction && <BrownBox text={q.primaryInstruction} />}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
         {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
         {q.paadal2 && <LeftBorderPoem text={q.paadal2} />}
         {q.tertiaryInstruction && <p>{q.tertiaryInstruction}</p>}
@@ -246,13 +275,14 @@ function ListenRepeatQuestion({ q, onNext }) {
 function QAQuestion({ q, onNext }) {
   const [showQA, setShowQA] = useState(false);
   const [qaPopup, setQaPopup] = useState(null);
+  const t = THEMES[useContext(ThemeCtx)];
 
   return (
     <div className="q2-wrap">
       <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
       <MediaBar />
       <div className="q2-question-area q12-question-area">
-        {q.primaryInstruction && <BrownBox text={q.primaryInstruction} />}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
         {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
         {q.tertiaryInstruction && <p>{q.tertiaryInstruction}</p>}
 
@@ -267,7 +297,7 @@ function QAQuestion({ q, onNext }) {
             <ul className="q12-questions" style={{ listStyle:'none', paddingLeft:0 }}>
               {(q.qas||[]).map((qa,i) => (
                 <li key={i} className="q12-question-item">
-                  <span style={{ color:'#5c3317', fontWeight:700, fontSize:'0.78rem', minWidth:18 }}>{i+1}.</span>
+                  <span style={{ color:t.qaNumColor, fontWeight:700, fontSize:'0.78rem', minWidth:18 }}>{i+1}.</span>
                   <span className="q12-question-text">{qa.question}</span>
                   <button className="q12-vidai-btn" onClick={() => setQaPopup({ index:i+1, question:qa.question, answer:qa.answer })}>விடை</button>
                 </li>
@@ -298,6 +328,9 @@ function QAQuestion({ q, onNext }) {
 function DragDropQuestion({ q, onNext }) {
   const correct = q.sentences || [];
   const [shuffled] = useState(() => {
+    if (q.shuffledSentences && q.shuffledSentences.length === correct.length) {
+      return [...q.shuffledSentences];
+    }
     const arr = [...correct];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -309,6 +342,7 @@ function DragDropQuestion({ q, onNext }) {
   const [dragItem, setDragItem] = useState(null);
   const [dragOver, setDragOver] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const t = THEMES[useContext(ThemeCtx)];
 
   const placed = new Set(slots.filter(Boolean));
   const bank = shuffled.filter(s => !placed.has(s));
@@ -328,9 +362,9 @@ function DragDropQuestion({ q, onNext }) {
   return (
     <div className="q4-options-page q10-drag-page">
       <div className="q2-question-area" style={{ background:'transparent', padding:'0 0 8px', overflow:'visible', flex:'none' }}>
-        {q.primaryInstruction && <BrownBox text={q.primaryInstruction} />}
-        {q.secondaryInstruction && <p style={{ color:'#f5ecd8', fontSize:'0.82rem', marginBottom:4 }}>{q.secondaryInstruction}</p>}
-        {q.tertiaryInstruction && <p style={{ color:'#f5ecd8', fontSize:'0.82rem', marginBottom:8 }}>{q.tertiaryInstruction}</p>}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
+        {q.secondaryInstruction && <p style={{ color:t.dragTextColor, fontSize:'0.82rem', marginBottom:4 }}>{q.secondaryInstruction}</p>}
+        {q.tertiaryInstruction && <p style={{ color:t.dragTextColor, fontSize:'0.82rem', marginBottom:8 }}>{q.tertiaryInstruction}</p>}
       </div>
       <div className="q10-slots">
         {correct.map((_, i) => (
@@ -379,14 +413,22 @@ function renderQuestion(q, onNext) {
 
 const STATIC_TYPES = new Set(['title','listen-repeat']);
 
-export default function DynamicExerciseModal({ exercise, title, onClose }) {
-  const { leftButtons = [], rightContent = {}, questions = [] } = exercise;
+export default function DynamicExerciseModal({ exercise, title, onClose, theme = 'akam' }) {
+  const { leftButtons = [], rightContent = {}, rightContentEnglish = {}, questions = [] } = exercise;
   const [activeLeft, setActiveLeft] = useState(leftButtons[0] || '');
   const [currentQ, setCurrentQ] = useState(0);
   const [qKey, setQKey] = useState(0);
+  const [showEnglish, setShowEnglish] = useState(false);
+  const t = THEMES[theme];
+
+  useEffect(() => { setShowEnglish(false); }, [activeLeft]);
 
   const q = questions[currentQ];
   const isStatic = q && STATIC_TYPES.has(q.type);
+
+  // Centre column header shows the exercise's own title (the title page's
+  // primaryTitle, e.g. "முன்னுரை"); falls back to the passed title.
+  const centreTitle = questions.find(qq => qq.type === 'title' && qq.primaryTitle)?.primaryTitle || title || 'பயிற்சி';
 
   const handleNext = () => {
     setCurrentQ(prev => (prev + 1) % questions.length);
@@ -394,85 +436,112 @@ export default function DynamicExerciseModal({ exercise, title, onClose }) {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/65 backdrop-blur-sm"
-      style={{ position:'fixed', inset:0, zIndex:200, display:'flex', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.65)', backdropFilter:'blur(4px)' }}
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
-    >
-      <div style={{ position:'relative' }}>
-        <button
-          onClick={onClose}
-          style={{ position:'absolute', top:-12, right:-12, zIndex:10, width:28, height:28, borderRadius:'50%', background:'#4d2c03', color:'#f5ecd8', border:'none', cursor:'pointer', fontWeight:700, fontSize:'0.85rem', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 6px rgba(0,0,0,0.5)' }}
-          aria-label="Close"
-        >✕</button>
+    <ThemeCtx.Provider value={theme}>
+      <div
+        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/65 backdrop-blur-sm"
+        style={{ position:'fixed', inset:0, zIndex:200, display:'flex', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.65)', backdropFilter:'blur(4px)' }}
+        onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+      >
+        <div style={{ position:'relative' }}>
+          <button
+            onClick={onClose}
+            style={{ position:'absolute', top:-12, right:-12, zIndex:10, width:28, height:28, borderRadius:'50%', background:t.closeBg, color:t.closeColor, border:t.closeBorder, cursor:'pointer', fontWeight:700, fontSize:'0.85rem', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.5)' }}
+            aria-label="Close"
+          >✕</button>
 
-        <div className="malai-scope">
-          <div className="app-container">
-            {/* LEFT SIDEBAR */}
-            <aside className="left-sidebar">
-              <nav className="sidebar-nav">
-                {leftButtons.map(btn => (
-                  <div key={btn} className="flip-wrapper">
-                    <button
-                      className={`flip-btn ${activeLeft === btn ? 'active' : ''}`}
-                      onClick={() => setActiveLeft(btn)}
-                    >
-                      <span className="flip-front">{btn}</span>
-                      <span className="flip-back">{btn}</span>
-                    </button>
-                  </div>
-                ))}
-              </nav>
-            </aside>
+          <div className={t.scopeClass}>
+            <div className="app-container">
+              {/* LEFT SIDEBAR */}
+              <aside className="left-sidebar">
+                <nav className="sidebar-nav">
+                  {leftButtons.map(btn => (
+                    <div key={btn} className="flip-wrapper">
+                      <button
+                        className={`flip-btn ${activeLeft === btn ? 'active' : ''}`}
+                        onClick={() => setActiveLeft(btn)}
+                      >
+                        <span className="flip-front">{btn}</span>
+                        <span className="flip-back">{btn}</span>
+                      </button>
+                    </div>
+                  ))}
+                </nav>
+              </aside>
 
-            {/* CENTRE COLUMN */}
-            <main className="centre-column">
-              <div className="centre-header">{title || 'பயிற்சி'}</div>
-              <div className="centre-content">
-                {q ? (
-                  <div key={qKey} style={{ height:'100%' }}>
-                    {renderQuestion(q, handleNext)}
-                  </div>
-                ) : (
-                  <p style={{ color:'#555' }}>No questions added.</p>
-                )}
-              </div>
-              {(isStatic) && (
-                <div className="centre-footer">
-                  <div className="flip-wrapper next-btn-wrapper">
-                    <button className="flip-btn" onClick={handleNext}>
-                      <span className="flip-front">அடுத்து &gt;&gt;</span>
-                      <span className="flip-back">அடுத்து &gt;&gt;</span>
-                    </button>
-                  </div>
+              {/* CENTRE COLUMN */}
+              <main className="centre-column">
+                <div className="centre-header">{centreTitle}</div>
+                <div className="centre-content">
+                  {q ? (
+                    <div key={qKey} style={{ height:'100%' }}>
+                      {renderQuestion(q, handleNext)}
+                    </div>
+                  ) : (
+                    <p style={{ color:'#555' }}>No questions added.</p>
+                  )}
                 </div>
-              )}
-            </main>
+                {(isStatic) && (
+                  <div className="centre-footer">
+                    <div className="flip-wrapper next-btn-wrapper">
+                      <button className="flip-btn" onClick={handleNext}>
+                        <span className="flip-front">அடுத்து &gt;&gt;</span>
+                        <span className="flip-back">அடுத்து &gt;&gt;</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </main>
 
-            {/* RIGHT COLUMN */}
-            <aside className="right-column">
-              <div className="right-header">{title || 'பயிற்சி'}</div>
-              <div className="right-content">
-                {activeLeft && rightContent[activeLeft]
-                  ? <p style={{ whiteSpace:'pre-line' }}>{rightContent[activeLeft]}</p>
-                  : <p style={{ color:'#aaa', fontStyle:'italic', fontSize:'0.8rem' }}>Select a topic from the left.</p>
-                }
-              </div>
-              <div className="question-nav">
-                {questions.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`q-nav-btn ${currentQ === i ? 'q-active' : ''}`}
-                    onClick={() => { setCurrentQ(i); setQKey(k => k + 1); }}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </div>
-            </aside>
+              {/* RIGHT COLUMN */}
+              <aside className="right-column">
+                <div className="right-header">{title || 'பயிற்சி'}</div>
+                <div className="right-content">
+                  {activeLeft && rightContent[activeLeft] ? (
+                    <>
+                      <p style={{ whiteSpace:'pre-line' }}>
+                        {showEnglish ? rightContentEnglish[activeLeft] : rightContent[activeLeft]}
+                      </p>
+                      {activeLeft === 'நூற்பெயர்' && rightContentEnglish[activeLeft] && (
+                        <button
+                          onClick={() => setShowEnglish(v => !v)}
+                          style={{
+                            marginTop: 10,
+                            background: showEnglish ? '#1a4cc8' : 'transparent',
+                            color: showEnglish ? '#fff' : '#1a4cc8',
+                            border: '1px solid #1a4cc8',
+                            borderRadius: 4,
+                            padding: '4px 14px',
+                            fontSize: '0.76rem',
+                            fontFamily: 'inherit',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            transition: 'all 0.15s',
+                          }}
+                        >
+                          ஆங்கீலம்
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <p style={{ color:'#aaa', fontStyle:'italic', fontSize:'0.8rem' }}>Select a topic from the left.</p>
+                  )}
+                </div>
+                <div className="question-nav">
+                  {questions.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`q-nav-btn ${currentQ === i ? 'q-active' : ''}`}
+                      onClick={() => { setCurrentQ(i); setQKey(k => k + 1); }}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                </div>
+              </aside>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ThemeCtx.Provider>
   );
 }

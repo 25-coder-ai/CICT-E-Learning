@@ -39,14 +39,28 @@ const pageTitles = {
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("home");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState("user");
+  const [currentPage, setCurrentPage] = useState(() => {
+    try { return localStorage.getItem('cict-page') || "home"; } catch { return "home"; }
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    try { return localStorage.getItem('cict-logged-in') === 'true'; } catch { return false; }
+  });
+  const [userRole, setUserRole] = useState(() => {
+    try { return localStorage.getItem('cict-role') || "user"; } catch { return "user"; }
+  });
 
   useEffect(() => {
     const id = window.requestAnimationFrame(() => setIsVisible(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('cict-logged-in', String(isLoggedIn));
+      localStorage.setItem('cict-role', userRole);
+      localStorage.setItem('cict-page', currentPage);
+    } catch {}
+  }, [isLoggedIn, userRole, currentPage]);
 
   const handleLoginSuccess = (role = "user") => {
     setIsLoggedIn(true);
@@ -103,6 +117,7 @@ const App = () => {
         onLoginClick={() => setCurrentPage("login")}
         onLogoutClick={() => {
           setIsLoggedIn(false);
+          setUserRole("user");
           setCurrentPage("home");
         }}
       />

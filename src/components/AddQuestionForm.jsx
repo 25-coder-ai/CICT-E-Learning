@@ -17,6 +17,18 @@ const QTYPES = [
   { id: 'dragdrop',      label: '8. Drag and Drop' },
 ];
 
+/* Remove consecutive duplicate spaces recursively through strings, arrays, objects */
+function deepClean(val) {
+  if (typeof val === 'string') return val.replace(/ {2,}/g, ' ');
+  if (Array.isArray(val)) return val.map(deepClean);
+  if (val && typeof val === 'object') {
+    const out = {};
+    for (const k of Object.keys(val)) out[k] = deepClean(val[k]);
+    return out;
+  }
+  return val;
+}
+
 const emptyQ = (type) => {
   const base = { type };
   switch (type) {
@@ -27,7 +39,7 @@ const emptyQ = (type) => {
     case 'mcq-paadal':   return { ...base, primaryTitle:'', paadal:'', primaryInstruction:'', question:'', paadal2:'', secondaryInstruction:'', tertiaryInstruction:'', options:[''], answer:0 };
     case 'listen-repeat': return { ...base, primaryTitle:'', paadal:'', primaryInstruction:'', secondaryInstruction:'', paadal2:'', tertiaryInstruction:'', question:'' };
     case 'qa':            return { ...base, primaryTitle:'', paadal:'', primaryInstruction:'', secondaryInstruction:'', tertiaryInstruction:'', qas:[{ question:'', answer:'' }] };
-    case 'dragdrop':      return { ...base, primaryTitle:'', paadal:'', primaryInstruction:'', secondaryInstruction:'', tertiaryInstruction:'', sentences:[''] };
+    case 'dragdrop':      return { ...base, primaryTitle:'', paadal:'', primaryInstruction:'', secondaryInstruction:'', tertiaryInstruction:'', sentences:[''], shuffledSentences:[] };
     default:              return base;
   }
 };
@@ -84,13 +96,13 @@ const S = {
 function QFields({ data, onChange }) {
   const set = (key, val) => onChange({ ...data, [key]: val });
 
-  /* Guard: only spread arrays when they exist */
-  const setOpt = (i, val) => { const o = [...(data.options||[])]; o[i]=val; set('options',o); };
-  const addOpt = () => set('options', [...(data.options||[]), '']);
-  const setQA  = (i, key, val) => { const q=[...(data.qas||[])]; q[i]={...q[i],[key]:val}; set('qas',q); };
-  const addQA  = () => set('qas', [...(data.qas||[]), { question:'', answer:'' }]);
-  const setSent= (i, val) => { const s=[...(data.sentences||[])]; s[i]=val; set('sentences',s); };
-  const addSent= () => set('sentences', [...(data.sentences||[]), '']);
+  const setOpt  = (i, val) => { const o = [...(data.options||[])]; o[i]=val; set('options',o); };
+  const addOpt  = () => set('options', [...(data.options||[]), '']);
+  const setQA   = (i, key, val) => { const q=[...(data.qas||[])]; q[i]={...q[i],[key]:val}; set('qas',q); };
+  const addQA   = () => set('qas', [...(data.qas||[]), { question:'', answer:'' }]);
+  const setSent = (i, val) => { const s=[...(data.sentences||[])]; s[i]=val; set('sentences',s); };
+  const addSent = () => set('sentences', [...(data.sentences||[]), '']);
+  const setShuf = (i, val) => { const s=[...(data.shuffledSentences||[])]; s[i]=val; set('shuffledSentences',s); };
 
   const tf = (label, key, rows=2) => (
     <div key={key}>
@@ -111,14 +123,13 @@ function QFields({ data, onChange }) {
     </div>
   );
 
-  /* Only rendered for types that actually have options */
   const OptionsBlock = () => (
     <div style={S.section}>
       <div style={S.secHd}>Options</div>
       {(data.options||[]).map((opt,i) => (
-        <div key={i} style={{ display:'flex', gap:8, alignItems:'center', marginBottom:8 }}>
-          <input type="radio" name={`ans-${data.type}-${i}`} checked={data.answer===i} onChange={()=>set('answer',i)} style={{ accentColor:C.btnTeal, flexShrink:0 }} />
-          <input value={opt} onChange={e=>setOpt(i,e.target.value)} placeholder={`Option ${i+1}`} style={{ ...S.input, marginBottom:0, flex:1 }} />
+        <div key={i} style={{ display:'flex', gap:8, alignItems:'flex-start', marginBottom:8 }}>
+          <input type="radio" name={`ans-${data.type}-${i}`} checked={data.answer===i} onChange={()=>set('answer',i)} style={{ accentColor:C.btnTeal, flexShrink:0, marginTop:9 }} />
+          <textarea rows={2} value={opt} onChange={e=>setOpt(i,e.target.value)} placeholder={`Option ${i+1} — press Enter for a new line if the option is a multi-line paadal`} style={{ ...S.input, marginBottom:0, flex:1 }} />
         </div>
       ))}
       <button type="button" onClick={addOpt} style={S.btnSm}>+ Add Option</button>
@@ -200,7 +211,7 @@ function QFields({ data, onChange }) {
         {brownBoxNote('Primary Instruction')}{tf('Primary Instruction','primaryInstruction')}
         {tf('Secondary Instruction','secondaryInstruction')}{tf('Tertiary Instruction','tertiaryInstruction')}
         <div style={S.section}>
-          <div style={S.secHd}>Sentences — enter in CORRECT order (auto-shuffled for the user)</div>
+          <div style={S.secHd}>Sentences — enter in CORRECT order (this is the answer key)</div>
           {(data.sentences||[]).map((s,i) => (
             <div key={i} style={{ display:'flex', gap:8, alignItems:'center', marginBottom:8 }}>
               <span style={{ color:C.label, fontSize:'0.78rem', minWidth:20, fontWeight:600 }}>{i+1}.</span>
@@ -209,6 +220,29 @@ function QFields({ data, onChange }) {
           ))}
           <button type="button" onClick={addSent} style={S.btnSm}>+ Add Sentence</button>
         </div>
+        <div style={S.section}>
+          <div style={S.secHd}>Shuffled Display Order — optional</div>
+          <div style={{ background:C.noteBg, border:`1px solid ${C.noteBorder}`, borderRadius:4, padding:'7px 12px', marginBottom:8, fontSize:'0.78rem', color:C.noteText }}>
+            If left empty, sentences are shuffled automatically for the user. Click below to set a specific display order instead.
+          </div>
+          {(data.shuffledSentences||[]).length === 0 ? (
+            <button type="button" onClick={() => set('shuffledSentences', [...(data.sentences||[])])} style={S.btnSm}>
+              Set custom shuffle order
+            </button>
+          ) : (
+            <>
+              {(data.shuffledSentences||[]).map((s,i) => (
+                <div key={i} style={{ display:'flex', gap:8, alignItems:'center', marginBottom:8 }}>
+                  <span style={{ color:C.label, fontSize:'0.78rem', minWidth:20, fontWeight:600 }}>{i+1}.</span>
+                  <input value={s} onChange={e=>setShuf(i,e.target.value)} placeholder={`Shuffled position ${i+1}`} style={{ ...S.input, marginBottom:0, flex:1 }} />
+                </div>
+              ))}
+              <button type="button" onClick={() => set('shuffledSentences',[])} style={{ ...S.btnSm, background:'#b22222' }}>
+                Remove custom order (revert to auto-shuffle)
+              </button>
+            </>
+          )}
+        </div>
       </>);
 
     default: return null;
@@ -216,53 +250,107 @@ function QFields({ data, onChange }) {
 }
 
 /* ── Main form component ── */
-export default function AddQuestionForm({ onSubmit, onCancel }) {
-  const [step, setStep]                 = useState(1);
-  const [selectedBtns, setSelectedBtns] = useState([]);
-  const [rightContent, setRightContent] = useState({});
-  const [questions, setQuestions]       = useState([]);
-  const [addingQ, setAddingQ]           = useState(false);
-  const [qType, setQType]               = useState(null);
-  const [qData, setQData]               = useState({});
-  const [lastCommon, setLastCommon]     = useState({ primaryInstruction:'', paadal:'' });
+export default function AddQuestionForm({ onSubmit, onCancel, initialData = null }) {
+  const isEditing = !!initialData;
+  const [step, setStep]                         = useState(1);
+  const [selectedBtns, setSelectedBtns]         = useState(initialData?.leftButtons || []);
+  const [rightContent, setRightContent]         = useState(initialData?.rightContent || {});
+  const [rightContentEnglish, setRightContentEnglish] = useState(initialData?.rightContentEnglish || {});
+  const [questions, setQuestions]               = useState(initialData?.questions || []);
+  const [addingQ, setAddingQ]                   = useState(false);
+  const [editingIdx, setEditingIdx]             = useState(null);
+  const [qType, setQType]                       = useState(null);
+  const [qData, setQData]                       = useState({});
+  const [lastCommon, setLastCommon]             = useState({ primaryInstruction:'', paadal:'', primaryTitle:'' });
+  const [lastMcqPaadalQ, setLastMcqPaadalQ]     = useState('');
+  const [showImport, setShowImport]             = useState(false);
+  const [importText, setImportText]             = useState('');
+  const [importError, setImportError]           = useState('');
+
+  /* Load a full exercise set from JSON (parsed from an admin's Word document)
+     and create it directly — the bridge for auto-filling questions/options/answers. */
+  const doImport = () => {
+    setImportError('');
+    let parsed;
+    try { parsed = JSON.parse(importText); }
+    catch (e) { setImportError('Invalid JSON — ' + e.message); return; }
+    if (!parsed || typeof parsed !== 'object') { setImportError('JSON must be an object.'); return; }
+    if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+      setImportError('JSON must include a non-empty "questions" array.'); return;
+    }
+    onSubmit(deepClean({
+      leftButtons:         Array.isArray(parsed.leftButtons) ? parsed.leftButtons : [],
+      rightContent:        (parsed.rightContent && typeof parsed.rightContent === 'object') ? parsed.rightContent : {},
+      rightContentEnglish: (parsed.rightContentEnglish && typeof parsed.rightContentEnglish === 'object') ? parsed.rightContentEnglish : {},
+      questions:           parsed.questions,
+    }));
+  };
 
   const toggleBtn = (btn) =>
     setSelectedBtns(prev => prev.includes(btn) ? prev.filter(b=>b!==btn) : [...prev, btn]);
 
-  const startAddQ = () => { setQType(null); setQData({}); setAddingQ(true); };
+  const startAddQ = () => { setQType(null); setQData({}); setEditingIdx(null); setAddingQ(true); };
 
   const selectType = (id) => {
     const base = emptyQ(id);
-    /* Autofill paadal + primaryInstruction from last saved question (except Title which has its own paadal position) */
-    const merged = id === 'title'
-      ? base
-      : { ...base, primaryInstruction: lastCommon.primaryInstruction, paadal: lastCommon.paadal };
+    if (id === 'title') { setQData(base); setQType(id); return; }
+    const merged = {
+      ...base,
+      primaryInstruction: lastCommon.primaryInstruction,
+      paadal:             lastCommon.paadal,
+      primaryTitle:       lastCommon.primaryTitle,
+      ...(id === 'mcq-paadal' ? { question: lastMcqPaadalQ } : {}),
+    };
     setQData(merged);
     setQType(id);
   };
 
   const saveQ = () => {
-    /* Persist common fields for next question autofill */
-    if (qData.primaryInstruction || qData.paadal) {
+    const cleaned = deepClean(qData);
+    if (cleaned.primaryInstruction || cleaned.paadal || cleaned.primaryTitle) {
       setLastCommon({
-        primaryInstruction: qData.primaryInstruction || lastCommon.primaryInstruction,
-        paadal:             qData.paadal             || lastCommon.paadal,
+        primaryInstruction: cleaned.primaryInstruction || lastCommon.primaryInstruction,
+        paadal:             cleaned.paadal             || lastCommon.paadal,
+        primaryTitle:       cleaned.primaryTitle       || lastCommon.primaryTitle,
       });
     }
-    setQuestions(prev => [...prev, qData]);
+    if (cleaned.type === 'mcq-paadal' && cleaned.question) {
+      setLastMcqPaadalQ(cleaned.question);
+    }
+    if (editingIdx !== null) {
+      setQuestions(prev => prev.map((q, i) => i === editingIdx ? cleaned : q));
+      setEditingIdx(null);
+    } else {
+      setQuestions(prev => [...prev, cleaned]);
+    }
     setAddingQ(false);
     setQType(null);
     setQData({});
   };
 
+  const editQ = (i) => {
+    const q = questions[i];
+    setQType(q.type);
+    setQData({ ...q });
+    setEditingIdx(i);
+    setAddingQ(true);
+  };
+
   const removeQ = (i) => setQuestions(prev => prev.filter((_,idx)=>idx!==i));
 
-  const handleSubmit = () => onSubmit({ leftButtons:selectedBtns, rightContent, questions });
+  const cancelAdding = () => { setAddingQ(false); setQType(null); setEditingIdx(null); };
+
+  const handleSubmit = () => onSubmit({ leftButtons:selectedBtns, rightContent, rightContentEnglish, questions: deepClean(questions) });
 
   const STEPS = ['Left Column','Right Column','Questions'];
 
   return (
     <div style={S.wrap}>
+      {isEditing && (
+        <div style={{ background:C.infoBg, border:`1px solid ${C.infoBorder}`, borderRadius:6, padding:'10px 14px', marginBottom:16, fontSize:'0.85rem', color:C.sectionHead, fontWeight:600 }}>
+          ✎ Editing an existing exercise set — make your changes across the steps, then click <strong>Save Changes</strong> on the final step.
+        </div>
+      )}
       {/* Step indicator */}
       <div style={{ display:'flex', gap:6, marginBottom:20, alignItems:'center', flexWrap:'wrap' }}>
         {[1,2,3].map(n => (
@@ -280,6 +368,45 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
           </div>
         ))}
       </div>
+
+      {/* ── Import panel (admin auto-fill from Word document → JSON) ── */}
+      {step === 1 && !isEditing && (
+        <div style={{ ...S.panel, borderStyle:'dashed' }}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, cursor:'pointer' }}
+               onClick={()=>setShowImport(s=>!s)}>
+            <div>
+              <div style={{ fontSize:'1rem', fontWeight:700, color:C.textMain, marginBottom:3 }}>📥 Import from document (JSON)</div>
+              <div style={{ fontSize:'0.8rem', color:C.label }}>Paste the exercise-set JSON generated from a Word document to auto-fill every field. Skip this to build manually below.</div>
+            </div>
+            <span style={{ fontSize:'1.1rem', color:C.label }}>{showImport ? '▲' : '▼'}</span>
+          </div>
+          {showImport && (
+            <div style={{ marginTop:14 }}>
+              <textarea
+                rows={8}
+                value={importText}
+                onChange={e=>{ setImportText(e.target.value); setImportError(''); }}
+                placeholder='Paste JSON here — e.g. { "leftButtons": [...], "rightContent": {...}, "questions": [...] }'
+                style={{ ...S.input, fontFamily:'monospace', fontSize:'0.78rem' }}
+              />
+              {importError && (
+                <div style={{ background:'rgba(178,34,34,0.1)', border:'1px solid rgba(178,34,34,0.4)', borderRadius:4, padding:'7px 12px', marginBottom:10, fontSize:'0.8rem', color:'#b22222', fontWeight:600 }}>
+                  ⚠ {importError}
+                </div>
+              )}
+              <div style={{ display:'flex', justifyContent:'flex-end', gap:10 }}>
+                <button type="button" onClick={doImport} disabled={!importText.trim()}
+                  style={{ ...S.btnTeal, opacity: importText.trim() ? 1 : 0.4, cursor: importText.trim() ? 'pointer' : 'not-allowed' }}>
+                  Load &amp; Create Set ✓
+                </button>
+              </div>
+              <div style={{ fontSize:'0.73rem', color:C.label, marginTop:8 }}>
+                The set is created immediately for this unit. You can then use <strong>✎ Edit</strong> to review or adjust any field.
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ── Step 1 ── */}
       {step === 1 && (
@@ -318,6 +445,15 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
             <div key={btn} style={S.section}>
               <label style={S.label}>{btn}</label>
               <textarea rows={4} value={rightContent[btn]||''} onChange={e=>setRightContent({...rightContent,[btn]:e.target.value})} style={S.input} placeholder={`Content for ${btn}…`} />
+              {btn === 'நூற்பெயர்' && (
+                <div style={{ marginTop:2 }}>
+                  <label style={{ ...S.label, color:C.noteText }}>ஆங்கில உள்ளடக்கம் (English content — optional)</label>
+                  <div style={{ background:C.noteBg, border:`1px solid ${C.noteBorder}`, borderRadius:4, padding:'6px 10px', marginBottom:6, fontSize:'0.75rem', color:C.noteText }}>
+                    If provided, an <strong>ஆங்கீலம்</strong> button will appear in the exercise when நூற்பெயர் is selected.
+                  </div>
+                  <textarea rows={3} value={rightContentEnglish['நூற்பெயர்']||''} onChange={e=>setRightContentEnglish({...rightContentEnglish,'நூற்பெயர்':e.target.value})} style={{ ...S.input, marginBottom:0 }} placeholder="English translation (optional)…" />
+                </div>
+              )}
             </div>
           ))}
           <div style={{ display:'flex', justifyContent:'flex-end', marginTop:8, gap:10 }}>
@@ -332,17 +468,29 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
         <div>
           <div style={S.panel}>
             <div style={{ fontSize:'1rem', fontWeight:700, color:C.textMain, marginBottom:3 }}>மையப் பகுதி — Questions</div>
-            <div style={{ fontSize:'0.8rem', color:C.label, marginBottom:16 }}>Add one or more questions. Each becomes a slide in the exercise popup. Paadal and Primary Instruction are auto-filled from the previous question.</div>
+            <div style={{ fontSize:'0.8rem', color:C.label, marginBottom:16 }}>Add one or more questions. Each becomes a slide in the exercise popup. Primary Title, Paadal and Primary Instruction are auto-filled from the previous question.</div>
 
-            {/* Added questions list */}
-            {questions.length > 0 && (
+            {/* Added questions list — hidden while adding/editing a single question,
+                so the editor for that question is what the user sees */}
+            {!addingQ && questions.length > 0 && (
               <div style={{ marginBottom:16 }}>
                 <div style={S.secHd}>Added Questions ({questions.length})</div>
                 {questions.map((q,i) => (
-                  <div key={i} style={{ display:'flex', alignItems:'center', gap:10, padding:'8px 12px', background:C.panelInner, borderRadius:4, marginBottom:6, border:`1px solid ${C.chipBorder}` }}>
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 12px', background:C.panelInner, borderRadius:4, marginBottom:6, border:`1px solid ${C.chipBorder}` }}>
                     <span style={{ color:C.btnTeal, fontWeight:700, fontSize:'0.82rem' }}>{i+1}.</span>
                     <span style={{ flex:1, fontSize:'0.82rem', color:C.textMain }}>{QTYPES.find(t=>t.id===q.type)?.label}{q.primaryTitle ? ` — "${q.primaryTitle}"` : ''}</span>
-                    <button type="button" onClick={()=>removeQ(i)} style={{ background:'none', border:'none', color:'#cc3333', cursor:'pointer', fontSize:'0.9rem', fontWeight:700 }} title="Remove question">✕</button>
+                    <button
+                      type="button"
+                      onClick={() => editQ(i)}
+                      style={{ background:'none', border:`1px solid ${C.chipBorder}`, color:C.btnTeal, cursor:'pointer', fontSize:'0.75rem', fontWeight:700, padding:'2px 8px', borderRadius:3 }}
+                      title="Edit question"
+                    >✎ Edit</button>
+                    <button
+                      type="button"
+                      onClick={() => removeQ(i)}
+                      style={{ background:'none', border:'none', color:'#cc3333', cursor:'pointer', fontSize:'0.9rem', fontWeight:700 }}
+                      title="Remove question"
+                    >✕</button>
                   </div>
                 ))}
               </div>
@@ -351,6 +499,11 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
             {/* Question builder */}
             {addingQ ? (
               <div style={{ background:C.panelInner, borderRadius:6, padding:'16px', border:`1px solid ${C.chipBorder}` }}>
+                {editingIdx !== null && (
+                  <div style={{ fontSize:'0.76rem', color:C.btnTeal, fontWeight:600, marginBottom:8, padding:'4px 8px', background:C.noteBg, borderRadius:3, border:`1px solid ${C.noteBorder}` }}>
+                    Editing question {editingIdx + 1}
+                  </div>
+                )}
                 <div style={S.secHd}>Select Question Type</div>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:6, marginBottom:16 }}>
                   {QTYPES.map(t => (
@@ -364,12 +517,14 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
                       <QFields data={qData} onChange={setQData} />
                     </div>
                     <div style={{ display:'flex', gap:10 }}>
-                      <button type="button" onClick={()=>{ setAddingQ(false); setQType(null); }} style={S.btnSec}>Cancel</button>
-                      <button type="button" onClick={saveQ} style={S.btnTeal}>Add Question ✓</button>
+                      <button type="button" onClick={cancelAdding} style={S.btnSec}>Cancel</button>
+                      <button type="button" onClick={saveQ} style={S.btnTeal}>
+                        {editingIdx !== null ? 'Save Changes ✓' : 'Add Question ✓'}
+                      </button>
                     </div>
                   </>
                 )}
-                {!qType && <button type="button" onClick={()=>{ setAddingQ(false); setQType(null); }} style={S.btnSec}>Cancel</button>}
+                {!qType && <button type="button" onClick={cancelAdding} style={S.btnSec}>Cancel</button>}
               </div>
             ) : (
               <button type="button" onClick={startAddQ} style={{ ...S.btnTeal, width:'100%', padding:'10px' }}>
@@ -382,7 +537,7 @@ export default function AddQuestionForm({ onSubmit, onCancel }) {
             <button type="button" onClick={()=>setStep(2)} style={S.btnSec}>← Back</button>
             <button type="button" onClick={handleSubmit} disabled={!questions.length}
               style={{ ...S.btn, opacity: questions.length ? 1 : 0.4, cursor: questions.length ? 'pointer' : 'not-allowed' }}>
-              Create Exercise Set ✓
+              {isEditing ? 'Save Changes ✓' : 'Create Exercise Set ✓'}
             </button>
           </div>
         </div>

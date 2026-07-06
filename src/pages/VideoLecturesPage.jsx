@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
@@ -237,32 +237,51 @@ const AkamModuleOverview = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQu
 );
 
 // ── Akam unit page (standard units 1-5) ──
-const ExerciseButtons = ({ btns }) => btns.length === 0 ? null : (
-  <div className="flex flex-wrap gap-4 justify-center pt-2">
-    {btns.map(({ label, onClick, onRemove }) => (
-      <div key={label} className="relative">
-        <button
-          type="button"
-          onClick={onClick}
-          title={`பயிற்சி ${label} திற`}
-          className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#407E8C] bg-[#083A4F] text-lg font-bold text-[#E5E1DD] shadow-md transition-all duration-200 hover:scale-110 hover:bg-[#407E8C]"
-        >
-          {label}
-        </button>
-        {onRemove && (
+const ExerciseButtons = ({ btns, theme = 'akam' }) => {
+  const isPuram = theme === 'puram';
+  const baseBg = isPuram ? '#4d2c03' : '#0d2a80';
+  const hoverBg = isPuram ? '#734501' : '#1a4cc8';
+  const borderColor = isPuram ? '#734501' : '#1a4cc8';
+  return btns.length === 0 ? null : (
+    <div className="flex flex-wrap gap-4 justify-center pt-2">
+      {btns.map(({ label, onClick, onRemove, onEdit }) => (
+        <div key={label} className="relative">
           <button
             type="button"
-            onClick={e => { e.stopPropagation(); onRemove(); }}
-            title="Remove exercise set"
-            className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold leading-none transition hover:bg-red-600 hover:scale-110"
+            onClick={onClick}
+            title={`பயிற்சி ${label} திற`}
+            style={{ background: baseBg, border: `2px solid ${borderColor}`, color: 'white' }}
+            className="flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold shadow-md transition-all duration-200 hover:scale-110"
+            onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
+            onMouseLeave={e => { e.currentTarget.style.background = baseBg; }}
           >
-            ×
+            {label}
           </button>
-        )}
-      </div>
-    ))}
-  </div>
-);
+          {onEdit && (
+            <button
+              type="button"
+              onClick={e => { e.stopPropagation(); onEdit(); }}
+              title="Edit exercise set"
+              className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#1a56db] text-white text-[10px] font-bold leading-none shadow transition hover:bg-[#1e40af] hover:scale-110"
+            >
+              ✎
+            </button>
+          )}
+          {onRemove && (
+            <button
+              type="button"
+              onClick={e => { e.stopPropagation(); onRemove(); }}
+              title="Remove exercise set"
+              className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold leading-none transition hover:bg-red-600 hover:scale-110"
+            >
+              ×
+            </button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const AkamUnitPage = ({ unitNumber, thinaName, emphasisClass, exerciseBtns = [], isAdmin, onAddQuestion }) => (
   <div className="space-y-5">
@@ -429,7 +448,7 @@ const PuramModuleOverview = ({ emphasisClass, exerciseBtns = [], isAdmin, onAddQ
       போர்முறை குறித்த அறிமுகமும், அக்கால வேந்தனது சிறப்பும் விளங்கியிருக்கும். இனி ஒவ்வொரு
       திணைக்குமான பாடங்களைப் பயில முயற்சி செய்யலாமா?
     </p>
-    <ExerciseButtons btns={exerciseBtns} />
+    <ExerciseButtons btns={exerciseBtns} theme="puram" />
   </div>
 );
 
@@ -745,6 +764,8 @@ const puramUnitContent = {
   },
 };
 
+const PURAM_UNIT_KEYS = new Set(['puram-overview', ...Object.keys(puramUnitContent)]);
+
 const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isIntroDrawerOpen, setIsIntroDrawerOpen] = useState(false);
   const [isAkamDrawerOpen, setIsAkamDrawerOpen] = useState(false);
@@ -752,13 +773,43 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
   const [malaiOpen, setMalaiOpen] = useState(false);
   const [addQuestionForUnit, setAddQuestionForUnit] = useState(null);
-  const [exercises, setExercises] = useState({});
+  const [exercises, setExercises] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cict-exercises');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
   const [openDynamicExercise, setOpenDynamicExercise] = useState(null);
+  const [editingExerciseIdx, setEditingExerciseIdx] = useState(null);
+
+  useEffect(() => {
+    try { localStorage.setItem('cict-exercises', JSON.stringify(exercises)); } catch {}
+  }, [exercises]);
 
   const handleAddExercise = (exerciseSet) => {
     const key = addQuestionForUnit;
-    setExercises(prev => ({ ...prev, [key]: [...(prev[key] || []), exerciseSet] }));
+    if (editingExerciseIdx !== null) {
+      setExercises(prev => {
+        const updated = [...(prev[key] || [])];
+        updated[editingExerciseIdx] = exerciseSet;
+        return { ...prev, [key]: updated };
+      });
+    } else {
+      setExercises(prev => ({ ...prev, [key]: [...(prev[key] || []), exerciseSet] }));
+    }
     setAddQuestionForUnit(null);
+    setEditingExerciseIdx(null);
+  };
+
+  const closeAddForm = () => { setAddQuestionForUnit(null); setEditingExerciseIdx(null); };
+
+  const openAddForm = (unitKey) => { setEditingExerciseIdx(null); setAddQuestionForUnit(unitKey); };
+
+  const startEditExercise = (unitKey, idx) => {
+    setEditingExerciseIdx(idx);
+    setAddQuestionForUnit(unitKey);
   };
 
   const removeExercise = (unitKey, idx) =>
@@ -770,6 +821,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
 
   const buildBtns = (unitKey) => {
     const isAdmin = userRole === 'admin';
+    const theme = PURAM_UNIT_KEYS.has(unitKey) ? 'puram' : 'akam';
     const btns = [];
     if (unitKey === 'அலகு 2 : குறிஞ்சி') {
       btns.push({ label: 1, onClick: () => setMalaiOpen(true) });
@@ -779,8 +831,9 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     exList.forEach((ex, i) => {
       btns.push({
         label: start + i,
-        onClick: () => setOpenDynamicExercise({ exercise: ex, title: ex.leftButtons?.[0] || 'பயிற்சி' }),
+        onClick: () => setOpenDynamicExercise({ exercise: ex, title: ex.leftButtons?.[0] || 'பயிற்சி', theme }),
         onRemove: isAdmin ? () => removeExercise(unitKey, i) : null,
+        onEdit: isAdmin ? () => startEditExercise(unitKey, i) : null,
       });
     });
     return btns;
@@ -813,21 +866,21 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const emphasisClass = "font-bold text-[17px] text-[#083A4F] sm:text-[19px]";
 
   const AddBtn = ({ unitKey }) => userRole === "admin" ? (
-    <button type="button" onClick={() => setAddQuestionForUnit(unitKey)} className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95">+ Add Question</button>
+    <button type="button" onClick={() => openAddForm(unitKey)} className="rounded-md bg-[#1a56db] px-4 py-1.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e40af] active:scale-95">+ Add Question</button>
   ) : null;
 
   // ── Akam content renderer ──
   const renderAkamContent = () => {
     const unitKey = activeAkamItem || 'akam-overview';
     if (addQuestionForUnit === unitKey) {
-      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={() => setAddQuestionForUnit(null)} />;
+      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={closeAddForm} initialData={editingExerciseIdx !== null ? exercises[unitKey]?.[editingExerciseIdx] : null} />;
     }
     if (!activeAkamItem) {
       return (
         <AkamModuleOverview
           emphasisClass={emphasisClass}
           isAdmin={userRole === "admin"}
-          onAddQuestion={() => setAddQuestionForUnit('akam-overview')}
+          onAddQuestion={() => openAddForm('akam-overview')}
           exerciseBtns={buildBtns('akam-overview')}
         />
       );
@@ -841,10 +894,10 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     };
     const isAdmin = userRole === "admin";
     if (activeAkamItem === "அலகு 6 : கைக்கிளை") {
-      return <AkamUnit6Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => setAddQuestionForUnit(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
+      return <AkamUnit6Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => openAddForm(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
     }
     if (activeAkamItem === "அலகு 7 : பெருந்திணை") {
-      return <AkamUnit7Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => setAddQuestionForUnit(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
+      return <AkamUnit7Page emphasisClass={emphasisClass} isAdmin={isAdmin} onAddQuestion={() => openAddForm(unitKey)} exerciseBtns={buildBtns(unitKey)} />;
     }
     const unit = akamUnitMap[activeAkamItem];
     if (unit) {
@@ -855,7 +908,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
           emphasisClass={emphasisClass}
           exerciseBtns={buildBtns(unitKey)}
           isAdmin={isAdmin}
-          onAddQuestion={() => setAddQuestionForUnit(unitKey)}
+          onAddQuestion={() => openAddForm(unitKey)}
         />
       );
     }
@@ -866,7 +919,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const renderPuramModuleContent = () => {
     const unitKey = activePuramModuleItem || 'puram-overview';
     if (addQuestionForUnit === unitKey) {
-      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={() => setAddQuestionForUnit(null)} />;
+      return <AddQuestionForm onSubmit={handleAddExercise} onCancel={closeAddForm} initialData={editingExerciseIdx !== null ? exercises[unitKey]?.[editingExerciseIdx] : null} />;
     }
     const isAdmin = userRole === "admin";
     if (!activePuramModuleItem) {
@@ -874,7 +927,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
         <PuramModuleOverview
           emphasisClass={emphasisClass}
           isAdmin={isAdmin}
-          onAddQuestion={() => setAddQuestionForUnit('puram-overview')}
+          onAddQuestion={() => openAddForm('puram-overview')}
           exerciseBtns={buildBtns('puram-overview')}
         />
       );
@@ -889,7 +942,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
           </div>
           <p className="text-2xl font-bold text-[#407E8C]">{unit.title}</p>
           {unit.body}
-          <ExerciseButtons btns={buildBtns(unitKey)} />
+          <ExerciseButtons btns={buildBtns(unitKey)} theme="puram" />
         </div>
       );
     }
@@ -1300,6 +1353,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
         <DynamicExerciseModal
           exercise={openDynamicExercise.exercise}
           title={openDynamicExercise.title}
+          theme={openDynamicExercise.theme || 'akam'}
           onClose={() => setOpenDynamicExercise(null)}
         />
       )}

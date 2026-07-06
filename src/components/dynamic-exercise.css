@@ -1,0 +1,793 @@
+/* Blue navy theme for DynamicExerciseModal — scoped to .dynamic-scope */
+
+.dynamic-scope *, .dynamic-scope *::before, .dynamic-scope *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── LAYOUT ── */
+.dynamic-scope .app-container {
+  display: grid;
+  grid-template-columns: 150px 1fr 240px;
+  width: 860px;
+  height: 520px;
+  gap: 0;
+  border: 2px solid #080f30;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ── LEFT SIDEBAR ── */
+.dynamic-scope .left-sidebar {
+  background: linear-gradient(to bottom, #162060, #0b1540);
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #080f30;
+  overflow: hidden;
+}
+
+.dynamic-scope .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── NAV BUTTONS (flat blue, no 3D flip) ── */
+.dynamic-scope .flip-wrapper {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.dynamic-scope .sidebar-nav .flip-wrapper {
+  height: 52px;
+}
+
+.dynamic-scope .flip-btn {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  cursor: pointer;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid transparent;
+  background: transparent;
+  outline: none;
+  color: rgba(200,220,255,0.82);
+  font-size: 0.78rem;
+  padding: 0 8px;
+  text-align: center;
+  line-height: 1.2;
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  transform-style: flat;
+}
+
+.dynamic-scope .flip-btn:hover {
+  background: rgba(80,120,220,0.35);
+  color: #fff;
+  transform: none;
+}
+
+.dynamic-scope .flip-btn.active {
+  background: linear-gradient(to right, rgba(60,110,230,0.55), rgba(30,70,180,0.3));
+  color: #fff;
+  font-weight: 700;
+  border-left: 3px solid #6699ff;
+}
+
+/* fix: position:absolute from malai-app.css leaks into dynamic-scope */
+.dynamic-scope .flip-front,
+.dynamic-scope .flip-back {
+  position: relative;
+  inset: auto;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transform: none;
+}
+
+.dynamic-scope .flip-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0 8px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* override (0,3,0) rules from malai-app.css that beat (0,2,0) scoped rules */
+.dynamic-scope .flip-btn.active .flip-front {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.dynamic-scope .sidebar-nav .flip-wrapper:last-child .flip-front {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.dynamic-scope .sidebar-nav .flip-wrapper:last-child .flip-back {
+  border-bottom: none;
+}
+
+.dynamic-scope .flip-back {
+  display: none;
+}
+
+/* ── CENTRE COLUMN ── */
+.dynamic-scope .centre-column {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #8ab0e0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #c8daf5 0%, #e8f0fc 40%, #ffffff 100%);
+}
+
+.dynamic-scope .centre-header {
+  background: linear-gradient(135deg, #0d2a80, #1a4cc8);
+  color: #ffffff;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.dynamic-scope .centre-content {
+  flex: 1;
+  padding: 16px 18px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: #0d2a80;
+  background: transparent;
+}
+
+.dynamic-scope .question-body h3 {
+  font-size: 0.9rem;
+  color: #0d2a80;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.dynamic-scope .question-body p {
+  margin-bottom: 0.5rem;
+}
+
+.dynamic-scope .centre-footer {
+  padding: 10px 16px;
+  display: flex;
+  justify-content: flex-end;
+  background: transparent;
+  border-top: 1px solid rgba(26,76,200,0.2);
+}
+
+/* Next button */
+.dynamic-scope .next-btn-wrapper {
+  width: auto !important;
+}
+
+.dynamic-scope .next-btn-wrapper .flip-btn {
+  width: 120px;
+  height: 36px;
+  background: linear-gradient(135deg, #1a4cc8, #0d2a80);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,40,120,0.35);
+  border: none;
+  border-left: none;
+}
+
+.dynamic-scope .next-btn-wrapper .flip-btn:hover {
+  background: linear-gradient(135deg, #2255d8, #1a3ab0);
+  box-shadow: 0 5px 18px rgba(26,76,200,0.5);
+  color: #fff;
+}
+
+/* ── RIGHT COLUMN ── */
+.dynamic-scope .right-column {
+  background: linear-gradient(to bottom, #c8daf5, #b0c8f0);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dynamic-scope .right-header {
+  background: linear-gradient(135deg, #0d2a80, #1a4cc8);
+  color: #ffffff;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.dynamic-scope .right-content {
+  flex: 1;
+  padding: 14px 16px;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: #0d2a80;
+  background: rgba(255,255,255,0.7);
+}
+
+.dynamic-scope .right-content p {
+  margin-bottom: 0.5rem;
+}
+
+/* ── QUESTION NAV ── */
+.dynamic-scope .question-nav {
+  padding: 10px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  background: linear-gradient(to bottom, #e0e8f4, #d0d8ee);
+  border-top: 1px solid #b0bed8;
+  justify-content: flex-end;
+}
+
+.dynamic-scope .q-nav-btn {
+  width: 30px;
+  height: 24px;
+  border: 1px solid #8ab0e0;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.82);
+  color: #0d2a80;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.dynamic-scope .q-nav-btn:hover {
+  background: #dde8ff;
+  color: #0d2a80;
+  transform: scale(1.08);
+}
+
+.dynamic-scope .q-nav-btn.q-active {
+  background: #1a4cc8;
+  color: #fff;
+  border-color: #0d2a80;
+}
+
+/* ── Q2 Layout ── */
+.dynamic-scope .q2-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: -16px -18px;
+}
+
+.dynamic-scope .q2-paadal {
+  background: rgba(255,255,255,0.72);
+  padding: 14px 18px;
+  overflow-y: scroll;
+  height: 140px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #c0d4f0;
+  font-size: 0.88rem;
+  line-height: 2;
+  color: #0d2a80;
+}
+
+.dynamic-scope .q2-divider {
+  background: linear-gradient(to bottom, #0d2a80, #1a4cc8);
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+
+.dynamic-scope .q2-media-controls {
+  display: flex;
+  gap: 3px;
+}
+
+.dynamic-scope .media-btn {
+  background: linear-gradient(135deg, #3a6ae8, #1a3ab0);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  width: 22px;
+  height: 18px;
+  font-size: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 1px 4px rgba(0,30,120,0.3);
+  transition: background 0.15s;
+}
+
+.dynamic-scope .media-btn:active {
+  background: #081f60;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.dynamic-scope .q2-question-area {
+  flex: 1;
+  padding: 14px 18px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  line-height: 1.9;
+  color: #0d2a80;
+  background: transparent;
+}
+
+.dynamic-scope .q2-question-area p {
+  margin-bottom: 0.4rem;
+}
+
+.dynamic-scope .q2-options {
+  margin-top: 16px;
+}
+
+.dynamic-scope .q2-prompt {
+  color: #b91c1c !important;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 10px !important;
+}
+
+.dynamic-scope .q2-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #0d2a80;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #c0d0ea;
+  background: rgba(255,255,255,0.82);
+  user-select: none;
+  transition: background 0.2s, border 0.2s, transform 0.1s;
+  box-shadow: 0 1px 4px rgba(0,30,100,0.06);
+}
+
+.dynamic-scope .q2-option:hover {
+  background: #dde8ff;
+  border-color: #1a4cc8;
+  transform: translateX(3px);
+  box-shadow: 0 3px 10px rgba(26,76,200,0.18);
+}
+
+.dynamic-scope .q3-options {
+  margin-top: 12px;
+}
+
+.dynamic-scope .q3-option {
+  align-items: flex-start !important;
+  line-height: 1.55 !important;
+  margin-bottom: 12px !important;
+}
+
+.dynamic-scope .q3-option .q2-radio-dot {
+  margin-top: 3px;
+}
+
+/* ── Radio dot ── */
+.dynamic-scope .q2-radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #8ab0e0;
+  background: #fff;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* ── Q4 ── */
+.dynamic-scope .q4-btn-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dynamic-scope .q4-click-btn {
+  background: linear-gradient(135deg, #1a4cc8, #0d2a80);
+  color: #fff;
+  border: none;
+  padding: 9px 28px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,40,120,0.35);
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.dynamic-scope .q4-click-btn:hover  { opacity: 0.88; }
+.dynamic-scope .q4-click-btn:active { transform: translateY(2px); }
+
+.dynamic-scope .q4-options-page {
+  margin: -16px -18px;
+  min-height: calc(100% + 32px);
+  background: linear-gradient(160deg, #dceeff 0%, #f0f6ff 60%, #ffffff 100%);
+  padding: 20px 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.dynamic-scope .q4-option-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  padding: 9px 13px;
+  border-radius: 8px;
+  border: 1px solid #c0d0ea;
+  background: rgba(255,255,255,0.82);
+  transition: background 0.15s, border 0.15s, transform 0.1s;
+  box-shadow: 0 1px 4px rgba(0,30,100,0.06);
+}
+
+.dynamic-scope .q4-option-item:hover {
+  background: #dde8ff;
+  border-color: #1a4cc8;
+  transform: translateX(3px);
+}
+
+.dynamic-scope .q4-option-text {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: #0d2a80;
+}
+
+/* ── Q5 inline paadal snippet ── */
+.dynamic-scope .q5-paadal-snippet {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(219,234,254,0.35);
+  border-left: 3px solid #1a4cc8;
+  font-size: 0.85rem;
+  line-height: 1.9;
+  color: #0d2a80;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ── Q10 drag-and-drop ── */
+.dynamic-scope .q10-drag-page {
+  gap: 0;
+  padding: 10px 16px 10px;
+}
+
+.dynamic-scope .q10-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.dynamic-scope .q10-slot {
+  height: 28px;
+  border: 1.5px dashed #93c5fd;
+  color: #94a3b8;
+  font-size: 12px;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 6px;
+  transition: background 0.12s, border 0.12s;
+  background: rgba(200,220,255,0.2);
+}
+
+.dynamic-scope .q10-slot-filled {
+  border: 1.5px solid #93c5fd;
+  color: #0d2a80;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 2px 8px rgba(26,76,200,0.12);
+  border-style: solid;
+}
+
+.dynamic-scope .q10-slot-hover {
+  background: rgba(200,220,255,0.45) !important;
+  border-color: #1a4cc8 !important;
+  border-style: solid !important;
+}
+
+.dynamic-scope .q10-bank {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dynamic-scope .q10-bank-item {
+  padding: 5px 10px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid #bfd0ea;
+  color: #0d2a80;
+  font-size: 12px;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  cursor: grab;
+  border-radius: 6px;
+  user-select: none;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s, box-shadow 0.1s;
+  box-shadow: 0 1px 5px rgba(0,30,100,0.08);
+}
+
+.dynamic-scope .q10-bank-item:hover {
+  background: #eef3ff;
+  border-color: #1a4cc8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26,76,200,0.18);
+}
+
+.dynamic-scope .q10-bank-item:active {
+  cursor: grabbing;
+}
+
+/* ── Q12 ── */
+.dynamic-scope .q12-question-area {
+  display: flex !important;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.dynamic-scope .q12-questions {
+  list-style: none;
+  padding-left: 0;
+  margin: 6px 0 4px;
+  font-size: 0.8rem;
+}
+
+.dynamic-scope .q12-question-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(26,76,200,0.1);
+}
+
+.dynamic-scope .q12-question-text {
+  flex: 1;
+  line-height: 1.5;
+  font-size: 0.78rem;
+  color: #0d2a80;
+}
+
+.dynamic-scope .q12-vidai-btn {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  background: linear-gradient(135deg, #1a4cc8, #0d2a80);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,40,120,0.25);
+  transition: opacity 0.2s;
+}
+
+.dynamic-scope .q12-vidai-btn:hover { opacity: 0.85; }
+
+.dynamic-scope .q12-footer-left {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.dynamic-scope .q12-footer-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.dynamic-scope .q12-next-btn {
+  padding: 6px 18px;
+  background: linear-gradient(135deg, #1a4cc8, #0d2a80);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0,40,120,0.3);
+  transition: opacity 0.2s;
+}
+
+.dynamic-scope .q12-next-btn:hover { opacity: 0.88; }
+
+.dynamic-scope .q12-popup {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 360px;
+  max-width: 92%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  max-height: 75%;
+  overflow-y: auto;
+}
+
+.dynamic-scope .q12-popup-header {
+  background: linear-gradient(135deg, #0d2a80, #1a4cc8);
+  color: #fff;
+  padding: 10px 36px 10px 12px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  position: relative;
+}
+
+.dynamic-scope .q12-popup-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 5px;
+  line-height: 1;
+  border-radius: 3px;
+}
+
+.dynamic-scope .q12-popup-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.dynamic-scope .q12-popup-body {
+  background: #fff;
+  color: #0d2a80;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.dynamic-scope .q12-popup-body p {
+  margin: 0 0 3px;
+}
+
+/* ── Popups ── */
+.dynamic-scope .popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dynamic-scope .popup-box {
+  width: 420px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.dynamic-scope .popup-header {
+  background: linear-gradient(135deg, #0d2a80, #1a4cc8);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 16px;
+}
+
+.dynamic-scope .popup-body {
+  background: #fff;
+  padding: 18px 16px 12px;
+}
+
+.dynamic-scope .popup-wrong-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.dynamic-scope .popup-wrong-content p {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: #b91c1c;
+  margin: 0;
+  padding-top: 6px;
+}
+
+.dynamic-scope .cross-icon {
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  animation: dyn-cross-wobble 0.65s ease-in-out;
+}
+
+@keyframes dyn-cross-wobble {
+  0%   { transform: rotate(0deg)   scale(1);    }
+  15%  { transform: rotate(-14deg) scale(1.12); }
+  30%  { transform: rotate(11deg)  scale(1.08); }
+  50%  { transform: rotate(-7deg)  scale(1.04); }
+  70%  { transform: rotate(4deg)   scale(1.02); }
+  100% { transform: rotate(0deg)   scale(1);    }
+}
+
+.dynamic-scope .popup-correct-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dynamic-scope .check-icon {
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  animation: dyn-check-bounce 0.6s ease-in-out;
+}
+
+@keyframes dyn-check-bounce {
+  0%   { transform: scale(0.2); opacity: 0; }
+  45%  { transform: scale(1.2); opacity: 1; }
+  65%  { transform: scale(0.9);             }
+  82%  { transform: scale(1.07);            }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.dynamic-scope .popup-success-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.dynamic-scope .popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.dynamic-scope .popup-action-btn {
+  background: linear-gradient(135deg, #1a4cc8, #0d2a80);
+  color: #fff;
+  border: none;
+  padding: 7px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,40,120,0.3);
+  transition: opacity 0.2s;
+}
+
+.dynamic-scope .popup-action-btn:hover { opacity: 0.85; }
+
+/* ── Scrollbar ── */
+.dynamic-scope *::-webkit-scrollbar { width: 5px; height: 5px; }
+.dynamic-scope *::-webkit-scrollbar-track { background: rgba(0,0,100,0.08); }
+.dynamic-scope *::-webkit-scrollbar-thumb { background: rgba(26,76,200,0.4); border-radius: 3px; }
