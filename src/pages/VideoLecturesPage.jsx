@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
+import { fetchAllExercises, saveExerciseSet, deleteExerciseSet } from "../api/exercises";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -773,31 +774,31 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
   const [malaiOpen, setMalaiOpen] = useState(false);
   const [addQuestionForUnit, setAddQuestionForUnit] = useState(null);
-  const [exercises, setExercises] = useState(() => {
-    try {
-      const saved = localStorage.getItem('cict-exercises');
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
+  const [exercises, setExercises] = useState({});
   const [openDynamicExercise, setOpenDynamicExercise] = useState(null);
   const [editingExerciseIdx, setEditingExerciseIdx] = useState(null);
 
+  // Load all exercise sets from the backend on mount (replaces localStorage read).
   useEffect(() => {
-    try { localStorage.setItem('cict-exercises', JSON.stringify(exercises)); } catch {}
-  }, [exercises]);
+    let active = true;
+    fetchAllExercises()
+      .then(map => { if (active) setExercises(map); })
+      .catch(err => console.error('Failed to load exercises from backend', err));
+    return () => { active = false; };
+  }, []);
 
-  const handleAddExercise = (exerciseSet) => {
+  const sectionForUnit = (unitKey) => (PURAM_UNIT_KEYS.has(unitKey) ? 'puram' : 'akam');
+
+  const handleAddExercise = async (exerciseSet) => {
     const key = addQuestionForUnit;
-    if (editingExerciseIdx !== null) {
-      setExercises(prev => {
-        const updated = [...(prev[key] || [])];
-        updated[editingExerciseIdx] = exerciseSet;
-        return { ...prev, [key]: updated };
-      });
-    } else {
-      setExercises(prev => ({ ...prev, [key]: [...(prev[key] || []), exerciseSet] }));
+    const section = sectionForUnit(key);
+    try {
+      // editingExerciseIdx !== null => edit (PUT), otherwise create (POST)
+      const res = await saveExerciseSet(section, key, editingExerciseIdx, exerciseSet);
+      setExercises(prev => ({ ...prev, [key]: res.list }));
+    } catch (err) {
+      console.error('Failed to save exercise set', err);
+      alert('Could not save the exercise set. Please ensure the backend server is running.');
     }
     setAddQuestionForUnit(null);
     setEditingExerciseIdx(null);
@@ -812,12 +813,16 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     setAddQuestionForUnit(unitKey);
   };
 
-  const removeExercise = (unitKey, idx) =>
-    setExercises(prev => {
-      const updated = [...(prev[unitKey] || [])];
-      updated.splice(idx, 1);
-      return { ...prev, [unitKey]: updated };
-    });
+  const removeExercise = async (unitKey, idx) => {
+    const section = sectionForUnit(unitKey);
+    try {
+      const res = await deleteExerciseSet(section, unitKey, idx);
+      setExercises(prev => ({ ...prev, [unitKey]: res.list }));
+    } catch (err) {
+      console.error('Failed to delete exercise set', err);
+      alert('Could not delete the exercise set. Please ensure the backend server is running.');
+    }
+  };
 
   const buildBtns = (unitKey) => {
     const isAdmin = userRole === 'admin';
