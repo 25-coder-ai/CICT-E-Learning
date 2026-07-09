@@ -1,6 +1,7 @@
 import './dynamic-exercise.css';
 import './malai-app.css';
 import { useState, useEffect, createContext, useContext } from 'react';
+import { createPortal } from 'react-dom';
 
 const ThemeCtx = createContext('akam');
 
@@ -50,11 +51,11 @@ function CorrectPopup({ onNext }) {
   );
 }
 
-function WrongPopup({ onRetry }) {
+function WrongPopup({ onRetry, message }) {
   return (
     <div className="popup-overlay">
       <div className="popup-box">
-        <div className="popup-header">இது தவறு</div>
+        <div className="popup-header">தவறு</div>
         <div className="popup-body">
           <div className="popup-wrong-content">
             <svg className="cross-icon" viewBox="0 0 82 82">
@@ -62,7 +63,7 @@ function WrongPopup({ onRetry }) {
               <line x1="24" y1="24" x2="58" y2="58" stroke="#cc0000" strokeWidth="6" strokeLinecap="round"/>
               <line x1="58" y1="24" x2="24" y2="58" stroke="#cc0000" strokeWidth="6" strokeLinecap="round"/>
             </svg>
-            <p>இனி நீங்கள் ஏன் அருஞ்சொற்பொருள் குமிழைப் பயன்படுத்திச் சரியான பாடலடிகடையாளம் காணக்கூடாது? அருஞ்சொற்பொள் குமிழைத் தேர்வு செய்யுங்கள்.</p>
+            <p>{message || 'இனி நீங்கள் ஏன் அருஞ்சொற்பொருள் குமிழைப் பயன்படுத்திச் சரியான பாடலடியை அடையாளம் காணக்கூடாது? அருஞ்சொற்பொருள் குமிழைத் தேர்வு செய்யுங்கள்.'}</p>
           </div>
           <div className="popup-footer">
             <button className="popup-action-btn" onClick={onRetry}>செல்க</button>
@@ -173,6 +174,54 @@ function MCQQuestion({ q, onNext }) {
       </div>
       {popup === 'correct' && <CorrectPopup onNext={() => { setPopup(null); setSelected(null); onNext(); }} />}
       {popup === 'wrong' && <WrongPopup onRetry={() => { setPopup(null); setSelected(null); }} />}
+    </div>
+  );
+}
+
+/* First-question progressive MCQ: each wrong answer advances to the next
+   "stage" (a fresh option set + hint message shown in the wrong popup). The
+   final stage repeats until the learner picks the correct option. Driven by
+   q.stages = [{ options, answer, wrongMessage }, ...]. */
+function StagedMCQQuestion({ q, onNext }) {
+  const stages = q.stages || [];
+  const [stageIdx, setStageIdx] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [popup, setPopup] = useState(null);
+  const stage = stages[stageIdx] || {};
+
+  const check = (i) => {
+    setSelected(i);
+    setPopup(i === stage.answer ? 'correct' : 'wrong');
+  };
+
+  // On wrong: dismiss popup and reveal the next stage's options (last stage
+  // stays put and simply re-prompts with the same hint each time).
+  const advanceStage = () => {
+    setPopup(null);
+    setSelected(null);
+    setStageIdx(idx => Math.min(idx + 1, stages.length - 1));
+  };
+
+  return (
+    <div className="q2-wrap">
+      <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
+      <MediaBar />
+      <div className="q2-question-area">
+        {q.primaryInstruction && <p>{q.primaryInstruction}</p>}
+        {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
+        {q.tertiaryInstruction && <p>{q.tertiaryInstruction}</p>}
+        {q.question && <p className="q2-prompt">{q.question}</p>}
+        <div className="q3-options">
+          {(stage.options||[]).map((opt,i) => (
+            <div key={`${stageIdx}-${i}`} className="q2-option q3-option" onClick={() => check(i)}>
+              <RadioDot checked={selected===i} />
+              <span style={{ whiteSpace:'pre-line' }}>{opt}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {popup === 'correct' && <CorrectPopup onNext={() => { setPopup(null); setSelected(null); onNext(); }} />}
+      {popup === 'wrong' && <WrongPopup message={stage.wrongMessage} onRetry={advanceStage} />}
     </div>
   );
 }
@@ -401,7 +450,9 @@ function renderQuestion(q, onNext) {
   switch (q.type) {
     case 'title':         return <TitleQuestion q={q} onNext={onNext} />;
     case 'truefalse':     return <TrueFalseQuestion key={Math.random()} q={q} onNext={onNext} />;
-    case 'mcq':           return <MCQQuestion key={Math.random()} q={q} onNext={onNext} />;
+    case 'mcq':           return q.stages
+                            ? <StagedMCQQuestion key={Math.random()} q={q} onNext={onNext} />
+                            : <MCQQuestion key={Math.random()} q={q} onNext={onNext} />;
     case 'listen-answer': return <ListenAnswerQuestion key={Math.random()} q={q} onNext={onNext} />;
     case 'mcq-paadal':   return <MCQPaadalQuestion key={Math.random()} q={q} onNext={onNext} />;
     case 'listen-repeat': return <ListenRepeatQuestion q={q} onNext={onNext} />;
@@ -435,7 +486,7 @@ export default function DynamicExerciseModal({ exercise, title, onClose, theme =
     setQKey(k => k + 1);
   };
 
-  return (
+  return createPortal(
     <ThemeCtx.Provider value={theme}>
       <div
         className="fixed inset-0 z-[200] flex items-center justify-center bg-black/65 backdrop-blur-sm"
@@ -542,6 +593,7 @@ export default function DynamicExerciseModal({ exercise, title, onClose, theme =
           </div>
         </div>
       </div>
-    </ThemeCtx.Provider>
+    </ThemeCtx.Provider>,
+    document.body
   );
 }

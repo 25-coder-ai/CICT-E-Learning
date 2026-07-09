@@ -991,7 +991,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                         <span className="text-sm">{isIntroDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isIntroDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {introDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -1034,7 +1034,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                         <span className="text-sm">{isAkamDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isAkamDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {akamDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -1077,7 +1077,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                         <span className="text-sm">{isPuramModuleDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isPuramModuleDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {puramModuleDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
@@ -1119,7 +1119,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                         <span className="text-sm">{isPuramDrawerOpen ? "▾" : "▸"}</span>
                       </button>
                       <div className={`overflow-hidden transition-all duration-300 ${isPuramDrawerOpen ? "max-h-160" : "max-h-0"}`}>
-                        <ul className="divide-y divide-[#A58D66]/70 border-t border-[#A58D66]/55 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
                           {puramDrawerItems.map((drawerItem) => (
                             <li key={drawerItem}>
                               <button
