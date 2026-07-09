@@ -617,6 +617,217 @@ function DragDropScreen({ q, index, total, onCorrect }) {
 }
 
 /* ─────────────────────────────────────────
+   Helper
+───────────────────────────────────────────*/
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ─────────────────────────────────────────
+   Match-the-following screen (type: "match-following")
+   Drag item onto the correct slot → snaps; wrong → shakes back
+───────────────────────────────────────────*/
+function MatchFollowingScreen({ q, index, total, onCorrect }) {
+  const [pool, setPool]       = useState(() => shuffle(q.pairs.map(p => p.right)));
+  const [matched, setMatched] = useState({});
+  const [wrongZone, setWrongZone] = useState(null);
+  const dragging = useRef(null);
+
+  const matchedCount = Object.keys(matched).length;
+  const allMatched   = matchedCount === q.pairs.length;
+
+  useEffect(() => {
+    if (!allMatched) return;
+    const t = setTimeout(onCorrect, 1300);
+    return () => clearTimeout(t);
+  }, [allMatched, onCorrect]);
+
+  const onDragStart = (item)  => { dragging.current = item; };
+  const onDragEnd   = ()      => { dragging.current = null; };
+
+  const onDrop = (pairId, e) => {
+    e.preventDefault();
+    if (matched[pairId]) return;
+    const pair = q.pairs.find(p => p.id === pairId);
+    if (dragging.current === pair.right) {
+      setMatched(m => ({ ...m, [pairId]: dragging.current }));
+      setPool(p => p.filter(x => x !== dragging.current));
+    } else {
+      setWrongZone(pairId);
+      setTimeout(() => setWrongZone(null), 700);
+    }
+    dragging.current = null;
+  };
+
+  return (
+    <motion.div key={q.id}
+      initial={{ x:70, opacity:0, scale:0.97 }} animate={{ x:0, opacity:1, scale:1 }} exit={{ x:-70, opacity:0, scale:0.97 }}
+      transition={{ duration:0.35, ease:[0.25,0.46,0.45,0.94] }}
+      style={{ padding:'12px 18px', fontFamily:FONT, overflowY:'auto', flex:1, display:'flex', flexDirection:'column' }}
+    >
+      <ProgressDots total={total} current={index} />
+
+      {/* Header */}
+      <div style={{ background:`linear-gradient(135deg,${BLUE_DARK},${BLUE_MID})`, color:'#fff', borderRadius:'8px 8px 0 0', padding:'8px 14px', fontSize:12, fontWeight:'bold', display:'flex', justifyContent:'space-between', boxShadow:'0 2px 8px rgba(0,20,100,0.2)' }}>
+        <span style={{ fontFamily:FONT }}>பொருத்துக</span>
+        <motion.span key={index} initial={{ opacity:0, y:-4 }} animate={{ opacity:1, y:0 }} style={{ fontFamily:FONT, opacity:0.9 }}>
+          வினா {index+1} / {total}
+        </motion.span>
+      </div>
+      <div style={{ background:'rgba(255,255,255,0.85)', border:'1px solid #c0d4f0', borderTop:'none', borderRadius:'0 0 8px 8px', padding:'10px 14px', marginBottom:10, fontSize:13, color:'#1e293b', lineHeight:1.75 }}>
+        {q.instruction}
+      </div>
+
+      {/* Progress badge */}
+      <div style={{ textAlign:'center', marginBottom:10 }}>
+        <span style={{ background:'#e8f0ff', border:`1px solid ${BLUE_MID}`, borderRadius:20, padding:'3px 14px', fontSize:11.5, color:BLUE_DARK, fontWeight:'bold' }}>
+          {matchedCount} / {q.pairs.length} இணைக்கப்பட்டது
+        </span>
+      </div>
+
+      {/* Pairs */}
+      <div style={{ display:'flex', flexDirection:'column', gap:8, marginBottom:14 }}>
+        {q.pairs.map((pair, i) => {
+          const isMatched = !!matched[pair.id];
+          const isWrong   = wrongZone === pair.id;
+          return (
+            <motion.div key={pair.id}
+              initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.05*i+0.1 }}
+              style={{ display:'flex', alignItems:'center', gap:8 }}
+            >
+              {/* Left term */}
+              <div style={{
+                flex:'0 0 auto', minWidth:100, maxWidth:130,
+                background:'linear-gradient(135deg,#e8f0fe,#d0dfff)',
+                border:`1.5px solid ${BLUE_MID}`, borderRadius:7,
+                padding:'7px 10px', fontSize:12.5, color:BLUE_DARK,
+                fontWeight:'bold', textAlign:'center',
+                boxShadow:'0 2px 6px rgba(26,76,200,0.12)',
+              }}>
+                {pair.left}
+              </div>
+
+              <span style={{ color:'#94a3b8', fontSize:18, flexShrink:0 }}>→</span>
+
+              {/* Drop zone */}
+              <motion.div
+                animate={isWrong ? { x:[0,-9,9,-7,7,-4,4,0] } : { x:0 }}
+                transition={isWrong ? { duration:0.55 } : {}}
+                onDragOver={e => !isMatched && e.preventDefault()}
+                onDrop={e => onDrop(pair.id, e)}
+                style={{
+                  flex:1, minHeight:38,
+                  background: isMatched ? 'linear-gradient(135deg,#dcfce7,#bbf7d0)' : isWrong ? 'rgba(254,226,226,0.85)' : 'rgba(219,234,254,0.3)',
+                  border: isMatched ? '2px solid #22c55e' : isWrong ? '2px solid #ef4444' : '1.5px dashed #93c5fd',
+                  borderRadius:7, padding:'7px 10px',
+                  fontSize:12.5,
+                  color: isMatched ? '#14532d' : '#94a3b8',
+                  fontStyle: isMatched ? 'normal' : 'italic',
+                  display:'flex', alignItems:'center', justifyContent:'center', gap:8,
+                  boxShadow: isMatched ? '0 0 8px rgba(34,197,94,0.4)' : 'none',
+                  transition:'background 0.25s, border 0.25s',
+                  cursor: isMatched ? 'default' : 'copy',
+                }}
+              >
+                {isMatched ? (
+                  <motion.span initial={{ scale:0, opacity:0 }} animate={{ scale:1, opacity:1 }} transition={{ type:'spring', stiffness:400, damping:14 }}>
+                    {matched[pair.id]}
+                  </motion.span>
+                ) : (
+                  <span style={{ fontSize:11 }}>இங்கே இழுக்கவும்</span>
+                )}
+                {isMatched && (
+                  <motion.span initial={{ scale:0 }} animate={{ scale:1 }} transition={{ type:'spring', stiffness:400, damping:14 }}
+                    style={{ color:GREEN, fontWeight:'bold', fontSize:15 }}
+                  >✓</motion.span>
+                )}
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Draggable answer pool */}
+      <AnimatePresence>
+        {pool.length > 0 && (
+          <motion.div initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}>
+            <p style={{ fontSize:11.5, color:'#64748b', marginBottom:6, fontStyle:'italic' }}>
+              ✦ விடைகளை இழுத்து இணைக்கவும்
+            </p>
+            <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+              <AnimatePresence>
+                {pool.map(item => (
+                  <motion.div
+                    key={item}
+                    layout
+                    initial={{ opacity:0, scale:0.85 }} animate={{ opacity:1, scale:1 }} exit={{ opacity:0, scale:0.8 }}
+                    whileHover={{ scale:1.06, y:-2, boxShadow:'0 6px 18px rgba(26,76,200,0.28)' }}
+                    whileTap={{ scale:0.95 }}
+                    draggable
+                    onDragStart={() => onDragStart(item)}
+                    onDragEnd={onDragEnd}
+                    style={{
+                      background:'linear-gradient(135deg,#fff,#f0f5ff)',
+                      border:`1.5px solid #bfd0ea`,
+                      borderRadius:8, padding:'8px 14px',
+                      fontSize:12.5, color:BLUE_DARK,
+                      cursor:'grab', fontFamily:FONT,
+                      boxShadow:'0 2px 8px rgba(26,76,200,0.1)',
+                      userSelect:'none',
+                    }}
+                  >
+                    ⠿ {item}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* All-done banner */}
+      <AnimatePresence>
+        {allMatched && (
+          <motion.div
+            initial={{ opacity:0, y:14, scale:0.9 }} animate={{ opacity:1, y:0, scale:1 }} exit={{ opacity:0 }}
+            transition={{ type:'spring', stiffness:380, damping:22 }}
+            style={{
+              marginTop:14,
+              background:'linear-gradient(135deg,#dcfce7,#bbf7d0)',
+              border:'2px solid #22c55e', borderRadius:10,
+              padding:'12px 16px', display:'flex', alignItems:'center', gap:12,
+              position:'relative', overflow:'hidden',
+            }}
+          >
+            <motion.div
+              initial={{ x:'-110%' }} animate={{ x:'210%' }}
+              transition={{ duration:0.75, ease:'easeOut', delay:0.15 }}
+              style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent)', pointerEvents:'none' }}
+            />
+            <motion.div
+              initial={{ scale:0, rotate:-90 }} animate={{ scale:[0,1.35,1], rotate:0 }}
+              transition={{ type:'spring', stiffness:420, damping:14, delay:0.05 }}
+              style={{ width:44, height:44, borderRadius:'50%', background:'linear-gradient(135deg,#22c55e,#16a34a)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 4px 16px rgba(34,197,94,0.5)', flexShrink:0, position:'relative' }}
+            >
+              <span style={{ fontSize:22, color:'#fff', fontWeight:'bold' }}>✓</span>
+              <SparkBurst />
+            </motion.div>
+            <p style={{ margin:0, fontSize:14, fontWeight:'bold', color:'#15803d', fontFamily:FONT }}>
+              அருமை! அனைத்தும் சரியாக பொருத்தப்பட்டது!
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────
    Listening screen (type: "listening")
 ───────────────────────────────────────────*/
 function ListeningScreen({ q, onNext, audioSrc }) {
@@ -842,7 +1053,7 @@ export default function QuizPage() {
   );
 
   const questions     = quizData.questions;
-  const scorableCount = questions.filter(q => q.type==='mcq'||q.type==='word-order'||q.type==='drag-drop'||!q.type).length;
+  const scorableCount = questions.filter(q => q.type==='mcq'||q.type==='word-order'||q.type==='drag-drop'||q.type==='match-following'||!q.type).length;
 
   const goNext = () => {
     setStage(prev => {
@@ -857,10 +1068,11 @@ export default function QuizPage() {
   const sharedProps = { poemLines: quizData.poemLines, audioSrc: quizData.audioSrc };
 
   const renderQuestion = (q, idx) => {
-    const scorableIdx = questions.slice(0,idx+1).filter(x => x.type==='mcq'||x.type==='word-order'||x.type==='drag-drop'||!x.type).length - 1;
-    if (q.type==='mcq')          return <McqScreen         q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} {...sharedProps} />;
-    if (q.type==='word-order')   return <WordOrderScreen   q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} poemLines={quizData.poemLines} />;
-    if (q.type==='drag-drop')    return <DragDropScreen    q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} />;
+    const scorableIdx = questions.slice(0,idx+1).filter(x => x.type==='mcq'||x.type==='word-order'||x.type==='drag-drop'||x.type==='match-following'||!x.type).length - 1;
+    if (q.type==='mcq')             return <McqScreen            q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} {...sharedProps} />;
+    if (q.type==='word-order')      return <WordOrderScreen      q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} poemLines={quizData.poemLines} />;
+    if (q.type==='drag-drop')       return <DragDropScreen       q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} />;
+    if (q.type==='match-following') return <MatchFollowingScreen q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} />;
     if (q.type==='listening')    return <ListeningScreen   q={q} onNext={goNext} audioSrc={quizData.audioSrc} />;
     if (q.type==='read-aloud')   return <ReadAloudScreen   q={q} onNext={goNext} />;
     if (q.type==='short-answer') return <ShortAnswerScreen q={q} onNext={goNext} />;
