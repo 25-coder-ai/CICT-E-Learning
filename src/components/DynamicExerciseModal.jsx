@@ -470,6 +470,12 @@ export default function DynamicExerciseModal({ exercise, title, onClose, theme =
   const [currentQ, setCurrentQ] = useState(0);
   const [qKey, setQKey] = useState(0);
   const [showEnglish, setShowEnglish] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+  // Font-size control: --fs multiplier applied to the whole modal. Starts at a
+  // larger-than-original baseline; the A+ button cycles through the levels.
+  const FONT_STEPS = [1.2, 1.4, 1.6, 1.85];
+  const [fontStep, setFontStep] = useState(0);
+  const fontScale = FONT_STEPS[fontStep];
   const t = THEMES[theme];
 
   useEffect(() => { setShowEnglish(false); }, [activeLeft]);
@@ -493,15 +499,37 @@ export default function DynamicExerciseModal({ exercise, title, onClose, theme =
         style={{ position:'fixed', inset:0, zIndex:200, display:'flex', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.65)', backdropFilter:'blur(4px)' }}
         onClick={e => { if (e.target === e.currentTarget) onClose(); }}
       >
-        <div style={{ position:'relative' }}>
+        <div style={fullscreen ? { position:'relative', width:'100vw', height:'100vh' } : { position:'relative' }}>
+          {/* Font-size control — cycles the --fs multiplier; sits left of the fullscreen toggle */}
+          <button
+            onClick={() => setFontStep(s => (s + 1) % FONT_STEPS.length)}
+            style={{ position:'absolute', top: fullscreen ? 4 : -12, right: fullscreen ? 84 : 60, zIndex:10, width:28, height:28, borderRadius:'50%', background:t.closeBg, color:t.closeColor, border:t.closeBorder, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.5)', fontWeight:700, lineHeight:1 }}
+            aria-label="Increase font size"
+            title={`Font size (${Math.round(fontScale * 100)}%) — click to enlarge`}
+          >
+            <span style={{ fontSize:'0.62rem' }}>A</span><span style={{ fontSize:'0.9rem' }}>A</span>
+          </button>
+          {/* Fullscreen / minimize toggle — sits to the LEFT of the close button */}
+          <button
+            onClick={() => setFullscreen(f => !f)}
+            style={{ position:'absolute', top: fullscreen ? 4 : -12, right: fullscreen ? 48 : 24, zIndex:10, width:28, height:28, borderRadius:'50%', background:t.closeBg, color:t.closeColor, border:t.closeBorder, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.5)' }}
+            aria-label={fullscreen ? 'Minimize' : 'Fullscreen'}
+            title={fullscreen ? 'Minimize' : 'Fullscreen'}
+          >
+            {fullscreen ? (
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3" /></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>
+            )}
+          </button>
           <button
             onClick={onClose}
-            style={{ position:'absolute', top:-12, right:-12, zIndex:10, width:28, height:28, borderRadius:'50%', background:t.closeBg, color:t.closeColor, border:t.closeBorder, cursor:'pointer', fontWeight:700, fontSize:'0.85rem', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.5)' }}
+            style={{ position:'absolute', top: fullscreen ? 4 : -12, right: fullscreen ? 12 : -12, zIndex:10, width:28, height:28, borderRadius:'50%', background:t.closeBg, color:t.closeColor, border:t.closeBorder, cursor:'pointer', fontWeight:700, fontSize:'0.85rem', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.5)' }}
             aria-label="Close"
           >✕</button>
 
-          <div className={t.scopeClass}>
-            <div className="app-container">
+          <div className={t.scopeClass} style={{ '--fs': fontScale, ...(fullscreen ? { width:'100%', height:'100%' } : {}) }}>
+            <div className="app-container" style={fullscreen ? { width:'100%', height:'100%', maxWidth:'none', maxHeight:'none', borderRadius:0 } : undefined}>
               {/* LEFT SIDEBAR */}
               <aside className="left-sidebar">
                 <nav className="sidebar-nav">

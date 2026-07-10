@@ -9,9 +9,11 @@
 /* ── LAYOUT ── */
 .dynamic-scope .app-container {
   display: grid;
-  grid-template-columns: 150px 1fr 240px;
-  width: 860px;
-  height: 520px;
+  grid-template-columns: 165px 1fr 265px;
+  width: 1060px;
+  height: 640px;
+  max-width: 95vw;
+  max-height: 90vh;
   gap: 0;
   border: 2px solid #080f30;
   box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
@@ -59,7 +61,7 @@
   background: transparent;
   outline: none;
   color: rgba(200,220,255,0.82);
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--fs, 1));
   padding: 0 8px;
   text-align: center;
   line-height: 1.2;
@@ -144,7 +146,7 @@
   background: linear-gradient(135deg, #0d2a80, #1a4cc8);
   color: #ffffff;
   padding: 10px 16px;
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--fs, 1));
   font-weight: 700;
   min-height: 40px;
   display: flex;
@@ -155,14 +157,14 @@
   flex: 1;
   padding: 16px 18px;
   overflow-y: auto;
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--fs, 1));
   line-height: 1.85;
   color: #0d2a80;
   background: transparent;
 }
 
 .dynamic-scope .question-body h3 {
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--fs, 1));
   color: #0d2a80;
   font-weight: 700;
   margin-bottom: 0.6rem;
@@ -190,7 +192,7 @@
   height: 36px;
   background: linear-gradient(135deg, #1a4cc8, #0d2a80);
   color: #fff;
-  font-size: 0.82rem;
+  font-size: calc(0.82rem * var(--fs, 1));
   font-weight: 600;
   border-radius: 6px;
   box-shadow: 0 3px 10px rgba(0,40,120,0.35);
@@ -216,7 +218,7 @@
   background: linear-gradient(135deg, #0d2a80, #1a4cc8);
   color: #ffffff;
   padding: 10px 14px;
-  font-size: 0.85rem;
+  font-size: calc(0.85rem * var(--fs, 1));
   font-weight: 700;
   min-height: 40px;
   display: flex;
@@ -227,7 +229,7 @@
   flex: 1;
   padding: 14px 16px;
   overflow-y: auto;
-  font-size: 0.85rem;
+  font-size: calc(0.85rem * var(--fs, 1));
   line-height: 1.85;
   color: #0d2a80;
   background: rgba(255,255,255,0.7);
@@ -255,7 +257,7 @@
   border-radius: 3px;
   background: rgba(255,255,255,0.82);
   color: #0d2a80;
-  font-size: 0.75rem;
+  font-size: calc(0.75rem * var(--fs, 1));
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
@@ -285,11 +287,13 @@
 .dynamic-scope .q2-paadal {
   background: rgba(255,255,255,0.72);
   padding: 14px 18px;
-  overflow-y: scroll;
-  height: 140px;
+  overflow-y: auto;
+  /* line-height 2 → each line = 2em; 6 lines = 12em (+ vertical padding).
+     em tracks the scaled font-size, so ~6 lines show at every --fs level. */
+  height: calc(12em + 28px);
   flex-shrink: 0;
   border-bottom: 1px solid #c0d4f0;
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--fs, 1));
   line-height: 2;
   color: #0d2a80;
 }
@@ -316,7 +320,7 @@
   border-radius: 3px;
   width: 22px;
   height: 18px;
-  font-size: 0.6rem;
+  font-size: calc(0.6rem * var(--fs, 1));
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -335,7 +339,7 @@
   flex: 1;
   padding: 14px 18px;
   overflow-y: auto;
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--fs, 1));
   line-height: 1.9;
   color: #0d2a80;
   background: transparent;
@@ -352,7 +356,7 @@
 .dynamic-scope .q2-prompt {
   color: #b91c1c !important;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: calc(0.9rem * var(--fs, 1));
   margin-bottom: 10px !important;
 }
 
@@ -362,7 +366,7 @@
   gap: 10px;
   margin-bottom: 10px;
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--fs, 1));
   color: #0d2a80;
   padding: 8px 12px;
   border-radius: 8px;
@@ -417,7 +421,7 @@
   color: #fff;
   border: none;
   padding: 9px 28px;
-  font-size: 0.88rem;
+  font-size: calc(0.88rem * var(--fs, 1));
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
@@ -461,7 +465,7 @@
 }
 
 .dynamic-scope .q4-option-text {
-  font-size: 0.84rem;
+  font-size: calc(0.84rem * var(--fs, 1));
   line-height: 1.75;
   color: #0d2a80;
 }
@@ -472,7 +476,7 @@
   padding: 8px 12px;
   background: rgba(219,234,254,0.35);
   border-left: 3px solid #1a4cc8;
-  font-size: 0.85rem;
+  font-size: calc(0.85rem * var(--fs, 1));
   line-height: 1.9;
   color: #0d2a80;
   border-radius: 0 6px 6px 0;
@@ -495,7 +499,7 @@
   height: 28px;
   border: 1.5px dashed #93c5fd;
   color: #94a3b8;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   font-family: 'Noto Sans Tamil', sans-serif;
   display: flex;
   align-items: center;
@@ -530,7 +534,7 @@
   background: rgba(255,255,255,0.88);
   border: 1px solid #bfd0ea;
   color: #0d2a80;
-  font-size: 12px;
+  font-size: calc(12px * var(--fs, 1));
   font-family: 'Noto Sans Tamil', sans-serif;
   cursor: grab;
   border-radius: 6px;
@@ -561,7 +565,7 @@
   list-style: none;
   padding-left: 0;
   margin: 6px 0 4px;
-  font-size: 0.8rem;
+  font-size: calc(0.8rem * var(--fs, 1));
 }
 
 .dynamic-scope .q12-question-item {
@@ -575,7 +579,7 @@
 .dynamic-scope .q12-question-text {
   flex: 1;
   line-height: 1.5;
-  font-size: 0.78rem;
+  font-size: calc(0.78rem * var(--fs, 1));
   color: #0d2a80;
 }
 
@@ -588,7 +592,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.75rem;
+  font-size: calc(0.75rem * var(--fs, 1));
   box-shadow: 0 2px 6px rgba(0,40,120,0.25);
   transition: opacity 0.2s;
 }
@@ -617,7 +621,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: calc(0.8rem * var(--fs, 1));
   box-shadow: 0 2px 8px rgba(0,40,120,0.3);
   transition: opacity 0.2s;
 }
@@ -640,7 +644,7 @@
   color: #fff;
   padding: 10px 36px 10px 12px;
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: calc(0.8rem * var(--fs, 1));
   line-height: 1.55;
   position: relative;
 }
@@ -652,7 +656,7 @@
   background: none;
   border: none;
   color: #fff;
-  font-size: 14px;
+  font-size: calc(14px * var(--fs, 1));
   cursor: pointer;
   padding: 2px 5px;
   line-height: 1;
@@ -668,7 +672,7 @@
   color: #0d2a80;
   padding: 12px 14px;
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: calc(0.8rem * var(--fs, 1));
   line-height: 1.65;
 }
 
@@ -697,7 +701,7 @@
 .dynamic-scope .popup-header {
   background: linear-gradient(135deg, #0d2a80, #1a4cc8);
   color: #fff;
-  font-size: 1rem;
+  font-size: calc(1rem * var(--fs, 1));
   font-weight: 700;
   text-align: center;
   padding: 10px 16px;
@@ -715,7 +719,7 @@
 }
 
 .dynamic-scope .popup-wrong-content p {
-  font-size: 0.85rem;
+  font-size: calc(0.85rem * var(--fs, 1));
   line-height: 1.75;
   color: #b91c1c;
   margin: 0;
@@ -760,7 +764,7 @@
 }
 
 .dynamic-scope .popup-success-text {
-  font-size: 1rem;
+  font-size: calc(1rem * var(--fs, 1));
   font-weight: 700;
   color: #15803d;
 }
@@ -776,7 +780,7 @@
   color: #fff;
   border: none;
   padding: 7px 22px;
-  font-size: 0.85rem;
+  font-size: calc(0.85rem * var(--fs, 1));
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;

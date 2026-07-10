@@ -53,3 +53,5 @@ Thumbs.db
 # Bytecode
 __pycache__/
 *.pyc
+
+.claude
