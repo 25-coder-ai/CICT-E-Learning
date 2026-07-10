@@ -3,6 +3,11 @@ import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
 import { fetchAllExercises, saveExerciseSet, deleteExerciseSet } from "../api/exercises";
+import M1L1App  from "../lessons/m1l1/App";
+import M1L2App  from "../lessons/m1l2/App";
+import M1L6App  from "../lessons/m1l6/App";
+import M1L7App  from "../lessons/m1l7/App";
+import M1L10App from "../lessons/m1l10/App";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -773,6 +778,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isPuramModuleDrawerOpen, setIsPuramModuleDrawerOpen] = useState(false);
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
   const [malaiOpen, setMalaiOpen] = useState(false);
+  const [openLesson, setOpenLesson] = useState(null);
   const [addQuestionForUnit, setAddQuestionForUnit] = useState(null);
   const [exercises, setExercises] = useState({});
   const [openDynamicExercise, setOpenDynamicExercise] = useState(null);
@@ -828,6 +834,37 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     const isAdmin = userRole === 'admin';
     const theme = PURAM_UNIT_KEYS.has(unitKey) ? 'puram' : 'akam';
     const btns = [];
+
+    // முல்லை (Lesson_1 of akam): 10 lessons in order L1-L10
+    // L1,L2,L6,L7,L10 → direct React component; L3,L4,L5,L8,L9 → DynamicExerciseModal
+    if (unitKey === 'அலகு 1 : முல்லை') {
+      const exList = exercises[unitKey] || [];
+      const lessonBtn = (label, lessonNum) => ({ label, onClick: () => setOpenLesson(lessonNum) });
+      const exBtn = (label, exIdx) => {
+        const ex = exList[exIdx];
+        if (!ex) return null;
+        return {
+          label,
+          onClick: () => setOpenDynamicExercise({ exercise: ex, title: ex.leftButtons?.[0] || 'பயிற்சி', theme }),
+          onRemove: isAdmin ? () => removeExercise(unitKey, exIdx) : null,
+          onEdit: isAdmin ? () => startEditExercise(unitKey, exIdx) : null,
+        };
+      };
+      const ordered = [
+        lessonBtn(1,  1),   // L1
+        lessonBtn(2,  2),   // L2
+        exBtn(3, 0),         // L3
+        exBtn(4, 1),         // L4
+        exBtn(5, 2),         // L5
+        lessonBtn(6,  6),   // L6
+        lessonBtn(7,  7),   // L7
+        exBtn(8, 3),         // L8
+        exBtn(9, 4),         // L9
+        lessonBtn(10, 10),  // L10
+      ].filter(Boolean);
+      return ordered;
+    }
+
     if (unitKey === 'அலகு 2 : குறிஞ்சி') {
       btns.push({ label: 1, onClick: () => setMalaiOpen(true) });
     }
@@ -1361,6 +1398,34 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
           theme={openDynamicExercise.theme || 'akam'}
           onClose={() => setOpenDynamicExercise(null)}
         />
+      )}
+
+      {openLesson && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: '#4b5563',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => setOpenLesson(null)}
+            style={{
+              position: 'absolute', top: 12, right: 12, zIndex: 10000,
+              background: '#0d2a80', color: '#fff', border: 'none',
+              borderRadius: 6, padding: '6px 14px', cursor: 'pointer',
+              fontSize: 14, fontWeight: 'bold',
+            }}
+          >
+            ✕ மூடு
+          </button>
+          {openLesson === 1  && <M1L1App />}
+          {openLesson === 2  && <M1L2App />}
+          {openLesson === 6  && <M1L6App />}
+          {openLesson === 7  && <M1L7App />}
+          {openLesson === 10 && <M1L10App />}
+        </div>
       )}
     </div>
   );
