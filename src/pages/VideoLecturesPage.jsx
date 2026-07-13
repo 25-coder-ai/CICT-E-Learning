@@ -3,11 +3,25 @@ import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
 import { fetchAllExercises, saveExerciseSet, deleteExerciseSet } from "../api/exercises";
-import M1L1App  from "../lessons/m1l1/App";
-import M1L2App  from "../lessons/m1l2/App";
-import M1L6App  from "../lessons/m1l6/App";
-import M1L7App  from "../lessons/m1l7/App";
-import M1L10App from "../lessons/m1l10/App";
+import M1L1App   from "../lessons/m1l1/App";
+import M1L2App   from "../lessons/m1l2/App";
+import M1L6App   from "../lessons/m1l6/App";
+import M1L7App   from "../lessons/m1l7/App";
+import M1L10App  from "../lessons/m1l10/App";
+import M1U2L1App  from "../lessons/m1u2l1/App";
+import M1U2L2App  from "../lessons/m1u2l2/App";
+import M1U2L3App  from "../lessons/m1u2l3/App";
+import M1U2L4App  from "../lessons/m1u2l4/App";
+import M1U2L5App  from "../lessons/m1u2l5/App";
+import M1U2L6App  from "../lessons/m1u2l6/App";
+import M1U2L7App  from "../lessons/m1u2l7/App";
+import M1U2L8App  from "../lessons/m1u2l8/App";
+import M1U2L9App  from "../lessons/m1u2l9/App";
+import M1U2L10App from "../lessons/m1u2l10/App";
+import M1U2L11App from "../lessons/m1u2l11/App";
+import M1U2L12App from "../lessons/m1u2l12/App";
+import M1U2L13App from "../lessons/m1u2l13/App";
+import M1U2L14App from "../lessons/m1u2l14/App";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -866,10 +880,12 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     }
 
     if (unitKey === 'அலகு 2 : குறிஞ்சி') {
-      btns.push({ label: 1, onClick: () => setMalaiOpen(true) });
+      const u2Apps = [M1U2L1App,M1U2L2App,M1U2L3App,M1U2L4App,M1U2L5App,M1U2L6App,M1U2L7App,M1U2L8App,M1U2L9App,M1U2L10App,M1U2L11App,M1U2L12App,M1U2L13App,M1U2L14App];
+      u2Apps.forEach((_, i) => btns.push({ label: i + 1, onClick: () => setOpenLesson(`u2-${i+1}`) }));
+      return btns;
     }
     const exList = exercises[unitKey] || [];
-    const start = unitKey === 'அலகு 2 : குறிஞ்சி' ? 2 : 1;
+    const start = 1;
     exList.forEach((ex, i) => {
       btns.push({
         label: start + i,
@@ -1425,6 +1441,20 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
           {openLesson === 6  && <M1L6App />}
           {openLesson === 7  && <M1L7App />}
           {openLesson === 10 && <M1L10App />}
+          {openLesson === 'u2-1'  && <M1U2L1App />}
+          {openLesson === 'u2-2'  && <M1U2L2App />}
+          {openLesson === 'u2-3'  && <M1U2L3App />}
+          {openLesson === 'u2-4'  && <M1U2L4App />}
+          {openLesson === 'u2-5'  && <M1U2L5App />}
+          {openLesson === 'u2-6'  && <M1U2L6App />}
+          {openLesson === 'u2-7'  && <M1U2L7App />}
+          {openLesson === 'u2-8'  && <M1U2L8App />}
+          {openLesson === 'u2-9'  && <M1U2L9App />}
+          {openLesson === 'u2-10' && <M1U2L10App />}
+          {openLesson === 'u2-11' && <M1U2L11App />}
+          {openLesson === 'u2-12' && <M1U2L12App />}
+          {openLesson === 'u2-13' && <M1U2L13App />}
+          {openLesson === 'u2-14' && <M1U2L14App />}
         </div>
       )}
     </div>
