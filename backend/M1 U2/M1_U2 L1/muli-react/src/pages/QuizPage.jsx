@@ -911,6 +911,26 @@ function ReadAloudScreen({ q, onNext }) {
 }
 
 /* ─────────────────────────────────────────
+   Next-only screen (type: "next-only")
+───────────────────────────────────────────*/
+function NextOnlyScreen({ q, onNext }) {
+  return (
+    <motion.div initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:0.4}}
+      style={{ padding:'14px 18px', fontFamily:FONT, overflowY:'auto', flex:1, display:'flex', flexDirection:'column' }}
+    >
+      <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:0.2}}
+        style={{ background:'rgba(255,255,255,0.8)', border:'1px solid #c0d4f0', borderRadius:10, padding:'16px 20px', marginBottom:14, fontSize:13, color:'#1e293b', lineHeight:1.95, boxShadow:'0 4px 20px rgba(0,30,120,0.1)' }}
+      >
+        {q.context}
+      </motion.div>
+      <div style={{display:'flex',justifyContent:'flex-end',marginTop:'auto'}}>
+        <NextBtn onClick={onNext}>அடுத்து &gt;&gt;</NextBtn>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────
    Short-answer screen (type: "short-answer")
 ───────────────────────────────────────────*/
 function ShortAnswerScreen({ q, onNext }) {
@@ -1092,6 +1112,7 @@ export default function QuizPage() {
     if (q.type==='word-order')      return <WordOrderScreen      q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} poemLines={quizData.poemLines} />;
     if (q.type==='drag-drop')       return <DragDropScreen       q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} />;
     if (q.type==='match-following') return <MatchFollowingScreen q={q} index={scorableIdx} total={scorableCount} onCorrect={handleCorrect} />;
+    if (q.type==='next-only')       return <NextOnlyScreen       q={q} onNext={goNext} />;
     if (q.type==='listening')       return <ListeningScreen      q={q} onNext={goNext} audioSrc={quizData.audioSrc} />;
     if (q.type==='read-aloud')      return <ReadAloudScreen      q={q} onNext={goNext} />;
     if (q.type==='short-answer')    return <ShortAnswerScreen    q={q} onNext={goNext} />;
