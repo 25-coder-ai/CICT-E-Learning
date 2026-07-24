@@ -1,6 +1,6 @@
 import './dynamic-exercise.css';
 import './malai-app.css';
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { createPortal } from 'react-dom';
 
 const ThemeCtx = createContext('akam');
@@ -83,9 +83,9 @@ const MediaBar = () => (
   </div>
 );
 
-const BlueBox = ({ text }) => {
+const BlueBox = ({ text, color }) => {
   const t = THEMES[useContext(ThemeCtx)];
-  return <div style={t.box}>{text}</div>;
+  return <div style={color ? { ...t.box, color } : t.box}>{text}</div>;
 };
 
 const LeftBorderPoem = ({ text }) => (
@@ -126,10 +126,10 @@ function TrueFalseQuestion({ q, onNext }) {
       <div className="q2-paadal" style={{ whiteSpace:'pre-line' }}>{q.paadal}</div>
       <MediaBar />
       <div className="q2-question-area">
-        {q.primaryInstruction && <p>{q.primaryInstruction}</p>}
-        {q.secondaryInstruction && <p>{q.secondaryInstruction}</p>}
-        {q.tertiaryInstruction && <p>{q.tertiaryInstruction}</p>}
-        {q.question && <p className="q2-prompt">{q.question}</p>}
+        {q.primaryInstruction && <p style={{ whiteSpace:'pre-line' }}>{q.primaryInstruction}</p>}
+        {q.secondaryInstruction && <p style={{ whiteSpace:'pre-line' }}>{q.secondaryInstruction}</p>}
+        {q.tertiaryInstruction && <p style={{ whiteSpace:'pre-line' }}>{q.tertiaryInstruction}</p>}
+        {q.question && <p className="q2-prompt" style={q.redQuestion ? { color:'#d00000', fontWeight:700 } : undefined}>{q.question}</p>}
         <div className="q2-options">
           {['ஆம்','இல்லை'].map(opt => (
             <div key={opt} className="q2-option" onClick={() => check(opt)}>
@@ -140,7 +140,7 @@ function TrueFalseQuestion({ q, onNext }) {
         </div>
       </div>
       {popup === 'correct' && <CorrectPopup onNext={() => { setPopup(null); setSelected(null); onNext(); }} />}
-      {popup === 'wrong' && <WrongPopup onRetry={() => { setPopup(null); setSelected(null); }} />}
+      {popup === 'wrong' && <WrongPopup message={q.wrongMessage} onRetry={() => { setPopup(null); setSelected(null); }} />}
     </div>
   );
 }
@@ -390,39 +390,78 @@ function DragDropQuestion({ q, onNext }) {
   const [slots, setSlots] = useState(Array(correct.length).fill(null));
   const [dragItem, setDragItem] = useState(null);
   const [dragOver, setDragOver] = useState(null);
+  const [selected, setSelected] = useState(null);   // tap-to-place selection
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [showSuccess, setShowSuccess] = useState(false);
+  const pageRef = useRef(null);
   const t = THEMES[useContext(ThemeCtx)];
+
+  // While a line is armed, a translucent ghost of it follows the cursor
+  // (mirroring the native drag image) so the learner sees what they picked.
+  useEffect(() => {
+    if (!selected) return;
+    const onMove = (e) => setCursor({ x: e.clientX, y: e.clientY });
+    window.addEventListener('pointermove', onMove);
+    return () => window.removeEventListener('pointermove', onMove);
+  }, [selected]);
 
   const placed = new Set(slots.filter(Boolean));
   const bank = shuffled.filter(s => !placed.has(s));
 
-  const handleDrop = (slotIdx) => {
-    setDragOver(null);
-    if (dragItem == null || slots[slotIdx] != null) return;
-    if (dragItem === correct[slotIdx]) {
+  // Place `item` into slotIdx if it is the correct line for that slot.
+  const place = (item, slotIdx) => {
+    if (item == null || slots[slotIdx] != null) return false;
+    if (item === correct[slotIdx]) {
       const next = [...slots];
-      next[slotIdx] = dragItem;
+      next[slotIdx] = item;
       setSlots(next);
       if (next.every((s, i) => s === correct[i])) setShowSuccess(true);
+      return true;
     }
+    return false;
+  };
+
+  const handleDrop = (slotIdx) => {
+    setDragOver(null);
+    place(dragItem, slotIdx);
     setDragItem(null);
   };
 
+  // Tap a bank item to arm it, then tap a slot to drop it there — removes the
+  // need to drag across a scrolling page. Arming scrolls the slots into view so
+  // a line grabbed at the bottom can be placed in a line near the top.
+  const pickBank = (s, e) => {
+    const next = selected === s ? null : s;
+    setSelected(next);
+    if (next && e) setCursor({ x: e.clientX, y: e.clientY });
+    if (next && pageRef.current) pageRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const tapSlot = (slotIdx) => {
+    if (selected == null) return;
+    place(selected, slotIdx);   // stays only if it's the correct slot
+    setSelected(null);          // wrong tap: release it back to the bank
+  };
+
   return (
-    <div className="q4-options-page q10-drag-page">
+    <div className="q4-options-page q10-drag-page" ref={pageRef}>
       <div className="q2-question-area" style={{ background:'transparent', padding:'0 0 8px', overflow:'visible', flex:'none' }}>
-        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} />}
+        {q.primaryInstruction && <BlueBox text={q.primaryInstruction} color={t.dragTextColor} />}
         {q.secondaryInstruction && <p style={{ color:t.dragTextColor, fontSize:'0.82rem', marginBottom:4 }}>{q.secondaryInstruction}</p>}
         {q.tertiaryInstruction && <p style={{ color:t.dragTextColor, fontSize:'0.82rem', marginBottom:8 }}>{q.tertiaryInstruction}</p>}
+        <p style={{ color:t.dragTextColor, opacity:0.75, fontSize:'0.72rem', margin:'2px 0 0' }}>
+          வரியைச் சொடுக்கி, பின் அதை இட வேண்டிய இடத்தில் சொடுக்கவும். (இழுத்தும் இடலாம்)
+        </p>
       </div>
       <div className="q10-slots">
         {correct.map((_, i) => (
           <div
             key={i}
-            className={`q10-slot ${slots[i] ? 'q10-slot-filled' : ''} ${dragOver===i && !slots[i] ? 'q10-slot-hover' : ''}`}
+            className={`q10-slot ${slots[i] ? 'q10-slot-filled' : ''} ${dragOver===i && !slots[i] ? 'q10-slot-hover' : ''} ${selected && !slots[i] ? 'q10-slot-armed' : ''}`}
             onDragOver={e => { e.preventDefault(); setDragOver(i); }}
             onDragLeave={() => setDragOver(null)}
             onDrop={() => handleDrop(i)}
+            onClick={() => tapSlot(i)}
           >
             {slots[i] || ''}
           </div>
@@ -432,15 +471,21 @@ function DragDropQuestion({ q, onNext }) {
         {bank.map((s, i) => (
           <div
             key={i}
-            className="q10-bank-item"
+            className={`q10-bank-item ${selected === s ? 'q10-bank-item-selected' : ''}`}
             draggable
-            onDragStart={() => setDragItem(s)}
+            onDragStart={() => { setDragItem(s); setSelected(null); }}
             onDragEnd={() => setDragItem(null)}
+            onClick={(e) => pickBank(s, e)}
           >
             {s}
           </div>
         ))}
       </div>
+      {selected && (
+        <div className="q10-tap-ghost" style={{ left: cursor.x + 4, top: cursor.y + 4 }}>
+          {selected}
+        </div>
+      )}
       {showSuccess && <CorrectPopup onNext={() => { setShowSuccess(false); onNext(); }} />}
     </div>
   );
@@ -573,7 +618,7 @@ export default function DynamicExerciseModal({ exercise, title, onClose, theme =
 
               {/* RIGHT COLUMN */}
               <aside className="right-column">
-                <div className="right-header">{title || 'பயிற்சி'}</div>
+                <div className="right-header">{activeLeft || title || 'பயிற்சி'}</div>
                 <div className="right-content">
                   {activeLeft && rightContent[activeLeft] ? (
                     <>

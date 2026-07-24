@@ -497,15 +497,16 @@
 .q10-slots {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3px;
   margin-bottom: 6px;
 }
 
 .q10-slot {
-  height: 22px;
+  height: 26px;
   border-bottom: 1px solid rgba(255, 195, 130, 0.4);
   color: #ffd9a0;
-  font-size: calc(11.5px * var(--fs, 1));
+  font-size: calc(13px * var(--fs, 1));
+  line-height: 1.4;
   font-family: 'Noto Sans Tamil', sans-serif;
   display: flex;
   align-items: center;
@@ -526,18 +527,31 @@
   border-bottom-color: rgba(255, 205, 140, 0.9) !important;
 }
 
+/* Slots are tappable targets while a bank line is armed (tap-to-place) */
+.q10-slot-armed {
+  cursor: pointer;
+  border-bottom-color: rgba(255, 205, 140, 0.7);
+  background: rgba(255, 200, 100, 0.05);
+}
+
+.q10-slot-armed:hover {
+  background: rgba(255, 200, 100, 0.18);
+  border-bottom-color: rgba(255, 205, 140, 0.9);
+}
+
 .q10-bank {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .q10-bank-item {
-  padding: 3px 10px;
+  padding: 4px 10px;
   background: rgba(255, 185, 80, 0.13);
   border: 1px solid rgba(255, 165, 60, 0.35);
   color: #ffd9a0;
-  font-size: calc(11.5px * var(--fs, 1));
+  font-size: calc(13px * var(--fs, 1));
+  line-height: 1.4;
   font-family: 'Noto Sans Tamil', sans-serif;
   cursor: grab;
   border-radius: 2px;
@@ -552,6 +566,32 @@
 
 .q10-bank-item:active {
   cursor: grabbing;
+}
+
+/* Armed (tapped) bank line waiting to be placed into a slot */
+.q10-bank-item-selected {
+  background: rgba(255, 200, 100, 0.34);
+  border-color: rgba(255, 205, 140, 0.95);
+  box-shadow: 0 0 0 2px rgba(255, 205, 140, 0.5);
+}
+
+/* Translucent ghost of the armed line, following the cursor (tap-to-place
+   mirror of the native drag image). Disappears once the line is placed. */
+.q10-tap-ghost {
+  position: fixed;
+  z-index: 250;
+  pointer-events: none;
+  max-width: 55%;
+  padding: 4px 10px;
+  font-size: calc(13px * var(--fs, 1));
+  line-height: 1.4;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  color: #ffe8c0;
+  background: rgba(255, 185, 80, 0.22);
+  border: 1px solid rgba(255, 205, 140, 0.7);
+  border-radius: 4px;
+  opacity: 0.85;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 /* Q12 */
