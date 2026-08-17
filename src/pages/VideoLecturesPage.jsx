@@ -1,27 +1,9 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, createElement } from "react";
 import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
 import { fetchAllExercises, saveExerciseSet, deleteExerciseSet } from "../api/exercises";
-import M1L1App   from "../lessons/m1l1/App";
-import M1L2App   from "../lessons/m1l2/App";
-import M1L6App   from "../lessons/m1l6/App";
-import M1L7App   from "../lessons/m1l7/App";
-import M1L10App  from "../lessons/m1l10/App";
-import M1U2L1App  from "../lessons/m1u2l1/App";
-import M1U2L2App  from "../lessons/m1u2l2/App";
-import M1U2L3App  from "../lessons/m1u2l3/App";
-import M1U2L4App  from "../lessons/m1u2l4/App";
-import M1U2L5App  from "../lessons/m1u2l5/App";
-import M1U2L6App  from "../lessons/m1u2l6/App";
-import M1U2L7App  from "../lessons/m1u2l7/App";
-import M1U2L8App  from "../lessons/m1u2l8/App";
-import M1U2L9App  from "../lessons/m1u2l9/App";
-import M1U2L10App from "../lessons/m1u2l10/App";
-import M1U2L11App from "../lessons/m1u2l11/App";
-import M1U2L12App from "../lessons/m1u2l12/App";
-import M1U2L13App from "../lessons/m1u2l13/App";
-import M1U2L14App from "../lessons/m1u2l14/App";
+import { LESSON_APP_MAP, UNIT_LESSON_COUNTS } from "../lessons/registry";
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -849,41 +831,31 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     const theme = PURAM_UNIT_KEYS.has(unitKey) ? 'puram' : 'akam';
     const btns = [];
 
-    // முல்லை (Lesson_1 of akam): 10 lessons in order L1-L10
-    // L1,L2,L6,L7,L10 → direct React component; L3,L4,L5,L8,L9 → DynamicExerciseModal
+    // முல்லை (Lesson_1 of akam): all 10 lessons are React components
     if (unitKey === 'அலகு 1 : முல்லை') {
-      const exList = exercises[unitKey] || [];
       const lessonBtn = (label, lessonNum) => ({ label, onClick: () => setOpenLesson(lessonNum) });
-      const exBtn = (label, exIdx) => {
-        const ex = exList[exIdx];
-        if (!ex) return null;
-        return {
-          label,
-          onClick: () => setOpenDynamicExercise({ exercise: ex, title: ex.leftButtons?.[0] || 'பயிற்சி', theme }),
-          onRemove: isAdmin ? () => removeExercise(unitKey, exIdx) : null,
-          onEdit: isAdmin ? () => startEditExercise(unitKey, exIdx) : null,
-        };
-      };
-      const ordered = [
-        lessonBtn(1,  1),   // L1
-        lessonBtn(2,  2),   // L2
-        exBtn(3, 0),         // L3
-        exBtn(4, 1),         // L4
-        exBtn(5, 2),         // L5
-        lessonBtn(6,  6),   // L6
-        lessonBtn(7,  7),   // L7
-        exBtn(8, 3),         // L8
-        exBtn(9, 4),         // L9
-        lessonBtn(10, 10),  // L10
-      ].filter(Boolean);
-      return ordered;
+      return [
+        lessonBtn(1,  1),
+        lessonBtn(2,  2),
+        lessonBtn(3,  3),
+        lessonBtn(4,  4),
+        lessonBtn(5,  5),
+        lessonBtn(6,  6),
+        lessonBtn(7,  7),
+        lessonBtn(8,  8),
+        lessonBtn(9,  9),
+        lessonBtn(10, 10),
+      ];
     }
 
-    if (unitKey === 'அலகு 2 : குறிஞ்சி') {
-      const u2Apps = [M1U2L1App,M1U2L2App,M1U2L3App,M1U2L4App,M1U2L5App,M1U2L6App,M1U2L7App,M1U2L8App,M1U2L9App,M1U2L10App,M1U2L11App,M1U2L12App,M1U2L13App,M1U2L14App];
-      u2Apps.forEach((_, i) => btns.push({ label: i + 1, onClick: () => setOpenLesson(`u2-${i+1}`) }));
+    const unitCfg = UNIT_LESSON_COUNTS[unitKey];
+    if (unitCfg) {
+      for (let i = 1; i <= unitCfg.count; i++) {
+        btns.push({ label: i, onClick: () => setOpenLesson(`${unitCfg.prefix}-${i}`) });
+      }
       return btns;
     }
+
     const exList = exercises[unitKey] || [];
     const start = 1;
     exList.forEach((ex, i) => {
@@ -1436,25 +1408,7 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
           >
             ✕ மூடு
           </button>
-          {openLesson === 1  && <M1L1App />}
-          {openLesson === 2  && <M1L2App />}
-          {openLesson === 6  && <M1L6App />}
-          {openLesson === 7  && <M1L7App />}
-          {openLesson === 10 && <M1L10App />}
-          {openLesson === 'u2-1'  && <M1U2L1App />}
-          {openLesson === 'u2-2'  && <M1U2L2App />}
-          {openLesson === 'u2-3'  && <M1U2L3App />}
-          {openLesson === 'u2-4'  && <M1U2L4App />}
-          {openLesson === 'u2-5'  && <M1U2L5App />}
-          {openLesson === 'u2-6'  && <M1U2L6App />}
-          {openLesson === 'u2-7'  && <M1U2L7App />}
-          {openLesson === 'u2-8'  && <M1U2L8App />}
-          {openLesson === 'u2-9'  && <M1U2L9App />}
-          {openLesson === 'u2-10' && <M1U2L10App />}
-          {openLesson === 'u2-11' && <M1U2L11App />}
-          {openLesson === 'u2-12' && <M1U2L12App />}
-          {openLesson === 'u2-13' && <M1U2L13App />}
-          {openLesson === 'u2-14' && <M1U2L14App />}
+          {openLesson != null && LESSON_APP_MAP[openLesson] && createElement(LESSON_APP_MAP[openLesson])}
         </div>
       )}
     </div>

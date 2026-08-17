@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; }
+
+body {
+  font-family: 'Arial Unicode MS', Arial, sans-serif;
+  background: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+}
+
+/* Mobile: full-screen layout */
+@media (max-width: 639px) {
+  body {
+    background: #1a2a6c;
+    align-items: flex-start;
+  }
+  #root {
+    align-items: flex-start;
+  }
+}
+
+button:focus { outline: none; }
+
+/* Thin scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.08); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,100,0.3); border-radius: 3px; }
