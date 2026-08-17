@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 /* Font override scoped to the exercise-set modal only.
-   `.dynamic-scope` (akam) and `.malai-scope` (puram) are the modal roots set
-   in DynamicExerciseModal. Using the scope + * + !important forces Arial
-   Unicode MS on every exercise element, including inline `fontFamily` styles,
-   while leaving the rest of the site untouched. */
+   `.dynamic-scope` (akam), `.malai-scope` (puram) and `.aram-scope` (அறம், green
+   replica of puram) are the modal roots set in DynamicExerciseModal. Using the
+   scope + * + !important forces Arial Unicode MS on every exercise element,
+   including inline `fontFamily` styles, while leaving the rest of the site
+   untouched. */
 .dynamic-scope,
 .dynamic-scope *,
 .malai-scope,
-.malai-scope * {
+.malai-scope *,
+.aram-scope,
+.aram-scope * {
   font-family: "Arial Unicode MS", "Nirmala UI", "Latha", sans-serif !important;
 }

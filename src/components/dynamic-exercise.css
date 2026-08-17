@@ -795,3 +795,157 @@
 .dynamic-scope *::-webkit-scrollbar { width: 5px; height: 5px; }
 .dynamic-scope *::-webkit-scrollbar-track { background: rgba(0,0,100,0.08); }
 .dynamic-scope *::-webkit-scrollbar-thumb { background: rgba(26,76,200,0.4); border-radius: 3px; }
+
+/* ── Fill-in-the-blanks question (தேர்வு assessment) ──
+   Theme-agnostic .fib-* classes: they live inside either .dynamic-scope or
+   .malai-scope, both of which define --fs and the base reset, so font scaling
+   and box-sizing are inherited. Accent colours come from inline style props. */
+.fib-lower {
+  flex: 1;
+  padding: 12px 16px;
+  overflow-y: auto;
+  font-size: calc(0.86rem * var(--fs, 1));
+  line-height: 1.7;
+}
+.fib-prompt {
+  margin-bottom: 10px;
+  color: inherit;
+  font-weight: 600;
+}
+.fib-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
+.fib-row { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.fib-num { min-width: 16px; font-weight: 700; opacity: 0.75; }
+.fib-label { min-width: 96px; font-weight: 600; }
+.fib-colon { opacity: 0.6; }
+.fib-field-wrap { position: relative; flex: 1; min-width: 150px; }
+.fib-field {
+  min-height: calc(1.6em + 8px);
+  padding: 4px 10px;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.22);
+  background: transparent;
+  border-radius: 4px 4px 0 0;
+  cursor: text;
+  word-break: break-word;
+  transition: border-color 0.15s, background 0.15s;
+}
+.fib-field.fib-active {
+  border-bottom-color: currentColor;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+.fib-field.fib-empty { color: #9aa7c4; }
+.fib-typed { color: #1c2b52; }
+.fib-ph { color: #9aa7c4; }
+/* Blinking text caret shown in the active on-screen-keyboard field */
+.fib-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: fib-blink 1s steps(1) infinite;
+}
+@keyframes fib-blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
+/* Transliteration (physical-keyboard) input — real <input>, native caret */
+.fib-tl-input {
+  width: 100%;
+  min-height: calc(1.7em + 8px);
+  padding: 4px 10px;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.22);
+  background: transparent;
+  border-radius: 4px 4px 0 0;
+  font-family: inherit;
+  font-size: calc(0.9rem * var(--fs, 1));
+  color: #1c2b52;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.fib-tl-input:focus {
+  border-bottom-color: currentColor;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+.fib-tl-input::placeholder { color: rgba(0,0,0,0.4); }
+.fib-hint {
+  margin-top: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: calc(0.72rem * var(--fs, 1));
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.fib-suggest {
+  position: absolute;
+  left: 0; top: calc(100% + 2px);
+  z-index: 40;
+  min-width: 140px;
+  background: #fff;
+  border: 1px solid #c3ccdf;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  overflow: hidden;
+}
+.fib-suggest-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: calc(0.84rem * var(--fs, 1));
+  color: #1c2b52;
+  cursor: pointer;
+}
+.fib-suggest-item:hover,
+.fib-suggest-item.fib-suggest-active { background: #dbe6fb; }
+.fib-mark { display: inline-flex; align-items: center; gap: 6px; font-size: calc(0.8rem * var(--fs, 1)); }
+.fib-mark svg { width: 18px; height: 18px; flex-shrink: 0; }
+.fib-correct-answer { color: #cc0000; font-weight: 600; }
+/* On-screen Tamil keyboard */
+.fib-keyboard {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.fib-kb-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+.fib-kb-row:last-child { margin-bottom: 0; }
+.fib-key {
+  min-width: calc(1.9em + 4px);
+  height: calc(1.9em + 6px);
+  padding: 0 6px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 5px;
+  background: #fff;
+  color: #1c2b52;
+  font-family: inherit;
+  font-size: calc(0.9rem * var(--fs, 1));
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  transition: transform 0.08s, background 0.12s;
+}
+.fib-key:hover { background: #eef2fb; }
+.fib-key:active { transform: translateY(1px); }
+.fib-key.fib-key-wide { min-width: 70px; font-weight: 600; }
+.fib-key.fib-key-util { background: #e9edf6; font-weight: 600; }
+.fib-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+.fib-next-btn {
+  border: none;
+  padding: 7px 22px;
+  font-size: calc(0.85rem * var(--fs, 1));
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  transition: opacity 0.2s;
+}
+.fib-next-btn:hover { opacity: 0.88; }

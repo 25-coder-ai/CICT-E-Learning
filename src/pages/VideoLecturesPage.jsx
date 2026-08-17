@@ -3,6 +3,14 @@ import MalaiApp from "../components/MalaiApp";
 import AddQuestionForm from "../components/AddQuestionForm";
 import DynamicExerciseModal from "../components/DynamicExerciseModal";
 import { fetchAllExercises, saveExerciseSet, deleteExerciseSet } from "../api/exercises";
+import { TERVU_SETS, buildTervuExercise, resolveSourceSet } from "../data/tervuSets";
+import { arasuSets } from "../data/aram/arasuSets";
+
+// கருத்தலகு 3 : அறம் — which பாடம் have exercise sets built (green theme).
+// அரசு has 24 sets (see arasuSets); the other பாடம் are not built yet.
+const aramLessonSets = {
+  "பாடம் 1 : அரசு": arasuSets,
+};
 
 const lectureConstituents = [
   "அறிமுகம்",
@@ -14,7 +22,13 @@ const lectureConstituents = [
   "திட்ட வரலாறு",
   "கருத்தலகு 1 : அகம்",
   "கருத்தலகு 2 : புறம்",
+  "கருத்தலகு 3 : அறம்",
+  "தேர்வு",
 ];
+
+// 21 assessment drop-downs; only those defined in TERVU_SETS open a built set.
+const tervuDrawerItems = Array.from({ length: 21 }, (_, i) => `தேர்வு ${i + 1}`);
+const TERVU_BUILT = new Set(TERVU_SETS.map((s) => s.name));
 
 const introDrawerItems = [
   "முன்னுரை",
@@ -55,6 +69,27 @@ const puramDrawerItems = [
   "அலகு 5 : வாகை",
   "அலகு 6 : காஞ்சி",
   "அலகு 7 : பாடாண்",
+];
+
+// கருத்தலகு 3 : அறம் — three அலகு, each with its own set of பாடம் sub-items.
+const aramDrawerUnits = [
+  {
+    unit: "அலகு (Unit) - 1 புறம்",
+    lessons: [
+      "பாடம் 1 : அரசு",
+      "பாடம் 2 : அமைச்சு",
+      "பாடம் 3 : குடி",
+      "பாடம் 4 : துறவு",
+    ],
+  },
+  {
+    unit: "அலகு (Unit) - 2 அகம்",
+    lessons: ["பாடம் 1 : இல்வாழ்வு"],
+  },
+  {
+    unit: "அலகு (Unit) - 3 அறம்",
+    lessons: ["பாடம் 1 : நல்லொழுக்கம்", "பாடம் 2 : தீயொழுக்கம்"],
+  },
 ];
 
 const introWelcomeContent = [
@@ -772,6 +807,11 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
   const [isAkamDrawerOpen, setIsAkamDrawerOpen] = useState(false);
   const [isPuramModuleDrawerOpen, setIsPuramModuleDrawerOpen] = useState(false);
   const [isPuramDrawerOpen, setIsPuramDrawerOpen] = useState(false);
+  const [isAramDrawerOpen, setIsAramDrawerOpen] = useState(false);
+  const [openAramUnit, setOpenAramUnit] = useState(null);
+  const [activeAramLesson, setActiveAramLesson] = useState(null);
+  const [isTervuDrawerOpen, setIsTervuDrawerOpen] = useState(false);
+  const [activeTervuItem, setActiveTervuItem] = useState(null);
   const [malaiOpen, setMalaiOpen] = useState(false);
   const [addQuestionForUnit, setAddQuestionForUnit] = useState(null);
   const [exercises, setExercises] = useState({});
@@ -844,6 +884,21 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     return btns;
   };
 
+  // Open a தேர்வு: borrow the matching puram set's side panels, then show the
+  // assessment pages in the same DynamicExerciseModal used by the exercises.
+  const openTervu = (name) => {
+    setActiveItem("தேர்வு");
+    setActiveTervuItem(name);
+    const cfg = TERVU_SETS.find((s) => s.name === name);
+    if (!cfg) return; // not built yet — centre column shows a placeholder
+    const source = resolveSourceSet(cfg, exercises);
+    if (!source) {
+      alert("இந்தத் தேர்வுக்கான பாடல் உள்ளடக்கம் இன்னும் ஏற்றப்படவில்லை. Backend server (uvicorn :8000) இயங்குகிறதா எனப் பாருங்கள்.");
+      return;
+    }
+    setOpenDynamicExercise({ exercise: buildTervuExercise(cfg, source), title: cfg.name, theme: "puram" });
+  };
+
   const [activeItem, setActiveItem] = useState("அறிமுகம்");
   const [activeIntroItem, setActiveIntroItem] = useState("அறிமுகம்");
   const [activeAkamItem, setActiveAkamItem] = useState(null);
@@ -856,7 +911,8 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     }
     if (activeItem === "கருத்தலகு 1 : அகம்") return null;
     if (activeItem === "கருத்தலகு 2 : புறம்") return null;
-    
+    if (activeItem === "கருத்தலகு 3 : அறம்") return null;
+
     return sectionContent[activeItem] || [];
   }, [activeItem, activeIntroItem, activeAkamItem, activePuramModuleItem, activePuramItem]);
 
@@ -959,6 +1015,8 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
     setIsAkamDrawerOpen(false);
     setIsPuramModuleDrawerOpen(false);
     setIsPuramDrawerOpen(false);
+    setIsAramDrawerOpen(false);
+    setIsTervuDrawerOpen(false);
   };
 
   return (
@@ -980,6 +1038,8 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                           setIsAkamDrawerOpen(false);
                           setIsPuramModuleDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
+                          setIsAramDrawerOpen(false);
+                          setIsTervuDrawerOpen(false);
                         }}
                         className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
                           activeItem === "அறிமுகம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
@@ -1023,6 +1083,8 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                           setIsIntroDrawerOpen(false);
                           setIsPuramModuleDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
+                          setIsAramDrawerOpen(false);
+                          setIsTervuDrawerOpen(false);
                         }}
                         className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
                           activeItem === "கருத்தலகு 1 : அகம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
@@ -1066,6 +1128,8 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                           setIsIntroDrawerOpen(false);
                           setIsAkamDrawerOpen(false);
                           setIsPuramDrawerOpen(false);
+                          setIsAramDrawerOpen(false);
+                          setIsTervuDrawerOpen(false);
                         }}
                         className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
                           activeItem === "கருத்தலகு 2 : புறம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
@@ -1092,6 +1156,77 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                               >
                                 {drawerItem}
                               </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : item === "கருத்தலகு 3 : அறம்" ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAramDrawerOpen((prev) => !prev);
+                          setActiveItem("கருத்தலகு 3 : அறம்");
+                          setOpenAramUnit(null);
+                          setActiveAramLesson(null);
+                          setAddQuestionForUnit(null);
+                          setIsIntroDrawerOpen(false);
+                          setIsAkamDrawerOpen(false);
+                          setIsPuramModuleDrawerOpen(false);
+                          setIsPuramDrawerOpen(false);
+                          setIsTervuDrawerOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "கருத்தலகு 3 : அறம்" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
+                        }`}
+                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                        aria-expanded={isAramDrawerOpen}
+                      >
+                        <span>{item}</span>
+                        <span className="text-sm">{isAramDrawerOpen ? "▾" : "▸"}</span>
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${isAramDrawerOpen ? "max-h-[900px]" : "max-h-0"}`}>
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                          {aramDrawerUnits.map(({ unit, lessons }) => (
+                            <li key={unit}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setActiveItem("கருத்தலகு 3 : அறம்");
+                                  setOpenAramUnit((prev) => (prev === unit ? null : unit));
+                                }}
+                                className={`flex w-full items-center justify-between px-5 py-2.5 text-left text-base leading-tight transition ${
+                                  openAramUnit === unit
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
+                                }`}
+                                style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                                aria-expanded={openAramUnit === unit}
+                              >
+                                <span>{unit}</span>
+                                <span className="text-xs">{openAramUnit === unit ? "▾" : "▸"}</span>
+                              </button>
+                              <div className={`overflow-hidden transition-all duration-300 ${openAramUnit === unit ? "max-h-96" : "max-h-0"}`}>
+                                <ul className="divide-y divide-[#407E8C]/30 border-t border-[#407E8C]/30 bg-[#E5E1DD]/70">
+                                  {lessons.map((lesson) => (
+                                    <li key={lesson}>
+                                      <button
+                                        type="button"
+                                        onClick={() => { setActiveItem("கருத்தலகு 3 : அறம்"); setActiveAramLesson(lesson); }}
+                                        className={`w-full px-8 py-2 text-left text-[15px] leading-tight transition ${
+                                          activeAramLesson === lesson
+                                            ? "bg-[#407E8C]/70 text-[#E5E1DD]"
+                                            : "text-[#083A4F] hover:bg-[#C0D5D6]/70"
+                                        }`}
+                                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                                      >
+                                        {lesson}
+                                      </button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             </li>
                           ))}
                         </ul>
@@ -1133,6 +1268,52 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                                 style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
                               >
                                 {drawerItem}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : item === "தேர்வு" ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsTervuDrawerOpen((prev) => !prev);
+                          setActiveItem("தேர்வு");
+                          setActiveTervuItem(null);
+                          setAddQuestionForUnit(null);
+                          setIsIntroDrawerOpen(false);
+                          setIsAkamDrawerOpen(false);
+                          setIsPuramModuleDrawerOpen(false);
+                          setIsPuramDrawerOpen(false);
+                          setIsAramDrawerOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between border-b border-[#C0D5D6]/35 px-4 py-3 text-left text-lg leading-tight transition ${
+                          activeItem === "தேர்வு" ? "bg-[#407E8C]/75 text-[#E5E1DD]" : "text-[#E5E1DD] hover:bg-[#407E8C]/45"
+                        }`}
+                        style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                        aria-expanded={isTervuDrawerOpen}
+                      >
+                        <span>{item}</span>
+                        <span className="text-sm">{isTervuDrawerOpen ? "▾" : "▸"}</span>
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${isTervuDrawerOpen ? "max-h-[1400px]" : "max-h-0"}`}>
+                        <ul className="divide-y divide-[#407E8C]/45 border-t border-[#407E8C]/45 bg-linear-to-b from-[#C0D5D6]/90 to-[#E5E1DD]/85">
+                          {tervuDrawerItems.map((drawerItem) => (
+                            <li key={drawerItem}>
+                              <button
+                                type="button"
+                                onClick={() => openTervu(drawerItem)}
+                                className={`flex w-full items-center justify-between px-5 py-2.5 text-left text-base leading-tight transition ${
+                                  activeItem === "தேர்வு" && activeTervuItem === drawerItem
+                                    ? "bg-[#407E8C]/85 text-[#E5E1DD]"
+                                    : "text-[#083A4F] hover:bg-[#C0D5D6]/80"
+                                }`}
+                                style={{ fontFamily: '"Noto Serif Tamil", "Cormorant Garamond", serif' }}
+                              >
+                                <span>{drawerItem}</span>
+                                {!TERVU_BUILT.has(drawerItem) && <span className="text-xs opacity-50">விரைவில்</span>}
                               </button>
                             </li>
                           ))}
@@ -1181,6 +1362,64 @@ const VideoLecturesPage = ({ userRole = "user" }) => {
                 renderAkamContent()
               ) : activeItem === "கருத்தலகு 2 : புறம்" ? (
                 renderPuramModuleContent()
+              ) : activeItem === "கருத்தலகு 3 : அறம்" ? (
+                <div className="space-y-5">
+                  <p className={emphasisClass}>கருத்தலகு 3 : அறம்</p>
+                  <p className="text-justify">
+                    இக்கருத்தலகு அறம் பற்றியது. இடப்பக்கத் தட்டில் உள்ள
+                    <span className={emphasisClass}> அலகு 1 புறம்</span>,
+                    <span className={emphasisClass}> அலகு 2 அகம்</span>,
+                    <span className={emphasisClass}> அலகு 3 அறம்</span> ஆகிய
+                    மூன்று அலகுகளுள் ஒன்றைச் சொடுக்கினால், அவ்வலகின் பாடங்கள்
+                    விரியும். ஒரு பாடத்தைத் தேர்ந்தெடுத்துச் சொடுக்குங்கள்.
+                  </p>
+                  {activeAramLesson ? (
+                    <div className="rounded-xl border border-[#2D5128]/30 bg-[#2D5128]/[0.06] p-4">
+                      <p className="font-semibold text-[#2D5128]">{activeAramLesson}</p>
+                      {aramLessonSets[activeAramLesson] ? (
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                          <span className="w-full text-sm text-[#2D5128]/80">பயிற்சிகள்:</span>
+                          {aramLessonSets[activeAramLesson].map((set, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              title={`பயிற்சி ${i + 1} திற`}
+                              onClick={() => setOpenDynamicExercise({
+                                exercise: set,
+                                title: `${activeAramLesson} — பயிற்சி ${i + 1}`,
+                                theme: "aram",
+                              })}
+                              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2D5128] text-sm font-bold text-white shadow transition hover:bg-[#3c6d2e] hover:scale-110 active:scale-95"
+                            >
+                              {i + 1}
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="mt-1 text-sm text-[#2D5128]/80">இப்பாடத்திற்கான உள்ளடக்கம் விரைவில் சேர்க்கப்படும்.</p>
+                      )}
+                    </div>
+                  ) : null}
+                </div>
+              ) : activeItem === "தேர்வு" ? (
+                <div className="space-y-5">
+                  <p className={emphasisClass}>தேர்வு — கருத்தலகு இரண்டின் மதிப்பீடு</p>
+                  <p className="text-justify">
+                    கருத்தலகு இரண்டில் (புறம்) பயின்ற பாடல்களின் திணை, துறை, பாடியோர்,
+                    பாடப்பெற்றோர், பாவகை, எதுகை, மோனை, உவமை ஆகிய கூறுகளை நீங்கள்
+                    இனங்கண்டு தட்டச்சு செய்து பயிலும் மதிப்பீட்டுப் பகுதி இது.
+                  </p>
+                  <p className="text-justify">
+                    இடப்பக்கத் தட்டில் உள்ள <span className={emphasisClass}>தேர்வு 1</span> முதல்
+                    <span className={emphasisClass}> தேர்வு 21</span> வரையிலான ஒரு தேர்வைத் தேர்ந்தெடுத்துச்
+                    சொடுக்கினால், அத்தேர்வு திறக்கும்.
+                  </p>
+                  {activeTervuItem && !TERVU_BUILT.has(activeTervuItem) && (
+                    <div className="rounded-xl border border-[#A58D66]/45 bg-[#C0D5D6]/50 p-4">
+                      <p className="font-semibold text-[#083A4F]">{activeTervuItem} — விரைவில் சேர்க்கப்படும்.</p>
+                    </div>
+                  )}
+                </div>
               ) : isMunnuraiView ? (
                 <div className="space-y-5">
                   <p className={emphasisClass}>1. அறிமுகம்</p>
